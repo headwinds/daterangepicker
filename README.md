@@ -6,7 +6,7 @@ I googled that task and discovered this [stackoverflow thread](http://stackoverf
 
 I started with [Justin Stern](http://foxrunsoftware.github.com/DatePicker/) as my base since I knew I could fairly easily port it to Angular or Backbone. 
 
-I didn't want a exact copy but to steal some ideas and also leverage momentjs to build custom ranges which [Dan Grossman](http://www.dangrossman.info/2012/08/20/a-date-range-picker-for-twitter-bootstrap/) did in this example.
+I didn't want a exact copy but to steal some ideas and also leverage underscore and momentjs to build custom ranges which [Dan Grossman](http://www.dangrossman.info/2012/08/20/a-date-range-picker-for-twitter-bootstrap/) did in this example.
 
 ## DEMO
 

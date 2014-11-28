@@ -18,7 +18,7 @@ tbody.datepickerDays td.datepickerCompareSelected a {
 }
 
 .toFrom  {
-	display: inline-block;
+	display: inline-block !important;
 }
 
 

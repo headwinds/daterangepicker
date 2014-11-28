@@ -368,7 +368,7 @@
               // update to fill to allow base and compare ranges 
               if ( options.date.length > 2 && ( val <= options.date[2] && val >= options.date[3] )  ) {
 
-                console.log(data.weeks[indic].days[indic2]);
+                //console.log(data.weeks[indic].days[indic2]);
                 var dateCandidate = data.weeks[indic].days[indic2];
              
                 var containsDisabled = _.contains( dateCandidate.classname, "datepickerDisabled" );
