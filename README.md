@@ -8,6 +8,9 @@ I started with [Justin Stern](http://foxrunsoftware.github.com/DatePicker/) as m
 
 I didn't want a exact copy but to steal some ideas and also leverage momentjs to build custom ranges which [Dan Grossman](http://www.dangrossman.info/2012/08/20/a-date-range-picker-for-twitter-bootstrap/) did in this example.
 
+## DEMO
+
+[demo](http://headwinds.net/lab/daterangepicker/datepicker.html)
 
 Update: I guess I didn't google hard enough because I googled again to see if I had missed anything and sure enough someone else had went down the same rabbit hole solved the problem copying Google's design [more precisely](https://github.com/petrkotek/DatePicker).
 
