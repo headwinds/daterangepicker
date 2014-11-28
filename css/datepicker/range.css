@@ -1,0 +1,59 @@
+body {
+	font-family: Arial;
+	font-size: 12px;
+}
+
+/* red cell color for selected compare days */
+tbody.datepickerDays td.datepickerCompareSelected {
+  background-color:#990000;
+ 
+}
+
+tbody.datepickerDays td.datepickerCompareSelected a {
+ color: white;
+}
+
+.selectContainer {
+	display: inline-block;
+}
+
+.toFrom  {
+	display: inline-block;
+}
+
+
+#compareRange {
+	display: inline-block;
+}
+
+.buffer {
+	margin-bottom: 10px;
+}
+
+.footerBar {
+	display: block; 
+	width: 530px; 
+	height: 30px; 
+	margin: 0px; 
+	padding: 0px
+}
+
+.validationContainer {
+	display: inline-block; 
+	width: 410px; 
+	margin: 0px; 
+	padding: 0px;
+}
+.validationText {
+	display: block; 
+	width: 400px; 
+	margin: 0px; 
+	padding: 0px;
+}
+
+.rangeButtonContainers {
+	display: inline-block; 
+	width: 100px;
+	margin: 0px; 
+	padding: 0px
+}

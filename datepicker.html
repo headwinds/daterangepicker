@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+   <head>
+   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+
+   <script type="text/javascript" src="js/moment.min.js"></script>
+    <script type="text/javascript" src="js/underscore-min.jsp.js"></script>
+   <script type="text/javascript" src="js/datepicker.js"></script>
+   <script type="text/javascript" src="js/voicesrangepicker.js"></script>
+   <link rel="stylesheet" type="text/css" href="css/datepicker/base.css" />
+   <link rel="stylesheet" type="text/css" href="css/datepicker/clean.css" />
+   <link rel="stylesheet" type="text/css" href="css/datepicker/range.css" />
+
+   </head>
+   <body>
+
+      <!-- base range input -->
+      <p id="baseRange">Base</p>
+      
+      <div class="toFrom buffer">
+         <label>from:</label><input class="inputDate" id="inputBaseStartDate" value="">
+         <label>to:</label><input class="inputDate" id="inputBaseEndDate" value="">
+      </div>
+
+      <div class="selectContainer" id="baseSelect">
+         <select>
+            <option value="0">Last 7 Days</option>
+            <option value="1">Last 30 Days</option>
+            <option value="2">Last 90 Days</option>
+         </select>
+      </div>
+      
+     
+
+      <div id="date-range-field" style="border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
+              <span></span>      
+       </div>
+
+
+      <!-- 3 calendars -->
+      <div id="datepicker-calendar"></div>
+
+      <!-- compare range input -->
+      <input class="inputCheckbox" id="inputCompareCheckbox" type="checkbox" value="0" />
+      
+      <p id="compareRange">Compare</p>
+      
+      <div id="compareGroup" class="toFrom">
+         <label>from:</label><input class="inputDate" id="inputCompareStartDate" value="" />
+         <label>to:</label><input class="inputDate" id="inputCompareEndDate" value="" />
+      </div>
+      
+      <div class="selectContainer" id="compareSelect">
+         <select>
+            <option value="0">Previous Period</option>
+            <option value="1">Custom Range</option>
+         </select>
+      </div>
+      <!-- apply and cancel -->
+      <div class="footerBar">
+      
+         <div class="validationContainer" class="validationContainer">
+            <p id="validationMessage" class="validationText">validation goes here...</p>
+         </div>
+
+         <div class="rangeButtonContainers">
+            <button id="applyDates">apply</button>
+            <button id="cancelDates">cancel</button>
+         </div>
+         
+      </div>  
+
+   </body>
+</html>
+
