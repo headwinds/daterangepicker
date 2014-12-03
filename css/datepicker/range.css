@@ -1,7 +1,36 @@
 body {
 	font-family: Arial;
-	font-size: 12px;
+	
 }
+
+input[type="input"] {
+	width: 80px;
+}
+
+input.baseRange:focus {
+	outline: none;
+	border: 2px solid #0000ff;
+}
+
+input.baseRangeSelected {
+	border: 2px solid #0000ff;
+}
+
+
+input.compareRange:focus {
+	outline: none;
+	border: 2px solid #990000;
+}
+
+p {
+	font-size: 14px;
+	color: #666;
+}
+
+input[type="radio"]{
+	display: inline-block;
+}
+
 
 /* red cell color for selected compare days */
 tbody.datepickerDays td.datepickerCompareSelected {
@@ -13,12 +42,39 @@ tbody.datepickerDays td.datepickerCompareSelected a {
  color: white;
 }
 
+#testsContainer {
+	margin-top: 40px;
+}
+
+.validMessage {
+	color: #666;
+}
+
+.errorMessage {
+	color: #990000;
+}
+
+hr {
+	margin: 0px;
+	padding: 0px;
+	background-color: #CCC;
+}
+
+strong {
+	color: #999;
+}
+
+label {
+	font-size: 14px;
+	color: #666;
+}
+
 .selectContainer {
 	display: inline-block;
 }
 
 .toFrom  {
-	display: inline-block !important;
+	display: inline-block;
 }
 
 
@@ -44,11 +100,13 @@ tbody.datepickerDays td.datepickerCompareSelected a {
 	margin: 0px; 
 	padding: 0px;
 }
+
 .validationText {
 	display: block; 
 	width: 400px; 
 	margin: 0px; 
 	padding: 0px;
+	font-size: 12px;
 }
 
 .rangeButtonContainers {

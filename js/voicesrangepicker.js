@@ -2,17 +2,19 @@
 // http://foxrunsoftware.github.io/DatePicker/
 // http://www.dangrossman.info/2012/08/20/a-date-range-picker-for-twitter-bootstrap/
 
+window.drp = {};
+
 $(document).ready(function() {
 
 
-	var init = function(){
+	//////////////////////////////////////////// VARIABLES
 
-		$("#compareGroup").hide();
-	};
+	var currentFocusId = null;
+	var prevFocusId = null;
+	var baseStartMoment = null;
+	var baseEndMoment = null; 
 
-	init();
-
-	// VARIABLES
+	var bCompareChecked = false;
 	
 	/*
 	requirements phase 1:
@@ -71,6 +73,25 @@ $(document).ready(function() {
 
 	var baseRangeStr = "Base: ";
 
+	/////////////////////////////////////////// INIT
+
+	var init = function(){
+
+		$("#compareGroup").hide();
+	
+		setValidMessage();
+
+		// focus on the first base bate
+		setCurrentFocus("inputBaseEndDate");
+
+		$("#testsContainer").hide();
+
+		setupEvents();
+		
+	};
+
+	
+
 	 //$('#inputBaseStartDate').DatePickerSetDate($('#inputBaseStartDate').val(), true);
 
 	 $("#baseSelect").on("change", function(e){
@@ -91,20 +112,162 @@ $(document).ready(function() {
 
 	 });
 
+	 /////////////////////////////////////////// GETTERS & SETTERS
+
+	 var setCurrentFocus = function( inputId ) {
+
+		currentFocusId = inputId;
+
+		console.log("current focus: " + currentFocusId);
+
+		
+	 	var curInputEl = $("#" + currentFocusId);
+	 	
+	 	// ...then focus here
+	 	var el = $("#" + currentFocusId).get(0);
+	    var elemLen = el.value.length;
+
+	    el.selectionStart = elemLen;
+	    el.selectionEnd = elemLen;
+	    el.focus();
+	    el.setSelectionRange(0,elemLen);
+
+	    // 
+
+	    if ( null !== prevFocusId ) {
+	    	
+	    	var prevInputEl = $("#" + prevFocusId);
+	   		prevInputEl.removeClass("baseRangeSelected");
+	   	}
+
+	    curInputEl.addClass("baseRangeSelected"); 
+
+	    prevFocusId = currentFocusId;
+
+
+	 }
+
+	 var setErrorMessage = function( messageStr ){
+
+	 	messageStr = (typeof messageStr !== "undefined") ? messageStr : "Valid Base Range: start date occurs before end date";
+
+	 	$("#validationMessage").text(messageStr);
+	 }
+
+	 var setValidMessage = function( messageStr ){
+
+	 	messageStr = (typeof messageStr !== "undefined") ? messageStr : "Valid Base Range: start date occurs before end date";
+
+	 	$("#validationMessage").text(messageStr);
+	 }
+
+	 var setBaseDate = function( startDate, endDate, posStr ){
+
+	 	console.log(arguments, " setBaseDate ");
+
+	 	var baseDate = (posStr === "Start") ? startDate : endDate; 
+
+		var baseNumDateStr = baseDate.getDate() + "/" + baseDate.getMonth() + "/" + baseDate.getFullYear();
+	    $("#inputBase" + posStr + "Date").val(baseNumDateStr);
+	    
+	 }
+
+	 var setCompareDate = function( startDate, endDate, posStr ){
+
+		console.log(arguments, " setCompareDate ");
+
+	 	var compareDate = (posStr === "Start") ? startDate : endDate; 
+
+		var compareNumDateStr = compareDate.getDate() + "/" + compareDate.getMonth() + "/" + compareDate.getFullYear();
+	    $("#inputCompare" + posStr + "Date").val(compareNumDateStr);
+	 }
+
+	 var setBaseRangeMessage = function(dates){
+
+	 	var baseStartDateStr = dates[1].getDate()+' '+dates[1].getMonthName(true)+', '+ dates[1].getFullYear();
+	    var baseEndDateStr = dates[0].getDate()+' '+dates[0].getMonthName(true)+', '+ dates[0].getFullYear();
+
+	    baseRangeStr = "Base: " + baseStartDateStr + ' - ' + baseEndDateStr;
+
+	    if ( dates.length > 2 ) {
+
+	    	var compareStartDateStr = dates[3].getDate()+' '+dates[3].getMonthName(true)+', '+ dates[3].getFullYear();
+	    	var compareEndDateStr = dates[2].getDate()+' '+dates[2].getMonthName(true)+', '+ dates[2].getFullYear();
+
+	    	baseRangeStr += " to " + compareStartDateStr + " - " + compareEndDateStr;
+
+	    }	
+
+	    $("#baseRange").text( baseRangeStr ) 
+	 }
+
+	 var getDateMoment = function( posStr ){
+
+	 	var dateStr = $("#input" + posStr + "Date").val();       	
+      	dateStr = dateStr.trim();
+
+      	dateStr = ( dateStr.indexOf("/") ) ? dateStr.split("/").join("-") : dateStr;
+
+      	var dateArray = dateStr.split("-");
+
+      	var dateNum = Number(dateArray[0]);
+      	var monthNum = Number(dateArray[1]);
+      	var yearNum = Number(dateArray[2]);
+
+      	var dateMoment = moment();
+      	
+      	dateMoment.date(dateNum);
+      	dateMoment.month(monthNum);
+      	dateMoment.year(yearNum)
+		
+      	return dateMoment; 
+
+	 }
+
+
 
 	 /////////////////////////////////////////// EVENTS
 
 
 	 var setupEvents = function(){
 
+	 	// FOCUS START BASE
 	 	$("#inputBaseStartDate").on("focus", function(){
 	 		console.log("focus");
+
+	 		setCurrentFocus( $(this).attr("id") );
 	 	});
+
+	 	// BLUR - maybe not necessary...	
 
 	 	$("#inputBaseStartDate").on("blur", function(){
 			console.log("blur");
 
 	 	});
+
+	 	// FOCUS END BASE
+
+	 	$("#inputBaseEndDate").on("focus", function(){
+	 		console.log("focus");
+
+	 		setCurrentFocus( $(this).attr("id") );
+	 	});
+
+	 	// FOCUS START COMPARE
+
+	 	$("#inputCompareStartDate").on("focus", function(){
+	 		console.log("focus");
+
+	 		setCurrentFocus( $(this).attr("id") );
+	 	});
+
+	 	// FOCUS END COMPARE
+
+	 	$("#inputCompareEndDate").on("focus", function(){
+	 		console.log("focus");
+
+	 		setCurrentFocus( $(this).attr("id") );
+	 	});	
 
 	 	//$("#inputBaseStartDate")
 
@@ -112,10 +275,16 @@ $(document).ready(function() {
 
 	 /////////////////////////////////////////// VALIDATION
 
-	 var validateDate = function( newDateStr ) {
+	 
 
+	 var validate = function( newDateStr ) {
+
+	 	var isValid = false;
+
+	 	var testDateStr = newDateStr.trim().replace("/", "-");
+
+	 	/*
 	 	var dateArray = newDateStr.trim().split("/");
-
 	 	var dayNum = Number( dateArray[0] );
 	 	var monthNum = Number( dateArray[1] );
 	 	var yearNum = Number( dateArray[2] ); 
@@ -124,11 +293,48 @@ $(document).ready(function() {
 		
 		var testDate = testDate.day( dayNum ); 
 		var testDate = testDate.month( monthNum ); 
-		var testDate = testDate.year( yearNum ); 	
+		var testDate = testDate.year( yearNum ); 
+		*/
+
+
+		isValid = moment(testDateStr, 'DD-MM-YYYY', true).isValid(); // this doesn't seem to be reliable?!
+
+		return isValid;
 			
 	 };
+
+	 validateAllDates = function(dates){
+
+	 	displayBaseRangeError();
+
+	 	return false;
+	 }
+
+	 var validateStartBeforeEnd = function( startDateMoment, endDateMoment ){
+
+	 	console.log(arguments, " validateStartBeforeEnd ");
+
+	 	 false;
+
+	 	var diffDays = Number(startDateMoment.diff(endDateMoment, 'days') );
+
+	 	var bResult = ( diffDays > 0 ) ? true : false;
+
+	 	console.log("validateStartBeforeEnd diff: " + bResult); 
+
+	 	if ( !bResult ) displayBaseRangeError(); 
+
+	 	return bResult;
+	 };
+
+	 var displayBaseRangeError = function(){
+
+	 	$("#validationMessage").addClass("errorMessage");
+	 	$("#validationMessage").text("invalid Base Range: start date occurs after end date");
+
+	 }
         
-     setupEvents();
+    
 
 	// 3 CALENDARS 
 
@@ -142,30 +348,80 @@ $(document).ready(function() {
 		  date: [from, to],
 		  calendars: 3,
 		  mode: 'range',
-		  current: new Date(to.getFullYear(), to.getMonth() - 1, 1),
 		  onChange: function(dates,el) {
-		     
-		   	  // BASE RANGE - START & END 
 
-		      var baseNumStartDateStr = dates[0].getDate() + "/" + dates[0].getMonth() + "/" + dates[0].getFullYear();
-		      var baseNumEndDateStr = dates[1].getDate() + "/" + dates[1].getMonth() + "/" + dates[1].getFullYear();
+		  	console.log(arguments, "Picker - dates change event currentFocusId: " + currentFocusId);
 
-		      $("#inputBaseStartDate").val(baseNumStartDateStr);
-		      $("#inputBaseEndDate").val(baseNumEndDateStr);
+		  	var bValidDates = validateAllDates(dates);
 
-		      var baseStartDateStr = dates[0].getDate()+' '+dates[0].getMonthName(true)+', '+ dates[0].getFullYear();
-		      var baseEndDateStr = dates[1].getDate()+' '+dates[1].getMonthName(true)+', '+ dates[1].getFullYear();
+		  		// what is my curent focus?
 
-		      var baseRangeStr = "Base: " + baseStartDateStr + ' - ' + baseEndDateStr;
+		  	if (bValidDates)	{
+		  		
+		  		switch(currentFocusId){
 
-		      $("#baseRange").text( baseRangeStr ) 
+		  			case "inputBaseStartDate" :
 
-			}
+		  				var endDate = baseEndMoment._d;
+		  				var startDate = dates[1]; // the change!
+		  				
+		  				setBaseDate(startDate, endDate, "Start");
+		  				setBaseRangeMessage([startDate, endDate]);
+
+		  				calendars.DatePickerSetDate([ endDate, startDate ], true)
+
+		  				break;
+
+		  			case "inputBaseEndDate" :
+		  				var endDate = dates[0]; // the change!
+		  				var startDate = baseStartMoment._d;
+
+		  				setBaseDate(startDate, endDate, "End");
+		  				setBaseRangeMessage([startDate, endDate]);
+
+		  				calendars.DatePickerSetDate([ endDate, startDate ], true)
+
+		  				break;	
+
+		  			case "inputCompareStartDate" :
+
+		  				var baseEndDate = baseEndMoment._d; 
+		  				var baseStartDate = baseStartMoment._d;
+
+		  				var endDate = compareEndMoment._d; 
+		  				var startDate = dates[3]; // the change!
+
+		  				setCompareDate(startDate, endDate, "Start");
+		  				setBaseRangeMessage(dates);
+
+		  				calendars.DatePickerSetDate([ baseEndDate, baseStartDate, endDate, startDate ], true);
+
+		  				break;
+		  			case "inputCompareEndDate" :
+
+		  				var baseEndDate = baseEndMoment._d; 
+		  				var baseStartDate = baseStartMoment._d;
+
+		  				var endDate = dates[2]; // the change!
+		  				var startDate = compareStartMoment._d;
+
+		  				setCompareDate(startDate, endDate, "End");
+		  				setBaseRangeMessage(dates);
+
+		  				calendars.DatePickerSetDate([ baseEndDate, baseStartDate, endDate, startDate ], true);
+
+		  				break;	
+
+		  		};  
+
+		  	}   
+		  	
+		}
+
 	});
 
 	// COMPARE INPUT RANGE 
 
-	var bCompareChecked = false;
 
 	$("#inputCompareCheckbox").on("change", function(e) {
 		console.log(e.currentTarget.checked);
@@ -197,22 +453,13 @@ $(document).ready(function() {
 
 		console.log(calendars, " setCalendarsByCurBaseRange ");
 
-		var dates = [ curRange[0]._d, curRange[1]._d ];  
+		var endDate = curRange[0]._d;
+		var startDate = curRange[1]._d;
 
-		var baseNumStartDateStr = dates[0].getDate() + "/" + dates[0].getMonth() + "/" + dates[0].getFullYear();
-	    var baseNumEndDateStr = dates[1].getDate() + "/" + dates[1].getMonth() + "/" + dates[1].getFullYear();
+		setBaseDate(startDate, endDate, "Start" );
+		setBaseDate(startDate, endDate, "End" );
 
-	    $("#inputBaseStartDate").val(baseNumStartDateStr);
-	    $("#inputBaseEndDate").val(baseNumEndDateStr);
-  
-        var baseStartDateStr = dates[0].getDate()+' '+ curRange[0].format("MMM") +', '+ dates[0].getFullYear();
-        var baseEndDateStr = dates[1].getDate()+' '+ curRange[1].format("MMM") +', '+ dates[1].getFullYear();
-        
-        baseRangeStr = "Base: " + baseStartDateStr + ' - ' + baseEndDateStr;
- 	 
- 	    $("#baseRange").text( baseRangeStr ); 
-
- 	    calendars.DatePickerSetDate([ dates[0], dates[1] ], true);
+		calendars.DatePickerSetDate([ endDate, startDate ], true)
 
 	}
 
@@ -224,23 +471,23 @@ $(document).ready(function() {
 
 		var dates = [ previousRange[0]._d, previousRange[1]._d ];  
 
-		var compareNumStartDateStr = dates[0].getDate() + "/" + dates[0].getMonth() + "/" + dates[0].getFullYear();
-	    var compareNumEndDateStr = dates[1].getDate() + "/" + dates[1].getMonth() + "/" + dates[1].getFullYear();
+		var compareNumStartDateStr = dates[1].getDate() + "/" + dates[1].getMonth() + "/" + dates[1].getFullYear();
+	    var compareNumEndDateStr = dates[0].getDate() + "/" + dates[0].getMonth() + "/" + dates[0].getFullYear();
 
 	    $("#inputCompareStartDate").val(compareNumStartDateStr);
 	    $("#inputCompareEndDate").val(compareNumEndDateStr);
   
-        var baseStartDateStr = dates[0].getDate()+' '+ curRange[0].format("MMM") +', '+ dates[0].getFullYear();
-        var baseEndDateStr = dates[1].getDate()+' '+ curRange[1].format("MMM") +', '+ dates[1].getFullYear();
+        var baseStartDateStr = dates[1].getDate()+' '+ curRange[1].format("MMM") +', '+ dates[1].getFullYear();
+        var baseEndDateStr = dates[0].getDate()+' '+ curRange[0].format("MMM") +', '+ dates[0].getFullYear();
        
- 	 	var compareRangeStr = baseRangeStr + " to " + baseStartDateStr + " - " + baseEndDateStr;
+ 	    setBaseRangeMessage(dates);
 
- 	    $("#baseRange").text( compareRangeStr ); 
+ 	    var baseStart = baseDates[1];
+ 	    var baseEnd = baseDates[0];
+ 	    var compareStart = dates[1];
+ 	    var comapareEnd = dates[0];
 
- 	    //calendars.date( baseDates[0], baseDates[1], dates[0], dates[1] );
-
- 	    // calendars.DatePicker( { date: [ dates[0], dates[1] ] }); 
- 	    calendars.DatePickerSetDate([ baseDates[0], baseDates[1], dates[0], dates[1] ], true)
+ 	    calendars.DatePickerSetDate([ baseEnd, baseStart, comapareEnd, compareStart ], true)
 
 	}
 
@@ -255,5 +502,27 @@ $(document).ready(function() {
 	$("#cancelDates").on("click", function(){
 
 	}); 
+
+	// SET VALUES
+
+	baseStartMoment = getDateMoment( "BaseStart" ); //getBaseStartDate();
+	baseEndMoment = getDateMoment( "BaseEnd" );
+
+	setBaseRangeMessage([baseStartMoment._d, baseEndMoment._d]);
+
+	compareStartMoment = getDateMoment( "CompareStart" );
+	compareEndMoment = getDateMoment( "CompareEnd" );
+
+	console.log(baseStartMoment, "baseStartMoment");
+
+
+	// GLOBAL API FOR TESTING 
+
+	window.drp.baseStartMoment = baseStartMoment;
+	window.drp.baseEndMoment = baseEndMoment;
+	window.drp.validate = validate;
+	window.drp.validateStartBeforeEnd = validateStartBeforeEnd;
+
+	init();
 
 });

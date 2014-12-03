@@ -4,22 +4,26 @@
    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
 
    <script type="text/javascript" src="js/moment.min.js"></script>
-    <script type="text/javascript" src="js/underscore-min.jsp.js"></script>
+   <script type="text/javascript" src="js/underscore-min.jsp.js"></script>
    <script type="text/javascript" src="js/datepicker.js"></script>
    <script type="text/javascript" src="js/voicesrangepicker.js"></script>
    <link rel="stylesheet" type="text/css" href="css/datepicker/base.css" />
    <link rel="stylesheet" type="text/css" href="css/datepicker/clean.css" />
    <link rel="stylesheet" type="text/css" href="css/datepicker/range.css" />
 
+   <!--tests-->
+   <link rel="stylesheet" href="tests/mocha.css" />
+
    </head>
    <body>
-
+   <strong>Date Range Picker Demo</strong>
+   <hr />
       <!-- base range input -->
       <p id="baseRange">Base</p>
       
       <div class="toFrom buffer">
-         <label>from:</label><input class="inputDate" id="inputBaseStartDate" value="">
-         <label>to:</label><input class="inputDate" id="inputBaseEndDate" value="">
+         <label>from:</label><input type="text" class="inputDate baseRange" id="inputBaseEndDate" value="">
+         <label>to:</label><input type="text" class="inputDate baseRange" id="inputBaseStartDate" value="">
       </div>
 
       <div class="selectContainer" id="baseSelect">
@@ -46,8 +50,8 @@
       <p id="compareRange">Compare</p>
       
       <div id="compareGroup" class="toFrom">
-         <label>from:</label><input class="inputDate" id="inputCompareStartDate" value="" />
-         <label>to:</label><input class="inputDate" id="inputCompareEndDate" value="" />
+         <label>from:</label><input type="text" class="inputDate compareRange" id="inputCompareEndDate" value="" />
+         <label>to:</label><input type="text" class="inputDate compareRange" id="inputCompareStartDate" value="" />
       </div>
       
       <div class="selectContainer" id="compareSelect">
@@ -69,6 +73,21 @@
          </div>
          
       </div>  
+
+      <!-- TESTS -->
+    
+      <div id="testsContainer">
+         <strong>Date Range Picker Tests</strong>
+         <hr />
+          <div id="mocha"></div>
+          <script src="tests/index.js"></script>
+          <script src="tests/mocha.js"></script>
+          
+          <script>mocha.setup('bdd')</script>
+          <script src="tests/datepicker/datepickerSpecs.js"></script>
+          <script>mocha.run();</script>
+       </div>
+
 
    </body>
 </html>
