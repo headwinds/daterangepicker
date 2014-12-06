@@ -1,0 +1,30 @@
+@mixin commonDiv {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
+}
+
+$fontTitle: 'Geogrotesque-Medium', Georgia, serif;
+$fontBody: 'DINMittelEF-Regular', Helvetica, sans-serif;
+$fontBodyBold: 'DINMittelEF-Bold', Helvetica, sans-serif;
+
+$fifthTextColor: #666;
+
+$themeColor: #a4e04e;
+
+#testsContainer {
+	@include commonDiv;
+	position: absolute;
+	top: 60px;
+	left: 600px;
+}
+
+body {
+	padding: 30px !important;
+}
+
+@import "ir_common_date_range";
