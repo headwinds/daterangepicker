@@ -89,7 +89,58 @@ describe('Date Range Tests', function() {
     });
 
 
-  }); // end first group 
+  }); // end of Base Validation
 
+  describe('Compare Validation', function(){
+
+    // setup compare mode 
+
+    var compareStartMoment;
+    var compareEndMoment;
+
+    before( function(){
+
+      $("#inputCompareCheckbox").click();
+
+        compareStartMoment = drp.getDateMoment( "CompareStart" );
+        compareEndMoment = drp.getDateMoment( "CompareEnd" );
+
+    });
+
+
+    describe('Valid Compare Start Date', function(){
+
+      
+      it('should set the compare "to:" start date as a valid date', function(){
+        
+        var compareStartDateStr = $("#inputCompareStartDate").val();
+
+        var bDateValid = drp.isDate(compareStartDateStr);
+
+        expect( String(bDateValid) ).to.equal('true');
+      
+      });
+   
+
+      it('should set the compare startDate to be before the compare endDate', function(){
+
+        var bResult = drp.validateStartBeforeEnd( compareStartMoment, compareEndMoment); 
+
+        expect( String(bResult) ).to.equal('true');
+
+      });
+
+      it('should set the compare startDate after the base end date', function(){
+
+        var bResult = drp.validateStartBeforeEnd( compareStartMoment, drp.baseEndMoment ); 
+
+        expect( String(bResult) ).to.equal('true');
+
+      });
+
+      
+    }); 
+
+   });      
 
 });

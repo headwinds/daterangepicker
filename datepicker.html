@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en-US">
-   <head>
-   <script type="text/javascript" src="js/jquery.min.js"></script>
+  <head>
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/moment.min.js"></script>
+  <script type="text/javascript" src="js/underscore-min.jsp.js"></script>
+  <script type="text/javascript" src="js/datepicker.js"></script>
+  <script type="text/javascript" src="js/DateRangeViewController.js"></script>
 
-   <script type="text/javascript" src="js/moment.min.js"></script>
-   <script type="text/javascript" src="js/underscore-min.jsp.js"></script>
-   <script type="text/javascript" src="js/datepicker.js"></script>
-   <script type="text/javascript" src="js/DateRangeViewController.js"></script>
-   <link rel="stylesheet" type="text/css" href="css/datepicker/base.css" />
-   <link rel="stylesheet" type="text/css" href="css/datepicker/clean.css" />
-   <link rel="stylesheet" type="text/css" href="css/datepicker/range.css" />
+  
+  <link rel="stylesheet" type="text/css" href="prism/prism.css" />
 
-   <!--tests-->
-   <link rel="stylesheet" href="tests/mocha.css" />
+  <link rel="stylesheet" type="text/css" href="css/datepicker/base.css" />
+  <link rel="stylesheet" type="text/css" href="css/datepicker/clean.css" />
+  <link rel="stylesheet" type="text/css" href="css/datepicker/range.css" />
 
-   </head>
-   <body>
+  <!--tests-->
+  <link rel="stylesheet" href="tests/mocha.css" />
 
+  </head>
+  <body>
 
-   <div id="dateCardContainer" class="cardContainer">
+    <h4>Demo</h4>
+    <div id="dateCardContainer" class="cardContainer">
       <!-- base range input -->
       <div class="calendarContainer"> 
 
@@ -67,21 +70,40 @@
         </div>
         <!-- apply and cancel -->
         <div class="footerBar">
-        
-           <div class="validationContainer" class="validationContainer">
-              <p id="validationMessage" class="validationText"></p>
-           </div>
+             <div class="validationContainer" class="validationContainer">
+                <p id="validationMessage" class="validationText"></p>
+             </div>
 
-           <div class="rangeButtonContainers">
-              <button id="applyDates" class="button dateButton">APPLY</button>
-              <button id="cancelDates" class="button dateButton">CANCEL</button>
-           </div>
-           
-        </div>  
-      </div>
-
-        
+             <div class="rangeButtonContainers">
+                <button id="applyDates" class="button dateButton">APPLY</button>
+                <button id="cancelDates" class="button dateButton">CANCEL</button>
+             </div>
+          </div>  
+        </div>
       </div>  
+
+      <!-- PRISM SYNTAX-->
+      
+      <div id="prismContainer">
+
+          <h4>HTML</h4>
+          <pre class="language-markup">
+           <code class="language-markup">
+              <!DOCTYPE html>
+               <body>
+                 <section>
+                    <daterangepicker configmodel="rangeConfigModel"></daterangepicker> 
+                 </section>
+                </body>
+              </html>
+              
+          </code>
+          </pre>
+          <h4>JS</h4>
+          <pre class="language-javascrpt">
+            <code class="language-javascrpt">var hello = "world";</code>
+          </pre>
+      </div>
 
       <!-- TESTS -->
     
@@ -91,12 +113,19 @@
           <script src="tests/index.js"></script>
           <script src="tests/mocha.js"></script>
           
-          <script>mocha.setup('bdd')</script>
+          <script>
+
+          mocha.setup('bdd');
+          mocha.setup({ignoreLeaks: true});
+
+          </script>
           <script src="tests/datepicker/datepickerSpecs.js"></script>
-          <script>mocha.run();</script>
-       </div>
+
+      </div>
 
 
+
+      <script type="text/javascript" src="prism/prism.js"></script>
    </body>
 </html>
 

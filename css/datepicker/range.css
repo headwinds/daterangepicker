@@ -1,4 +1,8 @@
 /* line 19, ../../sass/range.scss */
+br {
+  line-height: 16px; }
+
+/* line 23, ../../sass/range.scss */
 #testsContainer {
   display: block;
   position: relative;
@@ -11,9 +15,32 @@
   top: 60px;
   left: 600px; }
 
-/* line 26, ../../sass/range.scss */
+/* line 30, ../../sass/range.scss */
+#prismContainer {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
+  width: 600px;
+  height: 630px;
+  margin-top: 20px; }
+
+/* line 37, ../../sass/range.scss */
 body {
-  padding: 30px !important; }
+  padding: 30px !important;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+/* line 42, ../../sass/range.scss */
+h4 {
+  font-weight: normal;
+  color: #333;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-size: 20px;
+  font-weight: 200; }
 
 /* line 10, ../../sass/_ir_common_date_range.scss */
 #dateCardContainer {

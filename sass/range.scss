@@ -16,6 +16,10 @@ $fifthTextColor: #666;
 
 $themeColor: #a4e04e;
 
+br {
+  line-height: 16px;
+}
+
 #testsContainer {
 	@include commonDiv;
 	position: absolute;
@@ -23,8 +27,25 @@ $themeColor: #a4e04e;
 	left: 600px;
 }
 
+#prismContainer {
+  @include commonDiv;
+  width: 600px;
+  height: 630px;
+  margin-top: 20px;
+}
+
 body {
 	padding: 30px !important;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+h4 {
+  font-weight: normal;
+  color: #333;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-size: 20px;
+  font-weight: 200;
 }
 
 @import "ir_common_date_range";
