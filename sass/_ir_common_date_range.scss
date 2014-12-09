@@ -7,6 +7,9 @@ $darkerThemeColor: darken($themeColor, 15%);
 $baseRangeColor: $darkerThemeColor;
 $compareRangeColor: darken(#2a8eb0, 5%); 
 
+$warningRangeColor: darken(#ffa500, 5%);
+$errorColor: #990000;
+
 #dateCardContainer {
     height: 365px;
     width: 560px !important;
@@ -19,11 +22,13 @@ $compareRangeColor: darken(#2a8eb0, 5%);
     .disableApply {
       opacity: 0.6;
       pointer-events: none;
+      cursor: default;
     }
 
     .enableApply {
       opacity: 1;
       pointer-events: all;
+      cursor: pointer;
     }
 
     .disableInput {
@@ -54,6 +59,15 @@ $compareRangeColor: darken(#2a8eb0, 5%);
       color: $compareRangeColor;
       font-size: 14px;
       font-weight: normal;
+    }
+
+    .errorInputTxt {
+      color: $errorColor;
+      
+    }
+
+    span.warningRangeTxt {
+      color: $warningRangeColor;
     }
 
     .calendarContainer {
@@ -93,7 +107,7 @@ $compareRangeColor: darken(#2a8eb0, 5%);
       height: 175px;
 
       .datepicker {
-        width: 500px !important;
+        width: 488px !important;
         height: 140px !important;
       }
 
