@@ -12,12 +12,14 @@ I didn't want a exact copy but to steal some ideas and also leverage momentjs to
 
 [demo](http://headwinds.net/lab/daterangepicker/datepicker.html)
 
+Update: I guess I didn't google hard enough because I googled again to see if I had missed anything and sure enough someone else had went down the same rabbit hole solved the problem copying Google's design [more precisely](https://github.com/petrkotek/DatePicker).
+
+In my case, I didn't need an exact copy and I'm fine with doing some digging and know how to update the code base is more valuable anyways. So by all means steal from this and make it your own. 
+
 ## TESTS
 
 [tests using Mocha](http://headwinds.net/lab/daterangepicker/tests/tests.html)
 
-Update: I guess I didn't google hard enough because I googled again to see if I had missed anything and sure enough someone else had went down the same rabbit hole solved the problem copying Google's design [more precisely](https://github.com/petrkotek/DatePicker).
-
-In my case, I didn't need an exact copy and I'm fine with doing some digging and know how to update the code base is more valuable anyways. So by all means steal from this and make it your own. 
+Here's a great [github and article on testing](https://github.com/yearofmoo/YOM-AngularJS-Testing-Article) which I wish to update this repo and replace Mocha with Karma for the sake of learning something new - Mocha is excellent too.
 
 

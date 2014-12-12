@@ -22,58 +22,103 @@ $(document).ready(function() {
 
 	var bCompareChecked = false;
 	
-	var log = true;
+	var log = false;
+	var limLog = true
+
+	var dateIndex = 0;
 
 	/*
-	requirements phase 1:
-
-	Base
-	i) Last Week 
-	ii) Last Month 
-	iii) Last 3 month 
-
-	Compare 
-	1) Previous Period 
-	2) Custom Range
+      <option value="1">Last Week</option>
+	  <option value="2">Last 7 days</option>
+	  <option value="3">Last 30 days</option>
+	  <option value="4">Last Month</option>
+	  <option value="5">Last 3 Months</option>
+	  <option value="6">Last 6 Months</option>
+	  <option value="7">Last 365 Days</option>
+	  <option value="8">This year</option>
+	  <option value="9">Custom Range</option>
 
 	*/
 
+	
+	
+	
+	// var last90DaysRange = [moment().subtract(89, 'days'), moment()];
+	// var last180DaysRange = [moment().subtract(179, 'days'), moment()];
+	
+	// BASE 
 
-	// todayRange = [moment(), moment()];
-	// yesterdayRange = [moment().subtract(1, 'days'), moment().subtract(1, 'days')];
+	// 1 - last week 
+	var lastWeekRange = [moment().subtract(1, 'week').startOf('week'), moment().subtract(1, 'week').endOf('week')];
+	// 2 - last 7 days 
 	var last7DaysRange = [moment().subtract(6, 'days'), moment()];
+	// 3 - last 30 days 
 	var last30DaysRange = [moment().subtract(29, 'days'), moment()];
-	var last90DaysRange = [moment().subtract(89, 'days'), moment()];
-	var last180DaysRange = [moment().subtract(179, 'days'), moment()];
-	var last365DaysRange = [moment().subtract(364, 'days'), moment()];
+	// 4 - last month 
+	var lastMonthRange = [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')];
+	// 5 - last 3 months
+	var last3MonthRange = [moment().subtract(3, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month') ];
+	// 6 - last 6 months
+	var last6MonthRange = [moment().subtract(6, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')];
+	// 7 - 365 days
+	var last365DaysRange = [moment().subtract(365, 'days'), moment()];
+	// 8 - this year
+	var thisYearRange =  [moment().startOf('year'), moment()];
+	
+	
 	// thisMonthRange = [moment().startOf('month'), moment().endOf('month')];
 	// lastMonthRange = [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')];
 	// last3MonthsRange =
 	// last6MonthsRange =
 	// lastYearRange = 
 
-	// this could be backwards?! shouldn't the end come before the start?!
+	// COMPARE 
 
+	// 1 - last week 
+	var previousPeriodLastWeekRange = [moment().subtract(2, 'week').startOf('week'), moment().subtract(2, 'week').endOf('week')];
+	// 2 - last 7 days 
+	var previousPeriod7DaysRange = [moment().subtract(7, 'days'), moment().subtract(13, 'days')];
+	// 3 - last 30 days 
+	var previousPeriod30DaysRange = [moment().subtract(30, 'days'), moment().subtract(59, 'days')];
+	// 4 - last month 
+	var previousPeriodLastMonthRange = [moment().subtract(2, 'month').startOf('month'), moment().subtract(2, 'month').endOf('month')];
+	// 5 - last 3 months
+	var previousPeriodlast3MonthRange = [moment().subtract(7, 'month').startOf('month'), moment().subtract(4, 'month').endOf('month')];
+	// 6 - last 6 months
+	var previousPeriodLast6MonthRange = [moment().subtract(13, 'month').startOf('month'), moment().subtract(7, 'month').endOf('month')];
+	// 7 - 365 days
+	var previousPeriod365DaysRange = [moment().subtract(730, 'days'), moment().subtract(366, 'days')];
+	// 8 - this year
+	var previousPeriodThisYearRange = [moment().subtract(1, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')];
+
+	/*
 	var previousPeriod7DaysRange = [moment().subtract(7, 'days'), moment().subtract(13, 'days')];
 	var previousPeriod30DaysRange = [moment().subtract(30, 'days'), moment().subtract(59, 'days')];
 	var previousPeriod90DaysRange = [moment().subtract(90, 'days'), moment().subtract(179, 'days')];
 	var previousPeriod180DaysRange = [moment().subtract(180, 'days'), moment().subtract(359, 'days')];
 	var previousPeriod365DaysRange = [moment().subtract(365, 'days'), moment().subtract(729, 'days')];
+	*/
 
 	var baseRanges = [
-	     { label: 'Last 7 Days', range: last7DaysRange, id: 0},
-	     { label: 'Last 30 Days', range: last30DaysRange, id: 1},
-	     { label: 'Last 90 Days', range: last90DaysRange, id: 2},
-	     { label: 'Last 180 Days', range: last180DaysRange, id: 3},
-	     { label: 'Last 365 Days', range: last365DaysRange, id: 4}
+		{ label: 'Last 7 Days', range: last7DaysRange, id: 0},
+		{ label: 'Last Week', range: lastWeekRange, id: 1},
+	    { label: 'Last 30 Days', range: last30DaysRange, id: 2},
+	    { label: 'Last Month', range: lastMonthRange, id: 3},
+	    { label: 'Last 3 Months', range: last3MonthRange, id: 4},
+	    { label: 'Last 6 Months', range: last6MonthRange, id: 5},
+	    { label: 'Last 365 Days', range: last365DaysRange, id: 6},
+	    { label: 'This year', range: thisYearRange, id: 7}
     ]; 
 
     var previousRanges = [
-	     { label: 'Previous Last 7 Days', range: previousPeriod7DaysRange, id: 0},
-	     { label: 'Previous Last 30 Days', range: previousPeriod30DaysRange, id: 1},
-	     { label: 'Previous Last 90 Days', range: previousPeriod90DaysRange, id: 2},
-	     { label: 'Previous Last 180 Days', range: previousPeriod180DaysRange, id: 3},
-	     { label: 'Previous Last 365 Days', range: previousPeriod365DaysRange, id: 4}
+   		 { label: 'Previous Last 7 Days', range: previousPeriod7DaysRange, id: 0},
+	     { label: 'Previous Last Week', range: previousPeriodLastWeekRange, id: 1},
+	     { label: 'Previous Last 30 Days', range: previousPeriod30DaysRange, id: 2},
+	     { label: 'Previous Last Month', range: previousPeriodLastMonthRange, id: 3},
+	     { label: 'Previous Last 3 Months', range: previousPeriodlast3MonthRange, id: 4},
+	     { label: 'Previous Last 6 Months', range: previousPeriodLast6MonthRange, id: 5},
+	     { label: 'Previous Last 365 Days', range: previousPeriod365DaysRange, id: 6},
+	     { label: 'Previous Last Year', range: previousPeriodThisYearRange, id: 7}
     ]; 
 
    
@@ -101,12 +146,18 @@ $(document).ready(function() {
 		//$("#testsContainer").hide();
 		setAllDisabled();
 
+		disableCompareSelect();
+
 		setupEvents();
 
 		// after every control is ready, run the tests
 		if (typeof mocha !== "undefined" ) {
 			//mocha.run();
 		}
+
+		$("#inputCompareCheckbox").attr("checked", false);
+
+		displayNoErrorMessage();
 		
 	};
 
@@ -115,27 +166,37 @@ $(document).ready(function() {
 	 	
 	 	var idNum = Number(e.target.value);
 
-	 	if ( idNum === 4 ) {
+	 	console.log("base select idNum: " + idNum);
+
+	 	if ( idNum === 6 || idNum === 7 ) {
 	 		var warningStr =  "<span class='warningRangeTxt'> Warning: this year range may take a long time to load </span>";
 	 		$("#validationMessage").html(warningStr);
 	 	} else {
 	 		$("#validationMessage").html("");
 	 	}
 
-	 	if ( idNum === 5 ) {
+	 	if ( idNum === 8 ) {
 	 		
 	 		setBaseInputsEnabled();
 	 		setCalendarsEnabled();
 
+	 		disableCheckBox(); 
+	 		disableBaseTo();
 	 		// focus on the first base bate
 			setCurrentFocus("inputBaseEndDate");
 
+			//clearBaseDates();
+		
 			bCustomBaseRange = true; 
+
+			return;
 
 	 	} else {
 
 	 		curRange = baseRanges[idNum].range;
 		 	previousRange = previousRanges[idNum].range;
+
+		 	console.log(curRange, "new cur range")
 
 		 	setBaseInputsDisabled();
 	 		setCalendarsDisabled();
@@ -143,6 +204,7 @@ $(document).ready(function() {
 	 		bCustomBaseRange = false; 
 
 	 	}
+
 
 	 	if (!bCompareChecked) {
 		 		
@@ -152,13 +214,80 @@ $(document).ready(function() {
 
 		 	setCalendarsByPreviousCompareRange();
 		}
+	
 
-		console.log("baseSelect change bCompareChecked: " + bCompareChecked );
+		if (log) console.log("baseSelect change bCompareChecked: " + bCompareChecked );
 	 	
 
 	 });
 
 	 /////////////////////////////////////////// GETTERS & SETTERS
+
+	 var getDateIndex = function(){
+
+	 	if ( dateIndex === 1 ) dateIndex = 0;
+	 	else dateIndex = 1; 
+
+	 	return dateIndex; 
+	 }
+
+	 /////////////////////////////////////////////////// BASE T0 & FROM
+
+	 var disableBaseTo = function(){
+	 	$("#inputBaseStartDate").addClass("disableApply");
+	 }
+
+	 var enableBaseTo = function(){
+	 	$("#inputBaseStartDate").removeClass("disableApply");
+	 }
+
+	 var disableBaseFrom = function(){
+	 	$("#inputBaseEndDate").addClass("disableApply");
+	 }
+
+	 var enableBaseFrom = function(){
+	 	$("#inputBaseEndDate").removeClass("disableApply");
+	 }
+
+	 /////////////////////////////////////////////////// COMPARE T0 & FROM
+
+	 var disableCompareTo = function(){
+	 	$("#inputCompareStartDate").addClass("disableApply");
+	 }
+
+	 var enableCompareTo = function(){
+	 	$("#inputCompareStartDate").removeClass("disableApply");
+	 }
+
+	 var disableCompareFrom = function(){
+	 	$("#inputCompareEndDate").addClass("disableApply");
+	 }
+
+	 var enableCompareFrom = function(){
+	 	$("#inputCompareEndDate").removeClass("disableApply");
+	 }
+
+	 /////////////////////////////////////////////////// CHECKBOX
+
+	 var disableCheckBox = function(){
+	 	
+	 	$("#inputCompareCheckbox").addClass("disableApply");
+	 	$("#compareRange").addClass("disableApply");
+
+	 }
+
+	 var enableCheckBox = function(){
+	 	$("#inputCompareCheckbox").removeClass("disableApply");
+	 	$("#compareRange").removeClass("disableApply");
+	 }
+
+	 var disableCompareSelect = function() {
+	 	$("#compareSelect").addClass("disableApply");
+	 }
+
+	 var enableCompareSelect = function() {
+	 	$("#compareSelect").removeClass("disableApply");
+	 }
 
 	 var setApplyDisabled = function(){
 	 	$("#applyDates").addClass("disableApply");
@@ -170,7 +299,7 @@ $(document).ready(function() {
 
 	 var setCompareInputsDisabled = function() {
 
-	 	console.log("setCompareInputsDisabled");
+	 	if (log) console.log("setCompareInputsDisabled");
 
 	 	$("#inputCompareStartDate").addClass("disableControl");
 	 	$("#inputCompareEndDate").addClass("disableControl");
@@ -219,7 +348,10 @@ $(document).ready(function() {
 
 	 	if (  curInputEl.hasClass("errorInputTxt") ) curInputEl.removeClass("errorInputTxt"); 
 	 	
-	 	// ...then focus here
+	 	// ...then focus here <-- this interferes with selecting a date with the cursor requiring 2 clicks
+	 	// I think I need to transfer focus to the calender as the user begins to mouse over it if I want to keep this code 
+	 	// but for now I'll remove it 
+	 	/*
 	 	var el = $("#" + currentFocusId).get(0);
 	    var elemLen = el.value.length;
 
@@ -227,6 +359,7 @@ $(document).ready(function() {
 	    el.selectionEnd = elemLen;
 	    el.focus();
 	    el.setSelectionRange(0,elemLen);
+		*/
 
 	    // 
 	    $("#inputBaseEndDate").removeClass("baseRangeSelected");
@@ -246,8 +379,8 @@ $(document).ready(function() {
 	 
 	 var setBaseDate = function( startDate, endDate, posStr ){
 
-	 	//if (log)  console.log(arguments, " setBaseDate ");
-	 	//if (log)  console.log(baseStartMoment, " setBaseDate baseStartMoment");
+	 	//// if (log)  console.log(arguments, " setBaseDate ");
+	 	//// if (log)  console.log(baseStartMoment, " setBaseDate baseStartMoment");
 
 	 	var baseDate = (posStr === "Start") ? startDate : endDate; 
 
@@ -272,9 +405,24 @@ $(document).ready(function() {
 	    
 	 }
 
+	 var clearBaseDates = function(){
+
+	 	if (limLog)  console.log("clearBaseDates");
+	 	
+	 	$("#inputBaseStartDate").val(" ");
+	 	$("#inputBaseEndDate").val(" ");
+
+	 	$('#datepicker-calendar').DatePickerClear();
+
+	 	//baseStartMoment = null;
+	 	//baseEndMoment = null;
+
+	 	setApplyDisabled();
+	 }
+
 	 var setCompareDate = function( startDate, endDate, posStr ){
 
-		if (log)  console.log(arguments, "setCompareDate posStr: " + posStr);
+		// if (log)  console.log(arguments, "setCompareDate posStr: " + posStr);
 
 	 	var compareDate = (posStr === "Start") ? startDate : endDate; 
 
@@ -293,9 +441,14 @@ $(document).ready(function() {
 	    }
 	 }
 
+	 var clearCompareDates = function(){
+	 	$("#inputCompareStartDate").val(" ");
+	 	$("#inputCompareEndDate").val(" ");
+	 }
+
 	 var setBaseRangeMessage = function(dates){
 
-	 	//if (log)  console.log(arguments, " setBaseRangeMessage ");
+	 	//// if (log)  console.log(arguments, " setBaseRangeMessage ");
 
 	 	var baseStartDateStr = dates[1].getDate()+' '+dates[1].getMonthName(true)+', '+ dates[1].getFullYear();
 	    var baseEndDateStr = dates[0].getDate()+' '+dates[0].getMonthName(true)+', '+ dates[0].getFullYear();
@@ -341,15 +494,9 @@ $(document).ready(function() {
 
       	var dateArray = dateStr.split("-");
 
-      	console.log(dateArray, "getDateMoment dateStr: " + dateStr + " posStr: " + posStr);
+      	if (log) console.log(dateArray, "getDateMoment dateStr: " + dateStr + " posStr: " + posStr);
 
       	var monthNumDown = Number(dateArray[1]) -1; 
-
-      	//if ( posStr.indexOf("Compare") !== -1 ) {
-
-      	//	monthNumDown = Number(dateArray[1]); 
-
-      	//} 
 
       	var dateNum = Number(dateArray[0]);
       	var monthNum = monthNumDown;
@@ -362,7 +509,7 @@ $(document).ready(function() {
       	dateMoment.month(monthNum);
       	dateMoment.year(yearNum)
 
-      	console.log(dateMoment, "getDateMoment posStr: " + posStr)
+      	if (log) console.log(dateMoment, "getDateMoment posStr: " + posStr)
 		
       	return dateMoment; 
 
@@ -377,14 +524,14 @@ $(document).ready(function() {
 
 	 	// FOCUS START BASE
 	 	$("#inputBaseStartDate").on("focus", function(){
-	 		//if (log)  console.log("focus");
+	 		//// if (log)  console.log("focus");
 	 		setCurrentFocus( $(this).attr("id") );
 	 	});
 
 	 	// BLUR 
 
 	 	$("#inputBaseStartDate").on("blur", function(){
-			if (log)  console.log("blur start");
+			// if (log)  console.log("blur start");
 			newDateAdded("BaseStart");
 	 	});
 
@@ -398,14 +545,14 @@ $(document).ready(function() {
 	 	// FOCUS END BASE
 
 	 	$("#inputBaseEndDate").on("focus", function(){
-	 		if (log)  console.log("focus end");
+	 		// if (log)  console.log("focus end");
 	 		setCurrentFocus( $(this).attr("id") );
 	 	});
 
 	 	// BLUR
 
 	 	$("#inputBaseEndDate").on("blur", function(){
-			if (log)  console.log("blur end");
+			// if (log)  console.log("blur end");
 			 newDateAdded("BaseEnd");
 	 	});
 
@@ -422,7 +569,7 @@ $(document).ready(function() {
 	 	// FOCUS START COMPARE
 
 	 	$("#inputCompareStartDate").on("focus", function(){
-	 		//if (log)  console.log("focus");
+	 		//// if (log)  console.log("focus");
 
 	 		setCurrentFocus( $(this).attr("id") );
 	 	});
@@ -430,7 +577,7 @@ $(document).ready(function() {
 	 	// BLUR
 
 	 	$("#inputCompareStartDate").on("blur", function(){
-			//if (log)  console.log("blur");
+			//// if (log)  console.log("blur");
 			 newDateAdded("CompareStart");
 	 	});
 
@@ -446,7 +593,7 @@ $(document).ready(function() {
 	 	// FOCUS END COMPARE
 
 	 	$("#inputCompareEndDate").on("focus", function(){
-	 		//if (log)  console.log("focus");
+	 		//// if (log)  console.log("focus");
 
 	 		setCurrentFocus( $(this).attr("id") );
 	 	});	
@@ -454,7 +601,7 @@ $(document).ready(function() {
 	 	// BLUR
 
 	 	$("#inputCompareEndDate").on("blur", function(){
-			//if (log)  console.log("blur");
+			//// if (log)  console.log("blur");
 			newDateAdded("CompareEnd");
 	 	});
 
@@ -476,81 +623,108 @@ $(document).ready(function() {
 	 // on enter or blur test the new date
 	 var newDateAdded = function( posStr ){
 
-	 	console.log("newDateAdded posStr: " + posStr);
+	 	if (limLog) console.log("newDateAdded posStr: " + posStr);
 
 	 	var inputBox = $("#input" + posStr + "Date");
 
 	 	var enteredDate = inputBox.val();
 			   // 
-		var bValid = isDate(enteredDate);
+		var checkDateObj = isDate(enteredDate);
 
-		console.log("newDateAdded enteredDate: " + enteredDate);
-		console.log("newDateAdded bValid: " + bValid);
+		if (limLog) console.log("newDateAdded enteredDate: " + enteredDate);
+		if (limLog) console.log("newDateAdded bValid: " + checkDateObj.isValid);
 
-		var bCompare = ( posStr.indexOf("Compare") != - 1); 
 
-	    if (bValid) {
+	    // Walk through Base From to Base To first
 
-	    	if (bCompare) {
+	    if (checkDateObj.isValid) {
 
-	    		console.log("newDateAdded - its a compare date" );
+		   	switch(posStr) {
 
-	    		if (posStr == "CompareStart") compareStartMoment = getDateMoment("CompareStart");
-		   		else compareEndMoment = getDateMoment("CompareEnd");
+		   		case "BaseStart" :
 
-		 		var comparePos = (posStr == "CompareStart") ? "Start" : "End";
+		   			// disable both inputs 
+	  				setBaseInputsDisabled();
+	  				setCalendarsDisabled();
 
-		 		console.log("newDateAdded - and its set to: " + compareEndMoment._d );
+	  				setBaseDate(checkDateObj.date, null, "Start");
 
-		   		setCompareDate(compareStartMoment._d, compareEndMoment._d, comparePos);
+	  				var setDates = [ baseEndMoment._d, baseStartMoment._d ];
+	  				calendars.DatePickerSetDate(setDates, false);
 
-	    	} else {
-	   		
-		   		if (posStr == "BaseStart") baseStartMoment = getDateMoment("BaseStart");
-		   		else baseEndMoment = getDateMoment("BaseEnd");
+	  				if ( !bCompareChecked ) setBaseRangeMessage([ baseStartMoment._d, baseEndMoment._d  ]);
+	  				else setBaseRangeMessage([ baseStartMoment._d, baseEndMoment._d, compareEndMoment._d, compareStartMoment._d  ]);
 
-		   		var basePos = (posStr == "BaseStart") ? "Start" : "End";
+	  				//validateAllDates(setDates);
+	  				setApplyEnabled(); 
 
-		   		setBaseDate(baseStartMoment._d, baseEndMoment._d, basePos);
+	  				enableCheckBox();  
 
-	   		}
+		   			break; 
 
-	   		if (bCompareChecked) {
-		   			setCalendarsByPreviousCompareRange( baseStartMoment._d, baseEndMoment._d, compareStartMoment._d, compareEndMoment._d );
-		   	} else { 	
-		   			setCalendarsByCurBaseRange( baseStartMoment._d, baseEndMoment._d );
+		   		case "BaseEnd" : 
+
+		   			disableBaseFrom(); 
+			  		setCurrentFocus("inputBaseStartDate");
+			  		enableBaseTo(); 
+
+			  		setBaseDate(null, checkDateObj.date, "End");
+
+			  		if ( !bCompareChecked ) setBaseRangeMessage([ baseStartMoment._d, baseEndMoment._d  ]);
+	  				else setBaseRangeMessage([ baseStartMoment._d, baseEndMoment._d, compareEndMoment._d, compareStartMoment._d  ]);
+
+		   			break; 
+
+		   		case "CompareStart" : 
+
+		   			// disable both inputs 
+	  				setCompareInputsDisabled();
+	  				setCalendarsDisabled();
+
+	  				setCompareDate(checkDateObj.date, null, "Start");
+
+	  				var setDates = [ baseEndMoment._d, baseStartMoment._d, compareStartMoment._d, compareEndMoment._d ];
+
+	  				calendars.DatePickerSetDate(setDates, false);
+
+	  				enableCheckBox(); 
+
+	  				setBaseRangeMessage([ baseStartMoment._d, baseEndMoment._d, compareEndMoment._d, compareStartMoment._d  ]);
+
+	  				//validateAllDates(setDates);
+	  				setApplyEnabled(); 
+
+		   			break; 
+		   		
+		   		case "CompareEnd" : 
+
+		  			disableCompareFrom(); 
+		  			setCurrentFocus("inputCompareStartDate");
+		  			enableCompareTo(); 
+
+		  			setCompareDate(null, checkDateObj.date, "End");
+
+		  			setBaseRangeMessage([ baseStartMoment._d, baseEndMoment._d, compareEndMoment._d, compareStartMoment._d  ]);
+
+		   			break;
+
 		   	}
 
-	   		displayNoErrorMessage();
+	   }
+		  				//var startDate = baseStartMoment._d;
+		  				
 
-	   		if (  inputBox.hasClass("errorInputTxt") ) inputBox.removeClass("errorInputTxt"); 
-
-	   		// 
+		  				
 
 
-	    } else {
-
-	    	var displayPos;
-
-	    	if (bCompare) {
-	   		
-	   		 	displayPos = (posStr !== "CompareStart") ? "compare from:" : "compare to:";
-	   		
-	   		} else {
-				displayPos = (posStr !== "BaseStart") ? "base from:" : "base to:";
-	   		}
-
-	   		displayBaseRangeError('The '+ displayPos +' date is not properly formated (DD/MM/YYYY)'); 
-
-	   		inputBox.addClass("errorInputTxt"); 
-	    }
+	    // then walk through Compare From to Compare To second  
 
 	 }
 
 	 var onCompareInputEnterHandler = function( posStr ){
 	 	var enteredDate = $("#inputCompare" + posStr + "Date").val();
 			   // 
-		var bValid = isDate(enteredDate);
+		var bValid = isDate(enteredDate).isValid;
 
 	    if (bValid) {
 	   		
@@ -575,7 +749,7 @@ $(document).ready(function() {
 
 	 var isDate = function( newDateStr ) {
 
-	 	//if (log)  console.log("isDate newDateStr: " + newDateStr)
+	 	//// if (log)  console.log("isDate newDateStr: " + newDateStr)
 
 	 	var parms = newDateStr.split(/[\.\-\/]/);
 
@@ -593,21 +767,24 @@ $(document).ready(function() {
 
 		var isValid = (date.getMonth()+1) && dd === date.getDate() && yyyy === date.getFullYear();
 		
-		if (log)  console.log("isDate yyyy: " + yyyy);
-		if (log)  console.log("isDate date: " + date);
+		// if (log)  console.log("isDate yyyy: " + yyyy);
+		// if (log)  console.log("isDate date: " + date);
 
-		return isValid;
+		return {isValid: isValid, date: date};
 
 	
 	 };
+
+	 //////////////////////////////////////////////////////////////////////// VALIDATION 
 
 	 var validateAllDates = function(dates){
 
 	 	// assume all dates are invalid
 	 	var bResult = false;
+	 	setApplyDisabled();
 
-	 	console.log("---- validateAllDates ----");
-	 	console.log(dates, "dates");
+	 	if (log) console.log("---- validateAllDates ----");
+	 	if (log) console.log(dates, "dates");
 
 	 	// base range
 	 	// does the startdate come before the end ? if so, it's invalid
@@ -633,12 +810,12 @@ $(document).ready(function() {
 	 		var endCompareDateMoment =  moment().date( endCompareDate.getDate() ).month( endCompareDate.getMonth() ).year( endCompareDate.getFullYear() );
 	 	
 	 		
-	 		console.log("startCompareDateMoment._d: " + startCompareDateMoment._d);
-	 		console.log("endCompareDateMoment._d: " + endCompareDateMoment._d);
+	 		if (log) console.log("startCompareDateMoment._d: " + startCompareDateMoment._d);
+	 		if (log) console.log("endCompareDateMoment._d: " + endCompareDateMoment._d);
 
 	 		bResult = validateStartBeforeEnd(startCompareDateMoment, endCompareDateMoment);
 	 		
-	 		var compareErrorMsg = 'Invalid Compare Range: the compare "to:" date occurs before the compare "from:" date';
+	 		var compareErrorMsg = 'Invalid Compare Range: the compare "to:" date occurs before or on the compare "from:" date';
 
 	 		if (!bResult) {
 	 			
@@ -646,29 +823,31 @@ $(document).ready(function() {
 	 			return bResult;
 	 		}
 
-	 		console.log("---- 4 date validation ----");
-	 		console.log("compare start: " + startCompareDateMoment._d);
-	 		console.log("compare end: " + endCompareDateMoment._d);
-	 		console.log("base start: " + startDateMoment._d);
-	 		console.log("base end: " + endDateMoment._d);
+	 		if (log) {
+		 		console.log("---- 4 date validation ----");
+		 		console.log("compare start: " + startCompareDateMoment._d);
+		 		console.log("compare end: " + endCompareDateMoment._d);
+		 		console.log("base start: " + startDateMoment._d);
+		 		console.log("base end: " + endDateMoment._d);
+	 		}
 
 	 		// does the compare start or end date came before the base end date ?!
 	 		bResult = validateStartBeforeEnd(endDateMoment, startCompareDateMoment );
 
 	 		if (!bResult) {
-	 			compareErrorMsg = 'Invalid Compare Range: compare "to" occurs before base "from"';
+	 			compareErrorMsg = 'Invalid Compare Range: compare "to" occurs before or on the base "from"';
 	 			displayBaseRangeError(compareErrorMsg)
 	 			return bResult;
 	 		}
 
-	 		console.log("test 1 bResult: " + bResult);
+	 		if (log) console.log("test 1 bResult: " + bResult);
 
 	 		bResult = validateStartBeforeEnd(endDateMoment, endCompareDateMoment );
 
-	 		console.log("test 2 bResult: " + bResult);
+	 		if (log) console.log("test 2 bResult: " + bResult);
 
 	 		if (!bResult) {
-	 			compareErrorMsg = 'Invalid Compare Range: compare "from" occurs before base "from"';
+	 			compareErrorMsg = 'Invalid Compare Range: compare "from" occurs before or on the base "from"';
 	 			displayBaseRangeError(compareErrorMsg)
 	 			return bResult;
 	 		}
@@ -676,25 +855,27 @@ $(document).ready(function() {
 	 	
 	 	} 
 
+	 	if ( bResult ) setApplyEnabled();
+
 	 	return bResult;
 	 }
 
 	 var validateStartBeforeEnd = function( startDateMoment, endDateMoment ){
 
-	 	if (log)  console.log(arguments, " validateStartBeforeEnd ");
+	 	console.log(arguments, " validateStartBeforeEnd ");
 
 	 	//var diffStart = moment( [ startDateMoment.year(), startDateMoment.month(), startDateMoment.date() ] );
 	 	//var diffEnd =  moment( [ endDateMoment.year(), endDateMoment.month(), endDateMoment.date() ] );
 
-	 	if (log)  console.log("========== END ==========");
-	 	if (log)  console.log("year: " + endDateMoment.year() );
-	 	if (log)  console.log("month: " + Number ( Number( endDateMoment.month() ) + 1 ) );
-	 	if (log)  console.log("date: " + endDateMoment.date() );
+	 	if (limLog)  console.log("========== END ==========");
+	 	if (limLog)  console.log("year: " + endDateMoment.year() );
+	 	if (limLog)  console.log("month: " + Number ( Number( endDateMoment.month() ) + 1 ) );
+	 	if (limLog)  console.log("date: " + endDateMoment.date() );
 	 	
-	 	if (log)  console.log("=========== START ============");
-	 	if (log)  console.log("year: " + startDateMoment.year() );
-	 	if (log)  console.log("month: " + Number ( Number( startDateMoment.month() ) + 1 ) );
-	 	if (log)  console.log("date: " + startDateMoment.date() );
+	 	if (limLog)  console.log("=========== START ============");
+	 	if (limLog)  console.log("year: " + startDateMoment.year() );
+	 	if (limLog)  console.log("month: " + Number ( Number( startDateMoment.month() ) + 1 ) );
+	 	if (limLog)  console.log("date: " + startDateMoment.date() );
 
 	 	var diffDays = null;
 
@@ -733,7 +914,7 @@ $(document).ready(function() {
 	 		bResult = true;
 	 	}
 	
-	 	if (log)  console.log("validateStartBeforeEnd valid: " + bResult + " diffDays: " + diffDays); 
+	 	// if (log)  console.log("validateStartBeforeEnd valid: " + bResult + " diffDays: " + diffDays); 
 
 	 	if ( !bResult ) {
 	 		setApplyDisabled();
@@ -746,25 +927,264 @@ $(document).ready(function() {
 	 	return bResult;
 	 };
 
+	 var validateBaseFrom = function(){
+
+	 	var baseFromValid = false;
+
+	 	// simple 2 date validation
+	 	// is the from date after the to date?
+
+	 	baseFromValid = validateStartBeforeEnd(baseStartMoment, baseEndMoment); 
+
+	 	if (!baseFromValid) {
+
+			displayBaseRangeError("Invalid Base Range: the from date is after the to date ");
+		}
+
+	 	console.log("validateBaseFrom 1 valid? " + baseFromValid); 
+
+	 	// complex 3 date validation with compare checked	
+	 	if ( bCompareChecked ) {
+	 		baseFromValid = validateStartBeforeEnd(baseEndMoment, compareStartMoment); 
+
+	 		if (!baseFromValid) {
+				displayBaseRangeError("Invalid Base Range: the base from date is before the compare to date ");
+			}
+
+	 	}
+
+	 	console.log("validateBaseFrom 2 valid? " + baseFromValid); 
+
+	  	// if compare check 
+
+	  	return baseFromValid; 
+	 }
+
+	 var validateBaseTo = function(){
+
+	 	var baseToValid = false;
+
+	 		// simple 2 date validation
+	 	// is the from date after the to date?
+
+	 	baseToValid = validateStartBeforeEnd(baseStartMoment, baseEndMoment); 
+
+	 	if (!baseToValid) {
+
+			displayBaseRangeError("Invalid Base Range: the from date is after the to date ");
+		}
+
+	 	console.log("validateBaseTo 1 valid? " + baseToValid); 
+
+	 	// complex 3 date validation with compare checked	
+	 	if ( bCompareChecked ) {
+	 		baseToValid = validateStartBeforeEnd(baseStartMoment, compareStartMoment); 
+
+	 		if (!baseToValid) {
+				displayBaseRangeError("Invalid Base Range: the base to date is before the compare to date ");
+			}
+
+	 	}
+
+	 	console.log("validateBaseFrom 2 valid? " + baseFromValid); 
+
+
+
+	 	return baseToValid; 
+	 }
+
+
+	 var validateCompareFrom = function() {
+	 	var bTestCompareEndVsBaseEnd = validateStartBeforeEnd(baseEndMoment, compareEndMoment );
+	 	return bTestCompareEndVsBaseEnd;
+	 }
+
+	 var validateCompareTo = function(){
+
+	 	var bTestCompareStartvsCompareEnd =  validateStartBeforeEnd(compareStartMoment, compareEndMoment); 
+		var bTestCompareStartVsBaseEnd = validateStartBeforeEnd(baseEndMoment, compareStartMoment);
+
+		console.log("validateCompareTo b1: " + bTestCompareStartvsCompareEnd + " b2: " + bTestCompareStartVsBaseEnd);
+
+
+		if (!bTestCompareStartvsCompareEnd) {
+
+			displayBaseRangeError("Invalid Compare Range: the to date is before the from date ");
+		}
+
+		if (!bTestCompareStartVsBaseEnd) {
+
+			displayBaseRangeError("Invalid Compare Range: the compare to date is after the base from ");
+
+		}
+
+		return { bTestCompareStartvsCompareEnd: bTestCompareStartvsCompareEnd, bTestCompareStartVsBaseEnd: bTestCompareStartVsBaseEnd }
+
+	 };
+
 	 var displayNoErrorMessage = function() {
 
 	 	if ( $("#validationMessage").hasClass("errorMessage") ) $("#validationMessage").removeClass("errorMessage");
 
 	 	$("#validationMessage").addClass("validMessage");
-	 	$("#validationMessage").text('You have entered valid dates, please click Apply to continue');
+	 	$("#validationMessage").text('These are valid dates. Please click Apply to continue');
 	 }
 
 	 var displayBaseRangeError = function( errorMsgStr ){
 
-	 	errorMsgStr = ( typeof errorMsgStr !== "undefined" ) ? errorMsgStr : 'Invalid Base Range: the "to:" date occurs before the "from:" date';
+	 	errorMsgStr = ( typeof errorMsgStr !== "undefined" ) ? errorMsgStr : 'Invalid Base Range: the "to:" date occurs before or on the "from:" date';
 
 	 	$("#validationMessage").addClass("errorMessage");
 	 	$("#validationMessage").text(errorMsgStr);
 
 	 }
+
+	 
         
     
 	// 3 CALENDARS 
+
+	var onCalendarsChange = function(dates, el) {
+
+	  	if (limLog) console.log(arguments, "Date changed event currentFocusId: " + currentFocusId);
+
+	  	var bBaseFocus = ( currentFocusId.indexOf("Base") !== - 1);
+
+	  	var fromDate = dates[0];
+	  	var toDate = dates[1];
+
+	  	var testDates = [];
+
+	  	switch(currentFocusId) {
+
+  			case "inputBaseStartDate" :
+
+  				//var endDate = baseEndMoment._d;
+  				var startDate = dates[1]; // the change!
+  				setBaseDate(startDate, null, "Start");
+  				
+  				var bValidBaseTo = validateBaseTo();
+
+  				if ( bValidBaseTo ) {
+
+  					// disable both inputs 
+  					setBaseInputsDisabled();
+  					setCalendarsDisabled();
+
+  					enableCheckBox(); 
+
+  					setApplyEnabled(); 
+
+  					if (!bCompareChecked) {
+
+	  					setBaseRangeMessage([ baseStartMoment._d, baseEndMoment._d  ]);
+	  					calendars.DatePickerSetDate([ baseEndMoment._d, baseStartMoment._d ], false);
+
+	  				} else {
+	  					setBaseRangeMessage([ baseStartMoment._d, baseEndMoment._d, compareEndMoment._d, compareStartMoment._d  ]);
+	  					calendars.DatePickerSetDate([ baseEndMoment._d, baseStartMoment._d, compareStartMoment._d, compareEndMoment._d ], false);
+	  				}
+
+  				} 
+
+  				break;
+
+  			case "inputBaseEndDate" :
+  				var endDate = dates[0]; // the change!
+  				//var startDate = baseStartMoment._d;
+
+  				setBaseDate(null, endDate, "End");
+  				
+  				var bValidBaseFrom = validateBaseFrom();
+
+  				if ( bValidBaseFrom ) {
+
+	  				disableBaseFrom(); 
+	  				setCurrentFocus("inputBaseStartDate");
+	  				enableBaseTo(); 
+
+	  				if (!bCompareChecked) {
+
+	  					setBaseRangeMessage([ baseStartMoment._d, baseEndMoment._d  ]);
+	  					calendars.DatePickerSetDate([ baseEndMoment._d, baseStartMoment._d ], false);
+
+	  				} else {
+	  					setBaseRangeMessage([ baseStartMoment._d, baseEndMoment._d, compareEndMoment._d, compareStartMoment._d  ]);
+	  					calendars.DatePickerSetDate([ baseEndMoment._d, baseStartMoment._d, compareStartMoment._d, compareEndMoment._d ], false);
+	  				}
+
+	
+		  		}
+
+  				//testDates = [endDate, startDate]; 
+
+  				break;	
+
+  			case "inputCompareStartDate" :
+
+  				var startDate = dates[0]; // the change!
+  				
+  				setCompareDate(startDate, null, "Start");
+
+  				// ok we now have 2 dates for the compare range
+  				// are they valid?
+
+  				var validObj = validateCompareTo();
+
+  				calendars.DatePickerSetDate([ baseEndMoment._d, baseStartMoment._d, compareStartMoment._d, compareEndMoment._d ], false);
+
+  				setBaseRangeMessage([ baseStartMoment._d, baseEndMoment._d, compareEndMoment._d, compareStartMoment._d  ]);
+
+
+  				if (validObj.bTestCompareStartvsCompareEnd && validObj.bTestCompareStartVsBaseEnd ) {
+  					// disable both inputs 
+  					
+  					// bring opacity back to 1
+  					enableCompareFrom();
+  					enableCompareTo();
+
+  					// then disable them
+  					setCompareInputsDisabled();
+  					setCalendarsDisabled();
+
+  					enableCheckBox(); 
+  					setApplyEnabled(); 
+  				}
+
+  				break;
+
+  			case "inputCompareEndDate" :
+
+  				var endDate = dates[0]; // the change!
+  				//var startDate = baseStartMoment._d;
+  				setCompareDate(null, endDate, "End");
+
+  				var bTestCompareEndVsBaseEnd = validateCompareFrom(); 
+
+  				if (!bTestCompareEndVsBaseEnd) {
+
+  					displayBaseRangeError("Invalid Compare Range: the compare from is after the base from date ");
+
+  					//$('#datepicker-calendar').DatePickerClear();
+  				
+  				} else {
+
+  					disableCompareFrom(); 
+  					setCurrentFocus("inputCompareStartDate");
+  					enableCompareTo(); 
+
+  					
+
+  					calendars.DatePickerSetDate([ baseEndMoment._d, baseStartMoment._d, compareStartMoment._d, compareEndMoment._d ], false);
+
+  					setBaseRangeMessage([ baseStartMoment._d, baseEndMoment._d, compareEndMoment._d, compareStartMoment._d  ]);
+
+  				}
+
+  				break;	
+
+	  	};  
+	};   
 
 	var to = new Date();
 	var from = new Date(to.getTime() - 1000 * 60 * 60 * 24 * 14);
@@ -774,140 +1194,18 @@ $(document).ready(function() {
 		  date: [from, to],
 		  calendars: 3,
 		  mode: 'range',
-		  onChange: function(dates, el) {
-
-		  	if (log) console.log(arguments, "Date changed event currentFocusId: " + currentFocusId);
-
-		  	var selectedDate = dates[0];
-		  	if (log) console.log("selected date is: " + selectedDate);
-
-		  	var testDates = [];
-
-		  	switch(currentFocusId){
-
-		  			case "inputBaseStartDate" :
-
-		  				var endDate = baseEndMoment._d;
-		  				var startDate = selectedDate; // the change!
-		  				
-		  				testDates = [endDate, startDate]; 
-
-		  				break;
-
-		  			case "inputBaseEndDate" :
-		  				var endDate = selectedDate; // the change!
-		  				var startDate = baseStartMoment._d;
-
-		  				testDates = [endDate, startDate]; 
-
-		  				break;	
-
-		  			case "inputCompareStartDate" :
-
-		  				var baseEndDate = baseEndMoment._d; 
-		  				var baseStartDate = baseStartMoment._d;
-
-		  				var compareEndDate = compareEndMoment._d; 
-		  				var compareStartDate = selectedDate; // the change!
-
-		  				testDates = [baseEndDate, baseStartDate, compareEndDate, compareStartDate]; 
-
-		  				break;
-		  			case "inputCompareEndDate" :
-
-		  				var baseEndDate = baseEndMoment._d; 
-		  				var baseStartDate = baseStartMoment._d;
-
-		  				var compareEndDate = selectedDate; // the change!
-		  				var compareStartDate = compareStartMoment._d;
-
-		  				console.log(" +++++ focussed on inputCompareEndDate +++++++++");
-
-		  				testDates = [baseEndDate, baseStartDate, compareEndDate, compareStartDate]; 
-
-		  				break;	
-
-		  		};  
-
-		  	var bValidDates = validateAllDates(testDates);
-
-		  		// what is my curent focus?
-
-		  	if (bValidDates)	{
-
-		  		displayNoErrorMessage();
-		  		
-		  		switch(currentFocusId){
-
-		  			case "inputBaseStartDate" :
-
-		  				var endDate = baseEndMoment._d;
-		  				var startDate = selectedDate; // the change!
-		  				
-		  				setBaseDate(startDate, endDate, "Start");
-		  				setBaseRangeMessage([startDate, endDate]);
-
-		  				calendars.DatePickerSetDate([ endDate, startDate ], true)
-
-		  				break;
-
-		  			case "inputBaseEndDate" :
-		  				var endDate = selectedDate; // the change!
-		  				var startDate = baseStartMoment._d;
-
-		  				setBaseDate(startDate, endDate, "End");
-		  				setBaseRangeMessage([startDate, endDate]);
-
-		  				calendars.DatePickerSetDate([ endDate, startDate ], true)
-
-		  				break;	
-
-		  			case "inputCompareStartDate" :
-
-		  				var baseEndDate = baseEndMoment._d; 
-		  				var baseStartDate = baseStartMoment._d;
-
-		  				var compareEndDate = compareEndMoment._d; 
-		  				var compareStartDate = selectedDate; // the change!
-
-		  				setCompareDate(compareStartDate, compareEndDate, "Start");
-		  				setBaseRangeMessage([baseStartDate, baseEndDate, compareStartDate, compareEndDate]);
-
-		  				console.log("all dates valid - should draw this compare start date");
-
-		  				calendars.DatePickerSetDate([ baseEndDate, baseStartDate, compareEndDate, compareStartDate ], true);
-
-		  				break;
-		  			case "inputCompareEndDate" :
-
-		  				var baseEndDate = baseEndMoment._d; 
-		  				var baseStartDate = baseStartMoment._d;
-
-		  				var compareEndDate = selectedDate; // the change!
-		  				var compareStartDate = compareStartMoment._d;
-
-		  				console.log( " --- finally --- ");
-
-		  				setCompareDate(compareStartDate, compareEndDate, "End");
-		  				setBaseRangeMessage([baseStartDate, baseEndDate, compareEndDate, compareStartDate ]);
-
-		  				calendars.DatePickerSetDate([ baseEndDate, baseStartDate, compareStartDate, compareEndDate ], true);
-
-		  				break;	
-
-		  		};  
-
-		  	}   
+		  onRangeChange: function(){
+		  	// if (log) console.log(arguments, "Calendars range change")
+		  }, 
+		  onChange: onCalendarsChange,
 		  	
-		}
-
 	});
 
 	// COMPARE INPUT RANGE 
 
 
 	$("#inputCompareCheckbox").on("change", function(e) {
-		//if (log)  console.log(e.currentTarget.checked);
+		//// if (log)  console.log(e.currentTarget.checked);
 
 		if ( e.currentTarget.checked ) {
 			
@@ -932,8 +1230,8 @@ $(document).ready(function() {
 
 			setCalendarsByPreviousCompareRange();
 
-			
-			$("#compareGroup").fadeIn();
+			enableCompareSelect();
+			$("#compareGroup").show();
 
 		} else {
 
@@ -943,14 +1241,15 @@ $(document).ready(function() {
 			if ( bCustomBaseRange ) setCalendarsByCurBaseRange(baseStartMoment._d, baseEndMoment._d)
 			else setCalendarsByCurBaseRange();
 
-			$("#compareGroup").fadeOut();
+			disableCompareSelect();
+			$("#compareGroup").hide();
 
 		}
 
 	});
 
 	$("#compareSelect").on("change", function(e){
-		//if (log)  console.log("compare select - e.target.value: " + e.target.value);
+		//// if (log)  console.log("compare select - e.target.value: " + e.target.value);
 
 		var idNum = Number(e.target.value);
 
@@ -958,19 +1257,44 @@ $(document).ready(function() {
 		 	//previousRange = previousRanges[idNum].range;
 		 
 		 	setCompareInputsDisabled();
-	 		setCalendarsDisabled();
+	 		
+	 		// the base range could be in custom mode
+	 		if (!bCustomBaseRange) setCalendarsDisabled();
+
+	 		// revert possible custom date back to previous
+	 		//compareStartMoment = getDateMoment("CompareStart");
+	 		//compareEndMoment = getDateMoment("CompareEnd");
+	 		var compareStartD = previousRange[0]._d;
+	 		var compareEndD = previousRange[1]._d; 
+
+	 		setCompareDate(compareStartD, compareEndD, "Start");
+	 		setCompareDate(compareStartD, compareEndD, "End");
 
 	 		setCalendarsByPreviousCompareRange(); 
 
 	 		bCustomCompareRange = false; 
 
+	 		displayNoErrorMessage();
+	 		setApplyEnabled(); 
+
+
 	 	} else {
 
 	 		setCompareInputsEnabled();
+	 		
 	 		setCalendarsEnabled();
 
-	 		setCurrentFocus("inputCompareEndDate");
+	 		//disableCheckBox(); 
+	 		
+	 		//disableCompareSelect();
+	 		disableCompareTo();
+	 		//disableCompareFrom();
 
+	 		// focus on the first base bate
+			setCurrentFocus("inputCompareEndDate");
+
+			//clearCompareDates();
+			 	
 	 		bCustomCompareRange = true; 
 	 	}
 
@@ -980,7 +1304,7 @@ $(document).ready(function() {
 
 	var setCalendarsByCurBaseRange = function( startDate, endDate ) {
 
-		//if (log)  console.log(calendars, " setCalendarsByCurBaseRange ");
+		if (limLog)  console.log(calendars, " setCalendarsByCurBaseRange ");
 
 		startDate = (typeof startDate === "undefined") ? curRange[1]._d : startDate;
 		endDate = (typeof endDate === "undefined") ? curRange[0]._d : endDate;
@@ -1000,14 +1324,14 @@ $(document).ready(function() {
 
 		var diffDays = Number ( baseStartMoment.diff( baseEndMoment, "days") ) + 1;
 
-		console.log("getPreviousCustomBaseRange diffDays: " + diffDays);
+		if (limLog) console.log("getPreviousCustomBaseRange diffDays: " + diffDays);
 
 		var previousCompareStartMoment = moment().year( baseEndMoment.year() ).month( baseEndMoment.month() ).date( baseEndMoment.date() ).subtract(1, 'days');
 		var previousCompareEndMoment = moment().year( baseEndMoment.year() ).month( baseEndMoment.month() ).date( baseEndMoment.date() ).subtract(diffDays, 'days');
 
 		var previousCustomRange = [previousCompareStartMoment._d, previousCompareEndMoment._d];
 
-		console.log(previousCustomRange, "getPreviousCustomBaseRange");
+		if (limLog) console.log(previousCustomRange, "getPreviousCustomBaseRange");
 
 		return previousCustomRange; 
 	}
@@ -1015,7 +1339,7 @@ $(document).ready(function() {
 
 	var setCalendarsByPreviousCompareRange = function() {
 
-		if (log)  console.log("setCalendarsByPreviousCompareRange bCustomBaseRange: " + bCustomBaseRange + " vs bCustomCompareRange: " + bCustomCompareRange);
+		if (limLog)  console.log("setCalendarsByPreviousCompareRange bCustomBaseRange: " + bCustomBaseRange + " vs bCustomCompareRange: " + bCustomCompareRange);
 
 		var dates;
 
@@ -1030,7 +1354,9 @@ $(document).ready(function() {
 	    } else if ( bCustomBaseRange && !bCustomCompareRange ) {
 			dates =  getPreviousCustomBaseRange();
 		} else {
+			
 			dates = [ previousRange[0]._d, previousRange[1]._d ];
+			console.log(dates, "setCalendarsByPreviousCompareRange - final option")
 		}
 
 		
@@ -1048,7 +1374,7 @@ $(document).ready(function() {
  	    var compareStart = dates[1];
  	    var comapareEnd = dates[0];
 
- 	    calendars.DatePickerSetDate([ baseEnd, baseStart, comapareEnd, compareStart ], true);
+ 	    calendars.DatePickerSetDate([ baseEnd, baseStart, compareStart, comapareEnd  ], true);
 
  	    setBaseRangeMessage([ baseStart, baseEnd, compareStart, comapareEnd ]);
 
@@ -1075,7 +1401,12 @@ $(document).ready(function() {
 
 		//ir.introspect.app.msgBus.trigger('applyDates');
 		ir.introspect.app.msgBus.trigger('date:apply', data);
-		
+
+		if (log) {
+			console.log("============ Sending Dates =============")
+			console.log(data, "Dates sent to server")
+		}
+
         ga('send', 'event', 'Tool Bar', 'click', 'apply dates');
 			
 		
@@ -1097,7 +1428,7 @@ $(document).ready(function() {
 	setBaseRangeMessage([baseStartMoment._d, baseEndMoment._d]);
 
 
-	//if (log)  console.log(compareStartMoment, "compareStartMoment");
+	//// if (log)  console.log(compareStartMoment, "compareStartMoment");
 
 
 	// GLOBAL API FOR TESTING 
