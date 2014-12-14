@@ -185,6 +185,8 @@ $(document).ready(function() {
 
 	 		disableCheckBox(); 
 	 		disableBaseTo();
+
+	 		disableCompareSelect();
 	 		// focus on the first base bate
 			setCurrentFocus("inputBaseEndDate");
 
@@ -662,6 +664,8 @@ $(document).ready(function() {
 	  					setBaseInputsDisabled();
 	  					setCalendarsDisabled();
 
+	  					if( bCompareChecked ) enableCompareSelect();
+
 		  				var setDates;
 
 		  				if ( !bCompareChecked ) {
@@ -1063,6 +1067,10 @@ $(document).ready(function() {
 			displayNoErrorMessage();
 		}
 
+		if (!bTestCompareEndVsBaseEnd) {
+			displayBaseRangeError("Invalid Compare Range: the compare from date is after the base from date ");
+		}
+
 	 	return bTestCompareEndVsBaseEnd;
 	 }
 
@@ -1146,6 +1154,8 @@ $(document).ready(function() {
 
   					setApplyEnabled(); 
 
+  					console.log("movie time bCompareChecked: " + bCompareChecked)
+
   					if (!bCompareChecked) {
 
 	  					setBaseRangeMessage([ baseStartMoment._d, baseEndMoment._d  ]);
@@ -1153,15 +1163,19 @@ $(document).ready(function() {
 
 	  				} else {
 	  					setBaseRangeMessage([ baseStartMoment._d, baseEndMoment._d, compareStartMoment._d, compareEndMoment._d  ]);
-	  					calendars.DatePickerSetDate([ baseEndMoment._d, baseStartMoment._d, compareStartMoment._d, compareEndMoment._d ], false);
+	  					calendars.DatePickerSetDate([ baseEndMoment._d, baseStartMoment._d, compareEndMoment._d, compareStartMoment._d  ], false);
+	  					
+	  					enableCompareSelect();
 	  				}
 
-  				} 
+  				} else {
+
+  				}
 
   				break;
 
   			case "inputBaseEndDate" :
-  				var endDate = dates[0]; // the change!
+  				var endDate = dates[1]; // the change! both date indexes are the same at this point
   				//var startDate = baseStartMoment._d;
 
   				setBaseDate(null, endDate, "End");
@@ -1185,6 +1199,11 @@ $(document).ready(function() {
 	  				}
 
 	
+		  		} else {
+		  			
+		  			// only clear the calendar after the first click so it can forget about the second date in the range and start again 
+		  			$('#datepicker-calendar').DatePickerClear();
+
 		  		}
 
   				//testDates = [endDate, startDate]; 
@@ -1193,7 +1212,7 @@ $(document).ready(function() {
 
   			case "inputCompareStartDate" :
 
-  				var startDate = dates[0]; // the change!
+  				var startDate = dates[1]; // the change!
   				
   				setCompareDate(startDate, null, "Start");
 
@@ -1226,30 +1245,25 @@ $(document).ready(function() {
 
   			case "inputCompareEndDate" :
 
-  				var endDate = dates[0]; // the change!
+  				var endDate = dates[1]; // the change!
   				//var startDate = baseStartMoment._d;
   				setCompareDate(null, endDate, "End");
 
-  				var bTestCompareEndVsBaseEnd = validateCompareFrom(); 
+  				var bCompareFromValid = validateCompareFrom(); 
 
-  				if (!bTestCompareEndVsBaseEnd) {
-
-  					displayBaseRangeError("Invalid Compare Range: the compare from is after the base from date ");
-
-  					//$('#datepicker-calendar').DatePickerClear();
-  				
-  				} else {
+  				if ( bCompareFromValid ) {
 
   					disableCompareFrom(); 
   					setCurrentFocus("inputCompareStartDate");
   					enableCompareTo(); 
 
-  					
-
   					calendars.DatePickerSetDate([ baseEndMoment._d, baseStartMoment._d, compareStartMoment._d, compareEndMoment._d ], false);
 
   					setBaseRangeMessage([ baseStartMoment._d, baseEndMoment._d, compareStartMoment._d, compareEndMoment._d  ]);
 
+  				} else {
+  					// only clear the calendar after the first click so it can forget about the second date in the range and start again 
+		  			$('#datepicker-calendar').DatePickerClear();
   				}
 
   				break;	
@@ -1454,6 +1468,7 @@ $(document).ready(function() {
 			
 			dates = [ previousRange[0]._d, previousRange[1]._d ];
 			$("#compareSelect select").val("0");
+			bCustomCompareRange = false;
 
 			console.log(dates, "setCalendarsByPreviousCompareRange - final option");
 
