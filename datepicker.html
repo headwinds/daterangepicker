@@ -8,15 +8,10 @@
   <script type="text/javascript" src="js/datepicker.js"></script>
   <script type="text/javascript" src="js/DateRangeViewController.js"></script>
 
-  
-  <link rel="stylesheet" type="text/css" href="prism/prism.css" />
-
   <link rel="stylesheet" type="text/css" href="css/datepicker/base.css" />
   <link rel="stylesheet" type="text/css" href="css/datepicker/clean.css" />
   <link rel="stylesheet" type="text/css" href="css/datepicker/range.css" />
 
-  <!--tests-->
-  <link rel="stylesheet" href="tests/mocha.css" />
 
   </head>
   <body>
@@ -26,11 +21,16 @@
       <!-- base range input -->
       <div class="calendarContainer"> 
 
-          <h4 id="baseRange" class="baseTitle"></h4>
+          <p class="instructions" style="font-size: 12px; color: #999; padding: 0px; margin: 0px">To begin, create a Base range by selecting 2 dates. Once you have a Base range, then you may
+          select a Compare Range by selecting 2 more dates which occur in the past before the Base range. Whether preselected or custom, always create your Base range first. 
+
+          </p> 
+
+          <h4 id="baseRange" class="baseTitle" style="margin: 0px; margin-top: 10px; margin-bottom: 10px;"></h4>
 
           <div class="toFrom buffer">
-              <label>from: </label><input type="text" class="inputDate baseRange" id="inputBaseEndDate" value="">
-              <label>to: </label><input type="text" class="inputDate baseRange" id="inputBaseStartDate" value="">
+              <label>from: </label><input type="text" class="inputDate baseRange" id="inputBaseStartDate" value="">
+              <label>to: </label><input type="text" class="inputDate baseRange" id="inputBaseEndDate" value="">
           </div>
 
           <div class="selectContainer" id="baseSelect">
@@ -63,8 +63,8 @@
             <p id="compareRange">Compare</p>
             
             <div id="compareGroup" class="toFrom">
-               <label>from: </label><input type="text" class="inputDate compareRange" id="inputCompareEndDate" value="" />
-               <label>to: </label><input type="text" class="inputDate compareRange" id="inputCompareStartDate" value="" />
+               <label>from: </label><input type="text" class="inputDate compareRange" id="inputCompareStartDate" value="" />
+               <label>to: </label><input type="text" class="inputDate compareRange" id="inputCompareEndDate" value="" />
             </div>
             
             <div class="selectContainer" id="compareSelect">
@@ -82,56 +82,12 @@
 
              <div class="rangeButtonContainers">
                 <button id="applyDates" class="button dateButton">APPLY</button>
-                <button id="cancelDates" class="button dateButton">CANCEL</button>
+                <button id="cancelDates" class="button dateButton">RESET</button>
              </div>
           </div>  
         </div>
       </div>  
 
-      <!-- PRISM SYNTAX-->
-      
-      <div id="prismContainer">
-
-          <h4>HTML</h4>
-          <pre class="language-markup">
-           <code class="language-markup">
-              <!DOCTYPE html>
-               <body>
-                 <section>
-                    <daterangepicker configmodel="rangeConfigModel"></daterangepicker> 
-                 </section>
-                </body>
-              </html>
-              
-          </code>
-          </pre>
-          <h4>JS</h4>
-          <pre class="language-javascrpt">
-            <code class="language-javascrpt">var hello = "world";</code>
-          </pre>
-      </div>
-
-      <!-- TESTS -->
-    
-      <div id="testsContainer">
-
-          <div id="mocha"></div>
-          <script src="tests/index.js"></script>
-          <script src="tests/mocha.js"></script>
-          
-          <script>
-
-          mocha.setup('bdd');
-          mocha.setup({ignoreLeaks: true});
-
-          </script>
-          <script src="tests/datepicker/datepickerSpecs.js"></script>
-
-      </div>
-
-
-
-      <script type="text/javascript" src="prism/prism.js"></script>
    </body>
 </html>
 

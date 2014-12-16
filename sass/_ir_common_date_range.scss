@@ -107,7 +107,7 @@ $errorColor: #990000;
       height: 175px;
 
       .datepicker {
-        width: 488px !important;
+        width: 502px !important;
         height: 140px !important;
       }
 
@@ -115,6 +115,7 @@ $errorColor: #990000;
 
    select {
     width: 127px;
+    height: 18px;
    } 
 
   div.datepicker {
@@ -378,7 +379,9 @@ $errorColor: #990000;
     display: inline-block;
   }
 
+
   .toFrom  {
+    width: 230px;
     display: inline-block;
   }
 
