@@ -1359,7 +1359,9 @@ $(document).ready(function() {
 			
 			bCompareChecked = true; 
 
-			if (null === compareStartMoment) {
+			console.log(compareStartMoment, "compare checked - what is compareStartMoment?");
+
+			if (null === compareStartMoment && !bCustomBaseRange ) {
 
 				// 1. 
 				// I can't call getPreviousCustomBaseRange() until compareStartMoment is defined!
@@ -1377,9 +1379,6 @@ $(document).ready(function() {
 				compareStartMoment = getDateMoment( "CompareStart" );
 				compareEndMoment = getDateMoment( "CompareEnd" );
 
-				if ( bCustomBaseRange ) {
-					dates = getPreviousCustomBaseRange();
-				} 
 				
 			} 
 
@@ -1494,16 +1493,18 @@ $(document).ready(function() {
 
 	var getPreviousCustomBaseRange = function(){
 
-		var diffDays = baseEndMoment.diff( baseStartMoment, "days");
+		var diffDays = Number( baseEndMoment.diff( baseStartMoment, "days") );
 
 		console.log("getPreviousCustomBaseRange diffDays: " + diffDays);
 
-		var previousCompareEndMoment = baseStartMoment.subtract(1, 'days');
-		var previousCompareStartMoment = previousCompareEndMoment.subtract(diffDays, 'days');
+		var previousCompareEndMoment = moment().date( baseStartMoment.date() ).month( baseStartMoment.month() ).year( baseStartMoment.year() ).subtract(1, 'days');
+		var previousCompareStartMoment = moment().date( baseStartMoment.date() ).month( baseStartMoment.month() ).year( baseStartMoment.year() ).subtract(diffDays, 'days');
 
 		var previousCustomRange = [ previousCompareStartMoment._d, previousCompareEndMoment._d ];
 
-		console.log(previousCustomRange, "getPreviousCustomBaseRange check compareStartMoment");
+		console.log(previousCustomRange, "getPreviousCustomBaseRange check compareStartMoment new");
+		console.log(baseStartMoment, "getPreviousCustomBaseRange check baseStartMoment");
+		console.log(baseEndMoment, "getPreviousCustomBaseRange check baseStartMoment");
 		
 		setCompareDate(previousCompareStartMoment._d, null, "Start" );
 		setCompareDate(null, previousCompareEndMoment._d, "End" );
@@ -1526,14 +1527,15 @@ $(document).ready(function() {
 
 	var setCalendarsByPreviousCompareRange = function() {
 
-		if (limLog)  console.log("setCalendarsByPreviousCompareRange bCustomBaseRange: " + bCustomBaseRange + " vs bCustomCompareRange: " + bCustomCompareRange);
+		console.log("setCalendarsByPreviousCompareRange bCustomBaseRange: " + bCustomBaseRange + " vs bCustomCompareRange: " + bCustomCompareRange);
 
 		var dates;
 
-		
 		if( bCustomBaseRange && !bCustomCompareRange ) {
 
-			dates =  getPreviousCustomBaseRange();
+			dates = getPreviousCustomBaseRange();
+			// compare moments are already set now...
+
 		
 		} else {
 			
@@ -1541,34 +1543,31 @@ $(document).ready(function() {
 			
 			removeCompareState();
 
-			//baseStart = curRange[1]._d;
-			//baseEnd = curRange[0]._d; 
-
 			setBaseDate(curRange[0]._d, null, "Start");
 			setBaseDate(null, curRange[1]._d, "End");
+
+			baseStartMoment = getDateMoment("BaseStart");
+			baseEndMoment = getDateMoment("BaseEnd"); 
+			
+			var compareNumStartDateStr = dates[0].getDate() + "/" + (dates[0].getMonth() + 1) + "/" + dates[0].getFullYear();
+			var compareNumEndDateStr = dates[1].getDate() + "/" + (dates[1].getMonth() + 1) + "/" + dates[1].getFullYear();
+			
+		    $("#inputCompareStartDate").val(compareNumStartDateStr);
+		    $("#inputCompareEndDate").val(compareNumEndDateStr);
+
+		   	//if (!bCustomBaseRange) setCalendarsByCurBaseRange();
+	         
+	 	    var compareStart = dates[0];
+	 	    var comapareEnd = dates[1];
+
+	 	    setCompareDate(compareStart, null, "Start");
+			setCompareDate(null, comapareEnd, "End");
+
+			compareStartMoment = getDateMoment("CompareStart"); 
+			compareEndMoment = getDateMoment("CompareEnd");
 		}
 
-		var baseStart = baseStartMoment._d;
- 	    var baseEnd = baseEndMoment._d;
-
-		
-		var compareNumStartDateStr = dates[0].getDate() + "/" + (dates[0].getMonth() + 1) + "/" + dates[0].getFullYear();
-		var compareNumEndDateStr = dates[1].getDate() + "/" + (dates[1].getMonth() + 1) + "/" + dates[1].getFullYear();
-		
-	    $("#inputCompareStartDate").val(compareNumStartDateStr);
-	    $("#inputCompareEndDate").val(compareNumEndDateStr);
-
-	   	//if (!bCustomBaseRange) setCalendarsByCurBaseRange();
-         
- 	    var compareStart = dates[0];
- 	    var comapareEnd = dates[1];
-
- 	    setCompareDate(compareStart, null, "Start");
-		setCompareDate(null, comapareEnd, "End");
-
- 	    calendars.DatePickerSetDate([ baseStart, baseEnd, compareStart, comapareEnd ], true);
-
- 	    setBaseRangeMessage([ baseStart, baseEnd, compareStart, comapareEnd ]);
+ 	    drawDates();
 
 	};
 

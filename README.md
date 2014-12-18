@@ -1,5 +1,7 @@
 # DatePicker
 
+![headwinds datepicker](http://www.headwinds.net/lab/daterangepicker/images/daterangepicker.png)
+
 I was tasked to create a date range picker that mirrored the behavoir found in the Google Analytics date range picker. 
 
 I googled that task and discovered this [stackoverflow thread](http://stackoverflow.com/questions/1971208/looking-for-a-good-date-range-picker-any-suggestions). 
@@ -16,10 +18,6 @@ Update: I guess I didn't google hard enough because I googled again to see if I 
 
 In my case, I didn't need an exact copy and I'm fine with doing some digging and know how to update the code base is more valuable anyways. So by all means steal from this and make it your own. 
 
-## TESTS
 
-[tests using Mocha](http://headwinds.net/lab/daterangepicker/tests/tests.html)
-
-Here's a great [github and article on testing](https://github.com/yearofmoo/YOM-AngularJS-Testing-Article) which I wish to update this repo and replace Mocha with Karma for the sake of learning something new - Mocha is excellent too.
 
 
