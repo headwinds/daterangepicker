@@ -16,7 +16,8 @@ I didn't want a exact copy but to steal some ideas and also leverage momentjs to
 
 Update: I guess I didn't google hard enough because I googled again to see if I had missed anything and sure enough someone else had went down the same rabbit hole solved the problem copying Google's design [more precisely](https://github.com/petrkotek/DatePicker).
 
-In my case, I didn't need an exact copy and I'm fine with doing some digging and know how to update the code base is more valuable anyways. So by all means steal from this and make it your own. 
+In my case, I didn't need an exact copy and had more area to play with so I was able to alter the design to make it more aesthetically pleasing
+and easy to use. 
 
 
 
