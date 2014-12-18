@@ -11,7 +11,7 @@ $warningRangeColor: darken(#ffa500, 5%);
 $errorColor: #990000;
 
 #dateCardContainer {
-    height: 365px;
+    height: 400px;
     width: 560px !important;
     top: 0px;
     left: 520px; // only card that starts visible
@@ -155,7 +155,7 @@ $errorColor: #990000;
   div.datepicker a {
     color: #333;
     text-decoration: none;
-    cursor: default;
+    cursor: pointer;
     outline: none;
   }
   div.datepicker table td {
@@ -177,6 +177,7 @@ $errorColor: #990000;
     line-height: 16px;
     height: 16px;
     padding-right: 2px;
+    cursor: pointer;
   }
   .datepickerYears a,
   .datepickerMonths a{
@@ -196,6 +197,8 @@ $errorColor: #990000;
   }
   tbody.datepickerDays td.datepickerSelected{
     background: $baseRangeColor;
+    pointer-events: none !important;
+    cursor: default !important; 
   }
   tbody.datepickerDays td.datepickerNotInMonth.datepickerSelected {
     background: #17384d;
@@ -270,9 +273,13 @@ $errorColor: #990000;
   td.datepickerDisabled a,
   td.datepickerDisabled.datepickerNotInMonth a{
     color: #555555;
+    pointer-events: none !important;
+    cursor: default !important; 
   }
   td.datepickerDisabled a:hover {
     color: #333333;
+    pointer-events: none !important;
+    cursor: default !important; 
   }
   /* Not used by default, calendar cells can be marked as special if desired (doesn't seem to be totally working) */
   div.datepicker tbody.datepickerDays td.datepickerSpecial a {
@@ -493,28 +500,37 @@ $errorColor: #990000;
   }
 
   /* Grey out dates in the future */
+  div.datepicker td.datepickerFuture {
+    pointer-events: none !important;
+    cursor: default !important; 
+  }
+
   div.datepicker td.datepickerFuture a {
     color:#DDDDDD;
-    pointer-events: none;
-    cursor: default;
+    pointer-events: none !important;
+    cursor: default !important; 
   }
 
   /* Grey out dates in the future */
   div.datepicker td.datepickerFuture a:hover {
     pointer-events: none;
     background-color:#DDDDDD !important;
+    pointer-events: none !important;
+    cursor: default !important; 
   }
 
   /* Grey out dates in the future */
   div.datepicker td.datepickerFuture td:hover {
     pointer-events: none;
     background-color:#DDDDDD !important;
+    pointer-events: none !important;
+    cursor: default !important; 
   }
 
 
   /* yellow cell background on hover */
   div.datepicker tbody.datepickerDays td:hover {
-    background-color: #FFCC33;
+    background-color: #FFCC33; 
   }
 
   /* Bold today's date */

@@ -19,6 +19,11 @@ $(document).ready(function() {
 
 	//////////////////////////////////////////// VARIABLES
 
+	var BaseStartValid = true;
+	var BaseEndValid = true;
+	var CompareStartValid = true;
+	var CompareEndValid = true; 
+
 	var currentFocusId = null;
 	var prevFocusId = null;
 
@@ -47,6 +52,7 @@ $(document).ready(function() {
 	  <option value="7">Last 365 Days</option>
 	  <option value="8">This year</option>
 	  <option value="9">Custom Range</option>
+
 	*/
 
 	
@@ -184,8 +190,8 @@ $(document).ready(function() {
 
 		console.log("---- reset ----")
 
-		$("#baseRange").text("");
-		$("#validationMessage").text("");
+		$("#baseRange").text(" ");
+		$("#validationMessage").text(" ");
 
 		if  ( $("#validationMessage").hasClass("errorMessage") ) $("#validationMessage").removeClass("errorMessage"); 
 
@@ -204,7 +210,6 @@ $(document).ready(function() {
 		bCompareChecked = false;
 
 		curRange = last7DaysRange;
-	    previousRange = previousPeriod7DaysRange; 
 
 		setCalendarsByCurBaseRange();
 
@@ -216,18 +221,19 @@ $(document).ready(function() {
 		// remove focus
 		if  ( $("#inputCompareEndDate").hasClass("compareRangeSelected") ) $("#inputCompareEndDate").removeClass("compareRangeSelected"); 
 		if  ( $("#inputCompareStartDate").hasClass("compareRangeSelected") ) $("#inputCompareStartDate").removeClass("compareRangeSelected"); 
-		if  ( $("#inputBaseEndDate").hasClass("baseRangeSelected") ) $("#inputCompareEndDate").removeClass("baseRangeSelected"); 
+		if  ( $("#inputBaseEndDate").hasClass("baseRangeSelected") ) $("#inputBaseEndDate").removeClass("baseRangeSelected"); 
 		if  ( $("#inputBaseStartDate").hasClass("baseRangeSelected") ) $("#inputBaseStartDate").removeClass("baseRangeSelected"); 
 
 		if  ( $("#inputCompareEndDate").hasClass("disableApply") ) $("#inputCompareEndDate").removeClass("disableApply"); 
 		if  ( $("#inputCompareStartDate").hasClass("disableApply") ) $("#inputCompareStartDate").removeClass("disableApply"); 
-		if  ( $("#inputBaseEndDate").hasClass("disableApply") ) $("#inputCompareEndDate").removeClass("disableApply"); 
+		if  ( $("#inputBaseEndDate").hasClass("disableApply") ) $("#inputBaseEndDate").removeClass("disableApply"); 
 		if  ( $("#inputBaseStartDate").hasClass("disableApply") ) $("#inputBaseStartDate").removeClass("disableApply"); 
 
 		if  ( $("#inputCompareEndDate").hasClass("errorInputTxt") ) $("#inputCompareEndDate").removeClass("errorInputTxt"); 
 		if  ( $("#inputCompareStartDate").hasClass("errorInputTxt") ) $("#inputCompareStartDate").removeClass("errorInputTxt"); 
 		if  ( $("#inputBaseEndDate").hasClass("errorInputTxt") ) $("#inputBaseEndDate").removeClass("errorInputTxt"); 
 		if  ( $("#inputBaseStartDate").hasClass("errorInputTxt") ) $("#inputBaseStartDate").removeClass("errorInputTxt"); 
+
 
 		setAllDisabled();
 
@@ -238,6 +244,8 @@ $(document).ready(function() {
 		disableCompareSelect();
 		enableCheckBox();
 
+		if ( $("#baseSelect").hasClass("disableApply") ) $("#baseSelect").removeClass("disableApply");
+
 		/*
 		enableBaseTo();
 		enableCompareTo();
@@ -245,6 +253,10 @@ $(document).ready(function() {
 		enableCompareFrom();
 		*/
 
+		BaseStartValid = true;
+		BaseEndValid = true;
+		CompareStartValid = true;
+		CompareEndValid = true; 
 
 		setApplyEnabled();
 
@@ -305,7 +317,9 @@ $(document).ready(function() {
 	 		setCalendarsDisabled();
 
 	 		enableCheckBox(); 
-	 		enableCompareSelect();
+	 		disableCompareSelect();
+
+	 		setApplyEnabled();
 
 	 		//calendars.DatePickerClear();
 
@@ -447,24 +461,34 @@ $(document).ready(function() {
 	 	setCalendarsDisabled();
 	 }
 
-	 var setCurrentFocus = function( inputId ) {
+	 var setCurrentFocus = function( inputId, bError ) {
+
+	 	bError = (typeof bError !== "undefined") ? bError : false; 
 
 		currentFocusId = inputId;
 	 	var curInputEl = $("#" + currentFocusId);
 
-	 	if (  curInputEl.hasClass("errorInputTxt") ) curInputEl.removeClass("errorInputTxt"); 
+
+	 	/*
+	 	if ( !bError ) {
+
+	 		if (  curInputEl.hasClass("errorInputTxt") ) curInputEl.removeClass("errorInputTxt"); 
 	 	
+	 	}
+	 	*/
+
 	 	// ...then focus here <-- this interferes with selecting a date with the cursor requiring 2 clicks
 	 	// I think I need to transfer focus to the calender as the user begins to mouse over it if I want to keep this code 
 	 	// but for now I'll remove it 
-	 	/*
+	 	
 	 	var el = $("#" + currentFocusId).get(0);
-	    var elemLen = el.value.length;
-	    el.selectionStart = elemLen;
-	    el.selectionEnd = elemLen;
+	    //var elemLen = el.value.length;
+
+	    //el.selectionStart = elemLen;
+	    //el.selectionEnd = elemLen;
 	    el.focus();
-	    el.setSelectionRange(0,elemLen);
-		*/
+	    //el.setSelectionRange(0,elemLen);
+		
 
 	    // 
 	    $("#inputBaseEndDate").removeClass("baseRangeSelected");
@@ -516,7 +540,7 @@ $(document).ready(function() {
 	 	
 	 	$("#inputBaseStartDate").val("");
 	 	$("#inputBaseEndDate").val("");
-
+	 	
 	 	$('#datepicker-calendar').DatePickerClear();
 
 	 	baseStartMoment = null;
@@ -693,14 +717,16 @@ $(document).ready(function() {
 
 	 	// FOCUS START BASE
 	 	$("#inputBaseStartDate").on("focus", function(){
-	 		//// if (log)  console.log("focus");
+	 		
+	 		console.log("inputBaseStartDate - focus");
 	 		setCurrentFocus( $(this).attr("id") );
+
 	 	});
 
 	 	// BLUR 
 
 	 	$("#inputBaseStartDate").on("blur", function(){
-			// if (log)  console.log("blur start");
+			console.log("inputBaseStartDate start");
 			newDateAdded("BaseStart");
 	 	});
 
@@ -714,14 +740,16 @@ $(document).ready(function() {
 	 	// FOCUS END BASE
 
 	 	$("#inputBaseEndDate").on("focus", function(){
-	 		// if (log)  console.log("focus end");
+	 		console.log("inputBaseEndDate - focus");
+	 		
 	 		setCurrentFocus( $(this).attr("id") );
+
 	 	});
 
 	 	// BLUR
 
 	 	$("#inputBaseEndDate").on("blur", function(){
-			// if (log)  console.log("blur end");
+			 console.log("inputBaseEndDate - blur");
 			 newDateAdded("BaseEnd");
 	 	});
 
@@ -738,7 +766,7 @@ $(document).ready(function() {
 	 	// FOCUS START COMPARE
 
 	 	$("#inputCompareStartDate").on("focus", function(){
-	 		//// if (log)  console.log("focus");
+	 		//console.log("inputCompareStartDate - focus");
 
 	 		setCurrentFocus( $(this).attr("id") );
 	 	});
@@ -931,6 +959,51 @@ $(document).ready(function() {
 		}
 	 }
 
+	 var setValidDate = function( posStr ){
+
+	 	switch(posStr) {
+
+	   		case "BaseStart" :
+	   			BaseStartValid = true; 
+	   			break; 
+	   		case "BaseEnd" :
+	   			BaseStartValid = true; 
+	   			BaseEndValid = true; 
+	   			break; 
+	   		case "CompareStart" : 
+	   			CompareStartValid = true;
+	   			break; 
+	   		case "CompareEnd" : 
+	   			CompareStartValid = true;
+				ComapreEndValid = true; 
+	   			break;
+
+		}
+
+	 }
+
+	 var setInvalidDate = function( posStr ){
+
+	 	switch(posStr) {
+
+	   		case "BaseStart" :
+	   			BaseStartValid = false; 
+	   			break; 
+	   		case "BaseEnd" :
+	   			BaseEndValid = false; 
+	   			break; 
+	   		case "CompareStart" : 
+	   			CompareStartValid = false;
+	   			break; 
+	   		case "CompareEnd" : 
+				ComapreEndValid = false; 
+	   			break;
+
+		}
+
+	 }
+	 
+
 	 // on enter or blur test the new date
 	 var newDateAdded = function( posStr ){
 
@@ -942,13 +1015,16 @@ $(document).ready(function() {
 			   // 
 		var checkDateObj = isDate(enteredDate);
 
-		console.debug("newDateAdded enteredDate: " + enteredDate);
+		console.log("newDateAdded enteredDate: " + enteredDate);
 		console.log("newDateAdded bValid: " + checkDateObj.isValid);
 
+		// if you blurred into this input and previous input is invalid, send the cursor back
 
 	    // Walk through Base From to Base To first
 
 	    if (checkDateObj.isValid) {
+
+	    	//setValidDate(posStr); 
 
 		   	switch(posStr) {
 
@@ -973,6 +1049,9 @@ $(document).ready(function() {
 		   			break;
 
 		   	}
+
+		   	if ( inputBox.hasClass("errorInputTxt") )  inputBox.removeClass("errorInputTxt");
+		   	displayNoErrorMessage();
 
 	   } else {
 	   		
@@ -1014,7 +1093,9 @@ $(document).ready(function() {
 
 	 var isDate = function( newDateStr ) {
 
-	 	//// if (log)  console.log("isDate newDateStr: " + newDateStr)
+	 	console.log(arguments, "isDate newDateStr: " + newDateStr);
+
+	 	if ( typeof newDateStr === "undefined " || newDateStr === "" ) return {isValid: true, date: date};
 
 	 	var parms = newDateStr.split(/[\.\-\/]/);
 
@@ -1095,7 +1176,7 @@ $(document).ready(function() {
 
 	 		setApplyDisabled();
 
-	 		displayBaseRangeError('Invalid: the "from:" date is before the "to:" date. Please click Reset to try again. ');
+	 		displayBaseRangeError('Invalid: the "from:" date is before the "to:" date. Please click RESET to try again. ');
 
 	 		setCalendarsDisabled();
 
@@ -1120,7 +1201,7 @@ $(document).ready(function() {
 
 		 	if (!baseFromValid) {
 
-				displayBaseRangeError('Invalid: the "from:" date is before the "to:" date. Please click Reset to try again. ');
+				displayBaseRangeError('Invalid: the "from:" date is before the "to:" date. Please click RESET to try again. ');
 			}
 
 		 	console.log("validateBaseFrom 1 valid? " + baseFromValid); 
@@ -1130,7 +1211,7 @@ $(document).ready(function() {
 		 		baseFromValid = validateStartBeforeEnd(baseEndMoment, compareStartMoment); 
 
 		 		if (!baseFromValid) {
-					displayBaseRangeError('Invalid: the "from:" date is before the "to:" date. Please click Reset to try again. ');
+					displayBaseRangeError('Invalid: the "from:" date is before the "to:" date. Please click RESET to try again. ');
 				}
 
 		 	}
@@ -1164,7 +1245,7 @@ $(document).ready(function() {
 
 		 	if (!baseToValid) {
 
-				displayBaseRangeError('Invalid: the "from:" date is before the "to:" date. Please click Reset to try again. ');
+				displayBaseRangeError('Invalid: the "from:" date is before the "to:" date. Please click RESET to try again. ');
 			}
 
 		 	console.log("validateBaseTo 1 valid? " + baseToValid); 
@@ -1174,7 +1255,7 @@ $(document).ready(function() {
 		 		baseToValid = validateStartBeforeEnd(baseStartMoment, compareStartMoment); 
 
 		 		if (!baseToValid) {
-					displayBaseRangeError('Invalid: the "from:" date is before the "to:" date. Please click Reset to try again. ');
+					displayBaseRangeError('Invalid: the "from:" date is before the "to:" date. Please click RESET to try again. ');
 				}
 
 		 	}
@@ -1214,7 +1295,7 @@ $(document).ready(function() {
 			}
 
 			if (!bTestCompareEndVsBaseEnd) {
-				displayBaseRangeError('Invalid: the "from:" date is before the "to:" date. Please click Reset to try again. ');
+				displayBaseRangeError('Invalid: the "from:" date is before the "to:" date. Please click RESET to try again. ');
 			}
 
 		} else {
@@ -1245,7 +1326,7 @@ $(document).ready(function() {
 
 			if (!bTestCompareStartVsBaseEnd) {
 
-				displayBaseRangeError('Invalid: the "from:" date is before the "to:" date. Please click Reset to try again. ');
+				displayBaseRangeError('Invalid: the "from:" date is before the "to:" date. Please click RESET to try again. ');
 
 			}
 

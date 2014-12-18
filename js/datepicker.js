@@ -376,6 +376,7 @@
                 if ( containsDisabled === false ) dateCandidate.classname.push('datepickerCompareSelected');
         
               } else if (fromUser.selected || options.date == val || $.inArray(val, options.date) > -1 || (options.mode == 'range' && val >= options.date[0] && val <= options.date[1])) {
+                
                 data.weeks[indic].days[indic2].classname.push('datepickerSelected');
               }
             }
