@@ -198,6 +198,8 @@ $(document).ready(function() {
 		compareEndMoment = null;
 
 		$("#baseSelect select").val("0");
+		if  ( $("#baseSelect").hasClass("disableApply") ) $("#baseSelect").removeClass("disableApply"); 
+
 		
 		bCustomBaseRange = false;
 		bCustomCompareRange = false;
@@ -295,6 +297,8 @@ $(document).ready(function() {
 
 	 		bCustomBaseRange = false; 
 
+	 		setApplyEnabled(); 
+
 	 		curRange = baseRanges[idNum].range;
 		 	previousRange = previousRanges[idNum].range;
 
@@ -339,6 +343,7 @@ $(document).ready(function() {
 
 	 var enableBaseTo = function(){
 	 	$("#inputBaseEndDate").removeClass("disableApply");
+	 	$("#inputBaseEndDate").removeClass("disableControl");
 	 }
 
 	 var disableBaseFrom = function(){
@@ -347,6 +352,7 @@ $(document).ready(function() {
 
 	 var enableBaseFrom = function(){
 	 	$("#inputBaseStartDate").removeClass("disableApply");
+	 	$("#inputBaseEndDate").removeClass("disableControl");
 	 }
 
 	 /////////////////////////////////////////////////// COMPARE T0 & FROM
@@ -357,6 +363,7 @@ $(document).ready(function() {
 
 	 var enableCompareTo = function(){
 	 	$("#inputCompareEndDate").removeClass("disableApply");
+	 	$("#inputBaseEndDate").removeClass("disableControl");
 	 }
 
 	 var disableCompareFrom = function(){
@@ -365,6 +372,7 @@ $(document).ready(function() {
 
 	 var enableCompareFrom = function(){
 	 	$("#inputCompareStartDate").removeClass("disableApply");
+	 	$("#inputBaseEndDate").removeClass("disableControl");
 	 }
 
 	 /////////////////////////////////////////////////// CHECKBOX
@@ -448,6 +456,8 @@ $(document).ready(function() {
 	 }
 
 	 var setCurrentFocus = function( inputId ) {
+
+	 	console.log("setCurrentFocus inputId: " + inputId)
 
 		currentFocusId = inputId;
 	 	var curInputEl = $("#" + currentFocusId);
@@ -686,7 +696,7 @@ $(document).ready(function() {
 	 	ir.introspect.app.appModel.bind('change:viewMode', function(){
 
 	 		console.log("DateRangeViewController heard view mode change");
-	 		reset(); 
+	 		// reset(); 
 
 	 	});
 
@@ -808,20 +818,24 @@ $(document).ready(function() {
 
 	 	var bValidBaseFrom = validateBaseFrom();
 
+	 	console.log("baseStartCaseHandler bValidBaseFrom: " + bValidBaseFrom);
+
 		if ( bValidBaseFrom ) {
 
 			// disable both inputs 
 			setBaseInputsDisabled();
 
 			disableBaseFrom(); 
-			setCurrentFocus("inputBaseEndDate");
+			
 			enableBaseTo(); 
 
 			baseStartMoment = getDateMoment("BaseStart");
 
-			console.log("calendars change baseStartMoment._d: " + baseStartMoment._d)
+			console.log("calendars change baseStartMoment._d: " + baseStartMoment._d);
+
+			setCurrentFocus("inputBaseEndDate");
 			// don't draw until both are valid
-			//drawDates();
+			calendars.DatePickerSetDate(baseStartMoment._d, false)
 
 		} else {
 
@@ -867,7 +881,7 @@ $(document).ready(function() {
 
 	 }
 
-	 // CompareStart
+	 // Compare end 
 
 	 var compareEndCaseHandler = function(endDate){
 	 	
@@ -901,9 +915,7 @@ $(document).ready(function() {
 
 	 }
 
-	 // CompareEnd 
-
-
+	 // Compare start
 
 	 var compareStartCaseHandler = function(startDate) {
 
@@ -1111,35 +1123,11 @@ $(document).ready(function() {
 
 	 	var baseFromValid = false;
 
-	 	// simple 2 date validation
-	 	// is the from date after the to date?
+	 	console.log(baseStartMoment, "<--baseStartMoment validateBaseFrom");
 
 	 	if (null !== baseStartMoment) {
 
-		 	baseFromValid = validateStartBeforeEnd(baseStartMoment, baseEndMoment); 
-
-		 	if (!baseFromValid) {
-
-				displayBaseRangeError('Invalid: the "from:" date is before the "to:" date. Please click Reset to try again. ');
-			}
-
-		 	console.log("validateBaseFrom 1 valid? " + baseFromValid); 
-
-		 	// complex 3 date validation with compare checked	
-		 	if ( bCompareChecked ) {
-		 		baseFromValid = validateStartBeforeEnd(baseEndMoment, compareStartMoment); 
-
-		 		if (!baseFromValid) {
-					displayBaseRangeError('Invalid: the "from:" date is before the "to:" date. Please click Reset to try again. ');
-				}
-
-		 	}
-
-		 	console.log("validateBaseFrom 2 valid? " + baseFromValid); 
-
-		 	if (baseFromValid ) {
-				displayNoErrorMessage();
-			}
+			// hmmmm - this is the first date so there is nothing to compare it against
 
 		} else {
 			// it's custom base range mode and the user still needs to set a second date 
@@ -1317,6 +1305,10 @@ $(document).ready(function() {
   			case "inputBaseStartDate" :
 
   				var compareStartDate = getDateFromCalendarDates(dates, "start");
+  				
+  				// this fixes an odd edge case if a user leaves the process after only picking the first date
+  				if ( String(compareStartDate) === "Invalid Date" ) compareStartDate = dates[1];
+
   				baseStartCaseHandler(compareStartDate); 
 
   				break;
@@ -1422,6 +1414,8 @@ $(document).ready(function() {
 		if ( idNum === 0) {
 		 	//previousRange = previousRanges[idNum].range;
 		 	bCustomCompareRange = false; 
+
+		 	enableCheckBox(); 
 		 
 		 	setCompareInputsDisabled();
 	 		
@@ -1455,6 +1449,8 @@ $(document).ready(function() {
 	 	} else {
 
 	 		bCustomCompareRange = true; 
+
+	 		disableCheckBox();
 
 	 		setCompareInputsEnabled();
 	 		
