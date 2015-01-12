@@ -177,6 +177,8 @@ $(document).ready(function() {
 
 
 		displayNoErrorMessage();
+
+	
 		
 	};
 
@@ -226,11 +228,8 @@ $(document).ready(function() {
 		if  ( $("#inputBaseEndDate").hasClass("disableApply") ) $("#inputCompareEndDate").removeClass("disableApply"); 
 		if  ( $("#inputBaseStartDate").hasClass("disableApply") ) $("#inputBaseStartDate").removeClass("disableApply"); 
 
-		if  ( $("#inputCompareEndDate").hasClass("errorInputTxt") ) $("#inputCompareEndDate").removeClass("errorInputTxt"); 
-		if  ( $("#inputCompareStartDate").hasClass("errorInputTxt") ) $("#inputCompareStartDate").removeClass("errorInputTxt"); 
-		if  ( $("#inputBaseEndDate").hasClass("errorInputTxt") ) $("#inputBaseEndDate").removeClass("errorInputTxt"); 
-		if  ( $("#inputBaseStartDate").hasClass("errorInputTxt") ) $("#inputBaseStartDate").removeClass("errorInputTxt"); 
-
+		removeErrorTxt(); 
+		
 		setAllDisabled();
 
 		$("#compareSelect select").val("0");
@@ -251,6 +250,14 @@ $(document).ready(function() {
 		setApplyEnabled();
 
 		$("#compareGroup").hide();
+	}
+
+	var removeErrorTxt = function(){
+		if  ( $("#inputCompareEndDate").hasClass("errorInputTxt") ) $("#inputCompareEndDate").removeClass("errorInputTxt"); 
+		if  ( $("#inputCompareStartDate").hasClass("errorInputTxt") ) $("#inputCompareStartDate").removeClass("errorInputTxt"); 
+		if  ( $("#inputBaseEndDate").hasClass("errorInputTxt") ) $("#inputBaseEndDate").removeClass("errorInputTxt"); 
+		if  ( $("#inputBaseStartDate").hasClass("errorInputTxt") ) $("#inputBaseStartDate").removeClass("errorInputTxt"); 
+		if  ( $("#validationMessage").hasClass("errorInputTxt") ) $("#validationMessage").removeClass("errorInputTxt"); 
 	}
 
 
@@ -298,6 +305,7 @@ $(document).ready(function() {
 	 		bCustomBaseRange = false; 
 
 	 		setApplyEnabled(); 
+	 		removeErrorTxt();
 
 	 		curRange = baseRanges[idNum].range;
 		 	previousRange = previousRanges[idNum].range;
@@ -333,7 +341,6 @@ $(document).ready(function() {
 	 });
 
 	 /////////////////////////////////////////// GETTERS & SETTERS
-
 
 	 /////////////////////// BASE T0 & FROM
 
@@ -604,8 +611,8 @@ $(document).ready(function() {
 		dates[1] = ( typeof dates[1] !== "number" ) ? dates[1] : new Date( dates[1] ); 
 		dates[0] = ( typeof dates[0] !== "number" ) ? dates[0] : new Date( dates[0] ); 
 
-	 	var baseStartDateStr = dates[0].getDate()+' '+dates[0].getMonthName(true)+', '+ dates[0].getFullYear();
-	    var baseEndDateStr = dates[1].getDate()+' '+dates[1].getMonthName(true)+', '+ dates[1].getFullYear();
+	 	var baseStartDateStr = dates[0].getMonthName(true) + ' ' + dates[0].getDate()+ ', '+ dates[0].getFullYear();
+	    var baseEndDateStr = dates[1].getMonthName(true) + ' ' + dates[1].getDate() + ', '+ dates[1].getFullYear();
 
 	    baseRangeStr = "<span class='baseRangeTxt'>" + baseStartDateStr + ' - ' + baseEndDateStr + "</span>";
 
@@ -629,8 +636,8 @@ $(document).ready(function() {
 
 		    if ( dates.length > 2 ) {
 
-		    	compareStartDateStr = dates[2].getDate()+' '+dates[2].getMonthName(true)+', '+ dates[2].getFullYear();
-		    	compareEndDateStr = dates[3].getDate()+' '+dates[3].getMonthName(true)+', '+ dates[3].getFullYear();
+		    	compareStartDateStr = dates[2].getMonthName(true) + ' ' + dates[1].getDate() + ', '+ dates[2].getFullYear();
+		    	compareEndDateStr = dates[3].getMonthName(true) + ' ' + dates[3].getDate() + ', '+ dates[3].getFullYear();
 
 		    } else {
 		    	compareStartDateStr = compareStartMoment.date()+' '+compareStartMoment.format("MMMM")+', '+ compareStartMoment.year();
@@ -692,6 +699,32 @@ $(document).ready(function() {
 
 	 var setupEvents = function(){
 
+	 	var checkAlpha = function(event){
+
+	 		var code = (event.keyCode ? event.keyCode : event.which);
+
+	 		console.log(event.keyCode);
+
+	 		/*
+			 if (!(
+		            (code >= 48 && code <= 57) //numbers
+		            || (code == 47) //forward slash 
+		            || (code == 45) //dash
+		        )
+		        || (code == 46 && $(this).val().indexOf('.') != -1)
+		       )
+
+	 		*/
+
+		    if (!(
+		            (code >= 48 && code <= 57) //numbers
+		            || (code == 47) //forward slash 
+		        )
+		        || (code == 46 && $(this).val().indexOf('.') != -1)
+		       )
+		    event.preventDefault();
+	 	}
+
 
 	 	ir.introspect.app.appModel.bind('change:viewMode', function(){
 
@@ -707,6 +740,19 @@ $(document).ready(function() {
 	 		setCurrentFocus( $(this).attr("id") );
 	 	});
 
+	 	$("#inputBaseStartDate").on("keypress", function(event){
+	 		//// if (log)  console.log("focus");
+	 		//setCurrentFocus( $(this).attr("id") );
+	 		// check for alpha
+	 		checkAlpha(event);
+
+	 		// enter 
+	 		var code = event.keyCode || event.which;
+			 if(code == 13) { 
+			   newDateAdded("BaseStart");
+			 }
+	 	});
+
 	 	// BLUR 
 
 	 	$("#inputBaseStartDate").on("blur", function(){
@@ -714,12 +760,14 @@ $(document).ready(function() {
 			newDateAdded("BaseStart");
 	 	});
 
+	 	/*
 	 	$("#inputBaseStartDate").bind('keypress', function(e) {
 			var code = e.keyCode || e.which;
 			 if(code == 13) { 
 			   newDateAdded("BaseStart");
 			 }
 		});
+		*/
 
 	 	// FOCUS END BASE
 
@@ -737,7 +785,10 @@ $(document).ready(function() {
 
 	 	// ENTER
 
-	 	$("#inputBaseEndDate").bind('keypress', function(e) {
+	 	$("#inputBaseEndDate").on('keypress', function(e) {
+
+	 		checkAlpha(e);
+
 			var code = e.keyCode || e.which;
 			 if(code == 13) { 
 			    newDateAdded("BaseEnd");
@@ -762,7 +813,10 @@ $(document).ready(function() {
 
 	 	// ENTER
 
-	 	$("#inputCompareStartDate").bind('keypress', function(e) {
+	 	$("#inputCompareStartDate").on('keypress', function(e) {
+
+	 		checkAlpha(e);
+
 			var code = e.keyCode || e.which;
 			 if(code == 13) { 
 			    newDateAdded("CompareStart");
@@ -786,7 +840,10 @@ $(document).ready(function() {
 
 	 	// ENTER
 
-	 	$("#inputCompareEndDate").bind('keypress', function(e) {
+	 	$("#inputCompareEndDate").on('keypress', function(e) {
+
+	 		checkAlpha(e);
+
 			var code = e.keyCode || e.which;
 			 if(code == 13) { 
 			   newDateAdded("CompareEnd");
@@ -897,21 +954,33 @@ $(document).ready(function() {
 			
 			compareEndMoment = getDateMoment("CompareEnd");
 
-			// bring opacity back to 1
-			enableCompareFrom();
-			enableCompareTo();
+			// but is the end within or after the base range?!
+			var bTestCompareEndVsBaseStart = validateStartBeforeEnd(compareEndMoment, baseStartMoment );
 
-			// then disable them
-			setCompareInputsDisabled();
-			setCalendarsDisabled();
+			if ( bTestCompareEndVsBaseStart ) {
 
-			enableCheckBox(); 
-			setApplyEnabled(); 
+				// bring opacity back to 1
+				enableCompareFrom();
+				enableCompareTo();
 
-			$("#baseSelect").removeClass("disableApply"); 
+				// then disable them
+				setCompareInputsDisabled();
+				setCalendarsDisabled();
 
-			drawDates();
-		}
+				enableCheckBox(); 
+				setApplyEnabled(); 
+
+				$("#baseSelect").removeClass("disableApply"); 
+
+				drawDates();
+
+			} else {
+
+				displayBaseRangeError('Invalid: the date you selected is after the base range. Please click RESET to try again ');
+				setApplyDisabled(); 
+			}
+	
+		} 
 
 	 }
 
@@ -925,17 +994,27 @@ $(document).ready(function() {
 
 		if ( bCompareFromValid ) {
 
-			compareEndMoment = null; // should still be null here!	
+			// but is the compare start before the base range end?
 
-			disableCompareFrom(); 
-			setCurrentFocus("inputCompareEndDate");
-			enableCompareTo(); 
+			// but is the end within or after the base range?!
+			var bTestCompareStartVsBaseStart = validateStartBeforeEnd(compareStartMoment, baseStartMoment );
 
-			compareEndMoment = getDateMoment("CompareEnd");
+			if ( bTestCompareStartVsBaseStart ) {
 
-			//don't draw until the end date is established
-			// or set the compareEnd to the same so it looks
-			drawDates();
+				compareEndMoment = null; // should still be null here!	
+
+				disableCompareFrom(); 
+				setCurrentFocus("inputCompareEndDate");
+				enableCompareTo(); 
+
+				compareEndMoment = getDateMoment("CompareEnd"); // ok to set it because it the same and fakes the draw
+
+				drawDates();
+
+			} else {
+				displayBaseRangeError('Invalid: the date you selected is after the base range. Please click RESET to try again ');
+				setApplyDisabled(); 
+			}
 
 		} else {
 			// only clear the calendar after the first click so it can forget about the second date in the range and start again 
@@ -1038,8 +1117,14 @@ $(document).ready(function() {
 
 		var yyyy = parseInt(yearStr,10);
 
+		// US clients want mm/dd/yyyy not dd/mm/yyyy
+		/*
 		var mm   = parseInt(parms[1],10);
 		var dd   = parseInt(parms[0],10);
+		*/
+		var mm   = parseInt(parms[0],10);
+		var dd   = parseInt(parms[1],10);
+
 		var date = new Date(yyyy,mm-1,dd,0,0,0,0);
 
 		var isValid = (date.getMonth()+1) && dd === date.getDate() && yyyy === date.getFullYear();
@@ -1217,14 +1302,12 @@ $(document).ready(function() {
 	 	var bTestCompareStartvsCompareEnd = false;
 	 	var bTestCompareStartVsBaseEnd = false;
 
-	 		
 	 	if (null !== compareStartMoment && !bCustomCompareRange) {
 
 		 	bTestCompareStartvsCompareEnd =  validateStartBeforeEnd(compareStartMoment, compareEndMoment); 
 			bTestCompareStartVsBaseEnd = validateStartBeforeEnd(baseEndMoment, compareStartMoment);
 
 			console.log("validateCompareTo b1: " + bTestCompareStartvsCompareEnd + " b2: " + bTestCompareStartVsBaseEnd);
-
 
 			if (!bTestCompareStartvsCompareEnd) {
 
@@ -1241,6 +1324,7 @@ $(document).ready(function() {
 				displayNoErrorMessage();
 			}
 		} else {
+
 			return { bTestCompareStartvsCompareEnd: true, bTestCompareStartVsBaseEnd: true }
 		}
 
@@ -1277,7 +1361,18 @@ $(document).ready(function() {
 			if ( posStr === "start" ) {
 				calendarDate = dates[0];
 			} else {
-				calendarDate = dates[1];
+				
+				if ( String(dates[3]) === "Invalid Date" ) {
+					compareStartDate = dates[1];
+
+					var fixCompareMoment = moment().month( compareStartDate.getMonth() ).day( compareStartDate.getDate() ).subtract(1, 'days'); 
+					calendarDate = fixCompareMoment._d;
+
+					console.log("W I L D C A R D");
+
+				} else {
+					calendarDate = dates[1];
+				}	
 			}
 
 		} else {

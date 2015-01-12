@@ -1,0 +1,792 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"rad",
+				"randBuilds"
+			],
+			[
+				"tex",
+				"text-align"
+			],
+			[
+				"sel",
+				"selectedGame"
+			],
+			[
+				"p",
+				"playerBuildsThisMin"
+			],
+			[
+				"border",
+				"border-top"
+			],
+			[
+				"border-top",
+				"border-top-width"
+			],
+			[
+				"dark",
+				"sc_superDarkTealGreen"
+			],
+			[
+				"play",
+				"player2Supply"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"fo",
+				"font-weight"
+			],
+			[
+				"get",
+				"getColor"
+			],
+			[
+				"margin",
+				"margin-top"
+			],
+			[
+				"inl",
+				"inline-block"
+			],
+			[
+				"build",
+				"buildOrder"
+			],
+			[
+				"met",
+				"metamatch"
+			],
+			[
+				"fon",
+				"font-style"
+			],
+			[
+				"hide",
+				"hideMatchState"
+			],
+			[
+				"pro",
+				"proNameCase"
+			],
+			[
+				"game",
+				"gamemodel"
+			],
+			[
+				"max",
+				"max-width"
+			],
+			[
+				"mat",
+				"match4"
+			],
+			[
+				"re",
+				"replayDataIndex"
+			],
+			[
+				"Re",
+				"ReplayBuildFactory"
+			],
+			[
+				"ca",
+				"cancelInterval"
+			],
+			[
+				"REp",
+				"ReplayBuildFactory"
+			],
+			[
+				"Repl",
+				"ReplayBuildFactory"
+			],
+			[
+				"player",
+				"playermodel"
+			],
+			[
+				"replay",
+				"replayInterval"
+			],
+			[
+				"bak",
+				"background-color"
+			],
+			[
+				"bord",
+				"border-color"
+			],
+			[
+				"The",
+				"ThemeView_nr"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"ma",
+				"max-width"
+			],
+			[
+				"mar",
+				"margin-top"
+			],
+			[
+				"select",
+				"selectPlayer"
+			],
+			[
+				"to",
+				"toLowerCase"
+			],
+			[
+				"ver",
+				"versusHeader"
+			],
+			[
+				"te",
+				"text-align"
+			],
+			[
+				"con",
+				"convertTime"
+			],
+			[
+				"ability",
+				"abilityName"
+			],
+			[
+				"list",
+				"list-style-type"
+			],
+			[
+				"cain",
+				"cabinquest"
+			],
+			[
+				"cas",
+				"cascadingTree"
+			],
+			[
+				"zoo",
+				"zoomNum"
+			],
+			[
+				"journ",
+				"journeyCollection"
+			],
+			[
+				"roo",
+				"rootNode"
+			],
+			[
+				"even",
+				"eventInfoObj"
+			],
+			[
+				"attackDis",
+				"attackDistNum"
+			],
+			[
+				"cre",
+				"create_vis"
+			],
+			[
+				"creat",
+				"createLayout"
+			],
+			[
+				"Bubble",
+				"BubbleChartView"
+			],
+			[
+				"User",
+				"UserView_nr"
+			],
+			[
+				"in",
+				"inline-block"
+			],
+			[
+				"v",
+				"vertical-align"
+			],
+			[
+				"lan",
+				"languageModel"
+			],
+			[
+				"lang",
+				"langModel"
+			],
+			[
+				"dispaly",
+				"displayPreviewMode"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "todo.md",
+			"settings":
+			{
+				"buffer_size": 91,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "datepicker.html",
+			"settings":
+			{
+				"buffer_size": 3953,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": ".gitignore",
+			"settings":
+			{
+				"buffer_size": 89,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 67.0,
+		"selected_items":
+		[
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"",
+				"About"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read())"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/bflowers/Projects/headwinds/code/daterangepicker"
+	],
+	"file_history":
+	[
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/controllers/MetaMatchViewController.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/directives/build/BuildDecisionDirective.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/controllers/build/BuildDecisionViewController.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/controllers/build/BuildMinuteVisualViewController.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/controllers/replay/ReplayViewController.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/partials/buildminutevisual.html",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/partials/versus.html",
+		"/Users/bflowers/Projects/headwinds/metamatch/styles/common/build/_build.scss",
+		"/Users/bflowers/Projects/headwinds/metamatch/styles/starcraft/_sc_variables.scss",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/partials/builddecision.html",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/index.html",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/app.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/styles/starcraft/_sc_common.scss",
+		"/Users/bflowers/Projects/headwinds/metamatch/styles/common/page/_page.scss",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/directives/versus/VersusDirective.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/controllers/versus/VersusViewController.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/directives/game/GameDirective.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/controllers/game/GameViewController.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/directives/MetaMatchDirective.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/controllers/match/MatchViewController.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/controllers/build/BuildViewController.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/directives/build/BuildDirective.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/directives/build/BuildTimeDirective.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/styles/common/versus/_versus.scss",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/controllers/fightcard/FightCardViewController.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/styles/common/detailshud/_detailshud.scss",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/partials/builds.html",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/directives/replay/ReplayDirective.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/partials/metamatch.html",
+		"/Users/bflowers/Projects/headwinds/metamatch/styles/common/common.scss",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/partials/fightcard.html",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/partials/replay.html",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/controllers/player/PlayerViewController.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/styles/common/page/divider/_divider.scss",
+		"/Users/bflowers/Projects/headwinds/metamatch/styles/common/player/_player.scss",
+		"/Users/bflowers/Projects/headwinds/metamatch/styles/common/fightcard/_fightcard.scss",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/partials/game.html",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/partials/player.html",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/partials/matches.html",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/partials/games.html",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/appNotWorking.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/partials/results.html",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/states.html",
+		"/Users/bflowers/Projects/headwinds/metamatch/app.yaml",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/directives/MetamatchDirective.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/styles/common/_variables.scss",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/directives/page/divider/DividerDirective.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/partials/buildtime.html",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/directives/build/BuildMinuteVisualDirective.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/factories/build/BuildImageFactory.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/controllers/build/BuildTimeViewController.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/controllers/build/BuildTimeSecViewController.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/directives/build/BuildVisualDirective.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/controllers/build/BuildVisualViewController.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/directives/build/BuildTimeSecDirective.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/partials/build.html",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/partials/buildvisual.html",
+		"/Users/bflowers/Projects/headwinds/metamatch/todo.md",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/partials/buildtimesec.html",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/directives/player/PlayerDirective.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/Gulpfile.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/styles/common/replay/_replay.scss",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/partials/page/divider.html",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/utils/StarcraftUtilFactory.js",
+		"/Users/bflowers/Library/Application Support/Sublime Text 3/Packages/User/JavaScript.sublime-settings",
+		"/Users/bflowers/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/config/fightcards/america/wcs_am_2014_s1_r8.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/partials/match.html",
+		"/Users/bflowers/Projects/headwinds/metamatch/styles/common/footer/_footer.scss",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/partials/footer.html",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/pages/credits.html",
+		"/Users/bflowers/Projects/headwinds/metamatch/styles/common/credits/_credits.scss",
+		"/Users/bflowers/Projects/headwinds/metamatch/styles/common/_page.scss",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/partials/divider.html",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/images/svg/divider.svg",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/config/fightcards/america/wcs_am_2014_s2_r8.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/pages/streams.html",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/pages/about.html",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/stylesheets/metamatch.css",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/config/fightcards/sept2014/wcs_am_2014_s1_r8.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/config/fightcards/europe/wcs_eu_2014_s1_r8.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/directives/footer/FooterDirective.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/controllers/footer/FooterViewController.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/boilerplates/TemplateViewController.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/data/buildOrder.json",
+		"/Users/bflowers/Projects/headwinds/metamatch/styles/common/match/_match.scss",
+		"/Users/bflowers/Projects/headwinds/metamatch/styles/common/game/_game.scss",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/directives/match/MatchDirective.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/client_secrets.json",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/factories/configure/ConfigureFactory.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/spawningtool/constants.py",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/factories/build/BuildImageReaderFactory.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/directives/fightcard/FightCardDirective.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/styles/starcraft/_sc_icons.scss",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/config/fightcards/sept2014/wcs_am_2014_s2_r8.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/factories/api/ReplayHuntApiFactory.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/handlers/sc2reader_replay.py",
+		"/Users/bflowers/Projects/headwinds/metamatch/handlers/replay.py",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/partials/about.html",
+		"/Users/bflowers/Projects/headwinds/metamatch/styles/starcraft/starcraft.scss",
+		"/Users/bflowers/Projects/headwinds/metamatch/styles/starcraft/_sc_protoss.scss",
+		"/Users/bflowers/Projects/headwinds/metamatch/styles/starcraft/_sc_zerg.scss",
+		"/Users/bflowers/Projects/headwinds/metamatch/models/spawning_replay_model.py",
+		"/Users/bflowers/Projects/headwinds/metamatch/models/replay_model.py",
+		"/Users/bflowers/Projects/headwinds/metamatch/handlers/friends.py",
+		"/Users/bflowers/Projects/headwinds/metamatch/styles/starcraft/_sc_terranrace.scss",
+		"/Users/bflowers/Projects/headwinds/metamatch/handlers/spawningtool_replay.py",
+		"/Users/bflowers/Projects/headwinds/metamatch/spawningtool/spawningtool/parser.py",
+		"/Users/bflowers/Projects/headwinds/metamatch/spawningtool/setup.py",
+		"/Users/bflowers/Projects/headwinds/metamatch/spawningtool/tests/tlo_v_thorzain.json",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/utils/ArrayUtilFactory.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/main.py",
+		"/Users/bflowers/Projects/headwinds/site/site2014/analyticstracking.php",
+		"/Users/bflowers/Projects/headwinds/site/site2014/header.php",
+		"/Users/bflowers/Projects/headwinds/site/site2014/index.php",
+		"/Users/bflowers/Projects/headwinds/site/site2014/functions.php",
+		"/Users/bflowers/Dropbox/Brandon/headwinds/site/wordpress/functions.php",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/utils/StringUtilFactory.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/controllers/replay/ReplayTimedViewController.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/factories/replay/ReplayBuildFactory.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/directives/player/PlayerDirectiveBak.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/styles/common/results/_results.scss",
+		"/Users/bflowers/Projects/headwinds/code/jqueryUI/autocomplete/autocomplete.html",
+		"/Users/bflowers/Projects/headwinds/code/jqueryUI/autocomplete/questions.json",
+		"/Users/bflowers/Projects/headwinds/code/jqueryUI/autocomplete/autocompleteRemote.html",
+		"/Users/bflowers/Projects/headwinds/metamatch/styles/starcraft/_sc_units.scss",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/factories/replay/ReplayBuildFactoryBak.js",
+		"/Users/bflowers/Projects/headwinds/metamatch/static/js/angular.min.js"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			"/Users/bflowers/Projects/headwinds/metamatch/styles",
+			"/Users/bflowers/Projects/headwinds/metamatch/static/js",
+			"/Users/bflowers/Projects/headwinds/metamatch/styles",
+			"/Users/bflowers/Projects/headwinds/metamatch/",
+			"/Users/bflowers/Projects/headwinds/metamatch/styles",
+			"/Users/bflowers/Projects/headwinds/metamatch/",
+			"/Users/bflowers/Projects/headwinds/metamatch/styles",
+			"/Users/bflowers/Projects/headwinds/metamatch",
+			"/Users/bflowers/Projects/headwinds/metamatch/styles",
+			"/Users/bflowers/Projects/Intelliresponse/voices/repo/trunk/web/styles",
+			"/Users/bflowers/Projects/headwinds/sc2jsonhunt/styles",
+			"/Users/bflowers/Projects/headwinds/sc2jsonhunt/static/styles",
+			"/Users/bflowers/Projects/headwinds/sc2jsonhunt/static",
+			"/Users/bflowers/Projects/headwinds/sc2jsonhunt/",
+			"/Users/bflowers/Projects/headwinds/sc2jsonhunt/js",
+			"/Users/bflowers/Projects/headwinds/sc2jsonhunt/styles",
+			"/Users/bflowers/Projects/Intelliresponse/repo/introspect-web/trunk/web",
+			"/Users/bflowers/Projects/Intelliresponse/repo/introspect-web/trunk/web/styles",
+			"/Users/bflowers/Projects/Intelliresponse/repo/introspect-web/trunk/web/js"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"manifest",
+			"playerDisabled",
+			"player1BuildOrder",
+			"buildTimeContainer",
+			"contain",
+			"console",
+			"setDetailsBuilds",
+			"onPlayersSupplyChange",
+			"onGameDataPreparedHandler",
+			"hide()",
+			"hidef",
+			"hide",
+			"buildReplay",
+			"onGameDataPreparedHandler",
+			"onReplayUpdateHandler",
+			"goBtnContainer",
+			"page",
+			"bPreloaderMessage",
+			"emit",
+			"buildReplay",
+			"selectedGame",
+			"buildReplay",
+			"getReplay",
+			"bShowBuilds",
+			"selectedPlayerProNameCase",
+			"onDetailsUpdateHandler",
+			"bNoMatchSelected",
+			"goDetailsLabel",
+			"selectionState",
+			"gamemap",
+			"terran",
+			"metamatchApp",
+			"buildContainer",
+			"buildTop",
+			"buildTimeline",
+			"player1BuildOrder",
+			"buildContainer",
+			"bPreloaderMessage",
+			"prepare",
+			"buildTimeline",
+			"trigger",
+			"buildTimeline",
+			"prepareData",
+			"console",
+			"buildReplay",
+			"buildTimeCollection",
+			"Counter",
+			"onGameSelectedHandler",
+			"bShowVersus",
+			"onFightCardGoHandler",
+			"selectedGame",
+			"versusHeader",
+			"NumberUtilFactory",
+			"$location.path",
+			"header",
+			"pick a match",
+			"wire_0_Layer0_0_FILL",
+			"date: \"2014-04-10\"",
+			"study",
+			"matches",
+			"2014-07-05",
+			"0wcsa0s2",
+			"matches",
+			"container",
+			"footer",
+			"clearAllLocalStorage",
+			"clearLocalStorage",
+			"gateway",
+			"ShieldWall",
+			"localStorageService",
+			"BuildImageFactory",
+			"abilityStr",
+			"bShowPlayer1",
+			"proNameCase",
+			"getPlayerClass",
+			"build",
+			"Study",
+			"Study the build",
+			"updateSelectedGameDetails",
+			"prepareData",
+			"ReplayHuntApiFactory",
+			"Parser",
+			"SC2Factory",
+			"models",
+			"sc2reader",
+			"get_user_from_session",
+			"print_builds",
+			"debug",
+			"logging",
+			"print",
+			"pp",
+			"print",
+			"player1_game_event",
+			"api_server.py",
+			"api_server",
+			"logging",
+			"ReplayHandler",
+			"print",
+			"hideHomeState",
+			"bShowFightCard",
+			"onHomeSelectedHandler",
+			"analytics",
+			"onHomeSelectedHandler",
+			"buildReplay",
+			"$rootScope.selectionState = \"build\"",
+			"selectionState",
+			"build",
+			"buildContainer",
+			"checkLocalStorage",
+			"onFightCardGoHandler",
+			"getReplay",
+			"onPlayerSelectedHandler",
+			"console",
+			"onGameSelectedHandler",
+			"onPlayerSelectedHandler",
+			"replayInterval",
+			"timeout",
+			"ReplayBuildFactory",
+			"player1BuildCollection",
+			"ReplayDirective",
+			"getReplay",
+			"parentScope",
+			"compile",
+			"replayContainer",
+			"displayReplayEvent",
+			"playersContainer",
+			"replayDataIndex",
+			"$rootScope.selectionState"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"date: \"2014-04-10\"",
+			"2014-04-10",
+			"0wcsa0s1",
+			"buildStr",
+			"ReplayViewController",
+			"$scope",
+			"parentScope",
+			"buildImageStr",
+			"'ROLE_USERS', 'ROLE_GUEST'",
+			"ROLE_UZERS"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "todo.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 91,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								91,
+								91
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "datepicker.html",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 3953,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": ".gitignore",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 89,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								89,
+								89
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "daterangepicker.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 333.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
