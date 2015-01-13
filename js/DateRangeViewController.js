@@ -96,7 +96,7 @@ $(document).ready(function() {
 
 	var previousPeriodThisYearRange = [previousThisYearStart, previousThisYearEnd];
 
-	console.log(previousPeriodThisYearRange, "previousPeriodThisYearRange: ");
+	//console.log(previousPeriodThisYearRange, "previousPeriodThisYearRange: ");
 
 	
 	var previousYearRange = [moment().subtract(1, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')];
@@ -155,8 +155,6 @@ $(document).ready(function() {
 		baseStartMoment = getDateMoment( "BaseStart" ); //getBaseStartDate();
 		baseEndMoment = getDateMoment( "BaseEnd" );
 
-		setBaseRangeMessage([baseStartMoment._d, baseEndMoment._d]);
-
 		$("#compareGroup").hide();
 		$("#prismContainer").hide();
 	
@@ -184,7 +182,7 @@ $(document).ready(function() {
 
 	var reset = function(){
 
-		console.log("---- reset ----")
+		//console.log("---- reset ----")
 
 		$("#baseRange").text("");
 		$("#validationMessage").text("");
@@ -265,7 +263,7 @@ $(document).ready(function() {
 	 	
 	 	var idNum = Number(e.target.value);
 
-	 	console.log("base select idNum: " + idNum);
+	 	//console.log("base select idNum: " + idNum);
 
 	 	if ( idNum === 6 || idNum === 7 ) {
 	 		var warningStr =  "<span class='warningRangeTxt'> Warning: </span> this year range may take a long time to load";
@@ -298,6 +296,8 @@ $(document).ready(function() {
 		
 			$("#validationMessage").text("Please enter 2 dates for your Base range before continuing");
 
+			$("#shield").hide();
+
 			return;
 
 	 	} else {
@@ -310,8 +310,8 @@ $(document).ready(function() {
 	 		curRange = baseRanges[idNum].range;
 		 	previousRange = previousRanges[idNum].range;
 
-		 	console.log(curRange, "new curRange");
-		 	console.log(previousRange, "new previousRange");
+		 	//console.log(curRange, "new curRange");
+		 	//console.log(previousRange, "new previousRange");
 
 		 	setBaseInputsDisabled();
 	 		setCalendarsDisabled();
@@ -320,6 +320,8 @@ $(document).ready(function() {
 	 		enableCompareSelect();
 
 	 		//calendars.DatePickerClear();
+
+	 		$("#shield").show();
 
 	 	}
 
@@ -335,7 +337,7 @@ $(document).ready(function() {
 		}
 	
 
-		if (log) console.log("baseSelect change bCompareChecked: " + bCompareChecked );
+		//if (log)  //console.log("baseSelect change bCompareChecked: " + bCompareChecked );
 	 	
 
 	 });
@@ -346,40 +348,59 @@ $(document).ready(function() {
 
 	 var disableBaseTo = function(){
 	 	$("#inputBaseEndDate").addClass("disableApply");
+
+	 	$("#inputBaseEndDate").prop('disabled',true);
 	 }
 
 	 var enableBaseTo = function(){
 	 	$("#inputBaseEndDate").removeClass("disableApply");
 	 	$("#inputBaseEndDate").removeClass("disableControl");
+
+	 	$("#inputBaseEndDate").prop('disabled',false);
+
 	 }
 
 	 var disableBaseFrom = function(){
 	 	$("#inputBaseStartDate").addClass("disableApply");
+
+	 	$("#inputBaseStartDate").prop('disabled',true);
 	 }
 
 	 var enableBaseFrom = function(){
 	 	$("#inputBaseStartDate").removeClass("disableApply");
 	 	$("#inputBaseEndDate").removeClass("disableControl");
+
+	 	$("#inputBaseEndDate").prop('disabled',false);
 	 }
 
 	 /////////////////////////////////////////////////// COMPARE T0 & FROM
 
 	 var disableCompareTo = function(){
 	 	$("#inputCompareEndDate").addClass("disableApply");
+
+	 	$("#inputCompareEndDate").prop('disabled',true);
 	 }
 
 	 var enableCompareTo = function(){
 	 	$("#inputCompareEndDate").removeClass("disableApply");
 	 	$("#inputBaseEndDate").removeClass("disableControl");
+
+	 	$("#inputCompareEndDate").prop('disabled',false);
+	 	$("#inputBaseEndDate").prop('disabled',false);
 	 }
 
 	 var disableCompareFrom = function(){
 	 	$("#inputCompareStartDate").addClass("disableApply");
+
+	 	$("#inputCompareStartDate").prop('disabled',true);
 	 }
 
 	 var enableCompareFrom = function(){
 	 	$("#inputCompareStartDate").removeClass("disableApply");
 	 	$("#inputBaseEndDate").removeClass("disableControl");
+
+	 	$("#inputCompareStartDate").prop('disabled',false);
+	 	$("#inputBaseEndDate").prop('disabled',false);
 	 }
 
 	 /////////////////////////////////////////////////// CHECKBOX
@@ -389,35 +410,50 @@ $(document).ready(function() {
 	 	$("#inputCompareCheckbox").addClass("disableApply");
 	 	$("#compareRange").addClass("disableApply");
 
+	 	$("#inputCompareCheckbox").prop('disabled',true);
+	 	$("#compareRange").prop('disabled',true);
+
 	 }
 
 	 var enableCheckBox = function(){
 	 	$("#inputCompareCheckbox").removeClass("disableApply");
 	 	$("#compareRange").removeClass("disableApply");
+
+	 	$("#inputCompareCheckbox").prop('disabled',false);
+	 	$("#compareRange").prop('disabled',false);
+
 	 }
 
 	 var disableCompareSelect = function() {
 	 	$("#compareSelect").addClass("disableApply");
+
+	 	$("#compareSelect").prop('disabled',true);
 	 }
 
 	 var enableCompareSelect = function() {
 	 	$("#compareSelect").removeClass("disableApply");
+	 	$("#compareSelect").prop('disabled',false);
 	 }
 
 	 var setApplyDisabled = function(){
 	 	$("#applyDates").addClass("disableApply");
+	 	$("#applyDates").prop('disabled',true);
 	 }
 
 	 var setApplyEnabled = function(){
 	 	$("#applyDates").removeClass("disableApply");
+	 	$("#applyDates").prop('disabled',false);
 	 }
 
 	 var setCompareInputsDisabled = function() {
 
-	 	if (log) console.log("setCompareInputsDisabled");
+	 	//if (log)  //console.log("setCompareInputsDisabled");
 
 	 	$("#inputCompareStartDate").addClass("disableControl");
 	 	$("#inputCompareEndDate").addClass("disableControl");
+
+	 	$("#inputCompareStartDate").prop('disabled',true);
+	 	$("#inputCompareStartDate").prop('disabled',true);
 	 }
 
 	 var setCompareInputsEnabled = function() {
@@ -426,11 +462,19 @@ $(document).ready(function() {
 
 	 	$("#inputCompareStartDate").removeClass("disableApply");
 	 	$("#inputCompareEndDate").removeClass("disableApply");
+
+	 	$("#inputCompareStartDate").prop('disabled',false);
+	 	$("#inputCompareEndDate").prop('disabled',false);
+
+
 	 }
 
 	 var setBaseInputsDisabled = function() {
 	 	$("#inputBaseStartDate").addClass("disableControl");
 	 	$("#inputBaseEndDate").addClass("disableControl");
+
+		$("#inputBaseStartDate").prop('disabled',true);
+	 	$("#inputBaseEndDate").prop('disabled',true);
 	 }
 
 	 var setBaseInputsEnabled = function() {
@@ -439,6 +483,9 @@ $(document).ready(function() {
 
 	 	$("#inputBaseStartDate").removeClass("disableApply");
 	 	$("#inputBaseEndDate").removeClass("disableApply");
+
+	 	$("#inputBaseStartDate").prop('disabled',false);
+	 	$("#inputBaseEndDate").prop('disabled',false);
 	 }
 
 	 var setCalendarsDisabled = function() {
@@ -450,10 +497,14 @@ $(document).ready(function() {
 	 	$("#datepicker-calendar .datepickerGoPrev").css("pointer-events", "all");
 	 	$("#datepicker-calendar .datepickerGoNext").css("pointer-events", "all");
 
+	 	$("#datepicker-calendar").prop('disabled',true); 
+
 	 }
 
 	 var setCalendarsEnabled = function(){
 	 	$("#datepicker-calendar").removeClass("disableControl");
+
+	 	$("#datepicker-calendar").prop('disabled',false); 
 	 }
 
 	 var setAllDisabled = function(){
@@ -464,7 +515,7 @@ $(document).ready(function() {
 
 	 var setCurrentFocus = function( inputId ) {
 
-	 	console.log("setCurrentFocus inputId: " + inputId)
+	 	//console.log("setCurrentFocus inputId: " + inputId)
 
 		currentFocusId = inputId;
 	 	var curInputEl = $("#" + currentFocusId);
@@ -501,12 +552,15 @@ $(document).ready(function() {
 	 
 	 var setBaseDate = function( startDate, endDate, posStr ){
 
-	 	console.log(arguments, " setBaseDate ");
-	 	//// if (log)  console.log(baseStartMoment, " setBaseDate baseStartMoment");
+	 	//console.log(arguments, " setBaseDate ");
+	 	//// //if (log)   //console.log(baseStartMoment, " setBaseDate baseStartMoment");
 
 	 	var baseDate = (posStr === "Start") ? startDate : endDate; 
 
-		var baseNumDateStr = baseDate.getDate() + "/" + ( baseDate.getMonth() + 1 )  + "/" + baseDate.getFullYear();
+		var baseNumDateStr = ( baseDate.getMonth() + 1 ) + "/" + baseDate.getDate() + "/" + baseDate.getFullYear();
+
+		//console.log(baseDate, " baseDate setBaseDate");
+	    
 	    $("#inputBase" + posStr + "Date").val(baseNumDateStr);
 
 	    // need up update the base moments 
@@ -529,7 +583,7 @@ $(document).ready(function() {
 
 	 var clearBaseDates = function(){
 
-	 	if (limLog)  console.log("clearBaseDates");
+	 	if (limLog)  //console.log("clearBaseDates");
 	 	
 	 	$("#inputBaseStartDate").val("");
 	 	$("#inputBaseEndDate").val("");
@@ -554,7 +608,7 @@ $(document).ready(function() {
 	 	calendars.DatePickerClear();
 
 	 	var clearCompareDates = [ baseStartMoment._d, baseEndMoment._d ];
-		calendars.DatePickerSetDate(clearCompareDates, false);
+		calendars.DatePickerSetDate(clearCompareDates, true);
 
 	 	compareStartMoment = null;
 	 	compareEndMoment = null;
@@ -568,11 +622,11 @@ $(document).ready(function() {
 
 	 var setCompareDate = function( startDate, endDate, posStr ){
 
-		console.log(arguments, "setCompareDate posStr: " + posStr);
+		//console.log(arguments, "setCompareDate posStr: " + posStr);
 
 	 	var compareDate = (posStr === "Start") ? startDate : endDate; 
 
-		var compareNumDateStr = compareDate.getDate() + "/" + ( Number(compareDate.getMonth()) + 1 ) + "/" + compareDate.getFullYear();
+		var compareNumDateStr = ( Number(compareDate.getMonth()) + 1 ) + "/" + compareDate.getDate() + "/" + compareDate.getFullYear();
 	    $("#inputCompare" + posStr + "Date").val(compareNumDateStr);
 
 	    if ( null === compareStartMoment ) compareStartMoment = getDateMoment("CompareStart");
@@ -594,7 +648,7 @@ $(document).ready(function() {
 
 	 var setBaseRangeMessage = function(dates){
 
-	 	console.log(arguments, " setBaseRangeMessage ");
+	 	//console.log(arguments, " setBaseRangeMessage ");
 
 	 	var baseRangeStr;
 
@@ -613,6 +667,7 @@ $(document).ready(function() {
 
 	 	var baseStartDateStr = dates[0].getMonthName(true) + ' ' + dates[0].getDate()+ ', '+ dates[0].getFullYear();
 	    var baseEndDateStr = dates[1].getMonthName(true) + ' ' + dates[1].getDate() + ', '+ dates[1].getFullYear();
+
 
 	    baseRangeStr = "<span class='baseRangeTxt'>" + baseStartDateStr + ' - ' + baseEndDateStr + "</span>";
 
@@ -636,12 +691,12 @@ $(document).ready(function() {
 
 		    if ( dates.length > 2 ) {
 
-		    	compareStartDateStr = dates[2].getMonthName(true) + ' ' + dates[1].getDate() + ', '+ dates[2].getFullYear();
+		    	compareStartDateStr = dates[2].getMonthName(true) + ' ' + dates[2].getDate() + ', '+ dates[2].getFullYear();
 		    	compareEndDateStr = dates[3].getMonthName(true) + ' ' + dates[3].getDate() + ', '+ dates[3].getFullYear();
 
 		    } else {
-		    	compareStartDateStr = compareStartMoment.date()+' '+compareStartMoment.format("MMMM")+', '+ compareStartMoment.year();
-		    	compareEndDateStr = compareEndMoment.date()+' '+compareEndMoment.format("MMMM")+', '+ compareEndMoment.year();
+		    	compareStartDateStr = compareStartMoment.format("MMMM") + ' ' + compareStartMoment.date() + ', '+ compareStartMoment.year();
+		    	compareEndDateStr = compareEndMoment.format("MMMM") + ' ' + compareEndMoment.date() + ', '+ compareEndMoment.year();
 		    }
 
 		    if ( compareStartDateStr === "NaN undefined, NaN" ) compareStartDateStr = " ? ";
@@ -671,22 +726,15 @@ $(document).ready(function() {
 
       	var dateArray = dateStr.split("-");
 
-      	if (log) console.log(dateArray, "getDateMoment dateStr: " + dateStr + " posStr: " + posStr);
-
-      	var monthNumDown = Number(dateArray[1]) -1; 
-
-      	var dateNum = Number(dateArray[0]);
-      	var monthNum = monthNumDown;
-
-      	var yearNum = Number(dateArray[2]);
+      	//console.log(dateArray, "getDateMoment dateStr: " + dateStr + " posStr: " + posStr);
 
       	var dateMoment = moment();
       	
-      	dateMoment.date(dateNum);
-      	dateMoment.month(monthNum);
-      	dateMoment.year(yearNum)
+      	dateMoment.month( dateArray[0] - 1);
+      	dateMoment.date( dateArray[1] );
+      	dateMoment.year( dateArray[2] );
 
-      	if (log) console.log(dateMoment, "getDateMoment posStr: " + posStr)
+      	//if (log)  //console.log(dateMoment, "getDateMoment posStr: " + posStr)
 		
       	return dateMoment; 
 
@@ -703,7 +751,7 @@ $(document).ready(function() {
 
 	 		var code = (event.keyCode ? event.keyCode : event.which);
 
-	 		console.log(event.keyCode);
+	 		////console.log("keycode : " + event.keyCode);
 
 	 		/*
 			 if (!(
@@ -728,7 +776,7 @@ $(document).ready(function() {
 
 	 	ir.introspect.app.appModel.bind('change:viewMode', function(){
 
-	 		console.log("DateRangeViewController heard view mode change");
+	 		//console.log("DateRangeViewController heard view mode change");
 	 		// reset(); 
 
 	 	});
@@ -736,12 +784,12 @@ $(document).ready(function() {
 
 	 	// FOCUS START BASE
 	 	$("#inputBaseStartDate").on("focus", function(){
-	 		//// if (log)  console.log("focus");
+	 		//// //if (log)   //console.log("focus");
 	 		setCurrentFocus( $(this).attr("id") );
 	 	});
 
 	 	$("#inputBaseStartDate").on("keypress", function(event){
-	 		//// if (log)  console.log("focus");
+	 		//// //if (log)   //console.log("focus");
 	 		//setCurrentFocus( $(this).attr("id") );
 	 		// check for alpha
 	 		checkAlpha(event);
@@ -756,7 +804,7 @@ $(document).ready(function() {
 	 	// BLUR 
 
 	 	$("#inputBaseStartDate").on("blur", function(){
-			// if (log)  console.log("blur start");
+			// //if (log)   //console.log("blur start");
 			newDateAdded("BaseStart");
 	 	});
 
@@ -772,14 +820,14 @@ $(document).ready(function() {
 	 	// FOCUS END BASE
 
 	 	$("#inputBaseEndDate").on("focus", function(){
-	 		// if (log)  console.log("focus end");
+	 		// //if (log)   //console.log("focus end");
 	 		setCurrentFocus( $(this).attr("id") );
 	 	});
 
 	 	// BLUR
 
 	 	$("#inputBaseEndDate").on("blur", function(){
-			// if (log)  console.log("blur end");
+			// //if (log)   //console.log("blur end");
 			 newDateAdded("BaseEnd");
 	 	});
 
@@ -799,7 +847,7 @@ $(document).ready(function() {
 	 	// FOCUS START COMPARE
 
 	 	$("#inputCompareStartDate").on("focus", function(){
-	 		//// if (log)  console.log("focus");
+	 		//// //if (log)   //console.log("focus");
 
 	 		setCurrentFocus( $(this).attr("id") );
 	 	});
@@ -807,7 +855,7 @@ $(document).ready(function() {
 	 	// BLUR
 
 	 	$("#inputCompareStartDate").on("blur", function(){
-			//// if (log)  console.log("blur");
+			//// //if (log)   //console.log("blur");
 			 newDateAdded("CompareStart");
 	 	});
 
@@ -826,7 +874,7 @@ $(document).ready(function() {
 	 	// FOCUS END COMPARE
 
 	 	$("#inputCompareEndDate").on("focus", function(){
-	 		//// if (log)  console.log("focus");
+	 		//// //if (log)   //console.log("focus");
 
 	 		setCurrentFocus( $(this).attr("id") );
 	 	});	
@@ -834,7 +882,7 @@ $(document).ready(function() {
 	 	// BLUR
 
 	 	$("#inputCompareEndDate").on("blur", function(){
-			//// if (log)  console.log("blur");
+			//// //if (log)   //console.log("blur");
 			newDateAdded("CompareEnd");
 	 	});
 
@@ -860,10 +908,10 @@ $(document).ready(function() {
 	 	
 	 	if (!bCompareChecked) {
 	 		setBaseRangeMessage([ baseStartMoment._d, baseEndMoment._d  ]);
-			calendars.DatePickerSetDate([ baseStartMoment._d, baseEndMoment._d ], false);
+			calendars.DatePickerSetDate([ baseStartMoment._d, baseEndMoment._d ], true);
 	 	} else {
 	 		setBaseRangeMessage([ baseStartMoment._d, baseEndMoment._d, compareStartMoment._d, compareEndMoment._d  ]);
-			calendars.DatePickerSetDate([ baseStartMoment._d, baseEndMoment._d, compareStartMoment._d, compareEndMoment._d  ], false);
+			calendars.DatePickerSetDate([ baseStartMoment._d, baseEndMoment._d, compareStartMoment._d, compareEndMoment._d  ], true);
 		}
 	 }
 
@@ -875,7 +923,7 @@ $(document).ready(function() {
 
 	 	var bValidBaseFrom = validateBaseFrom();
 
-	 	console.log("baseStartCaseHandler bValidBaseFrom: " + bValidBaseFrom);
+	 	//console.log("baseStartCaseHandler bValidBaseFrom: " + bValidBaseFrom);
 
 		if ( bValidBaseFrom ) {
 
@@ -888,11 +936,11 @@ $(document).ready(function() {
 
 			baseStartMoment = getDateMoment("BaseStart");
 
-			console.log("calendars change baseStartMoment._d: " + baseStartMoment._d);
+			//console.log("calendars change baseStartMoment._d: " + baseStartMoment._d);
 
 			setCurrentFocus("inputBaseEndDate");
 			// don't draw until both are valid
-			calendars.DatePickerSetDate(baseStartMoment._d, false)
+			calendars.DatePickerSetDate(baseStartMoment._d, true)
 
 		} else {
 
@@ -902,6 +950,8 @@ $(document).ready(function() {
 	 // BaseEnd - TO: 
 
 	 var baseEndCaseHandler = function(endDate){
+
+	 	console.log(endDate, "baseEndCaseHandler")
 	 	
 	 	setBaseDate(null, endDate, "End");
 
@@ -909,7 +959,7 @@ $(document).ready(function() {
 
 		var bValidBaseTo = validateBaseTo();
 
-		console.log("baseEndCaseHandler bValidBaseTo: " + bValidBaseTo); 
+		console.log(baseEndMoment, "baseEndCaseHandler bValidBaseTo: " + bValidBaseTo); 
 
 		if ( bValidBaseTo ) {
 
@@ -919,14 +969,14 @@ $(document).ready(function() {
 			enableCheckBox();
 
 			if (null !== baseStartMoment) {
-				console.log("about to draw base dates");
+				//console.log("about to draw base dates");
 				drawDates();
 
 			}
 
-			console.log("! CUSTOM BASE CHECK !---------");
-			console.log(baseStartMoment, "baseStartMoment");
-			console.log(baseEndMoment, "baseEndMoment");
+			//console.log("! CUSTOM BASE CHECK !---------");
+			//console.log(baseStartMoment, "baseStartMoment");
+			//console.log(baseEndMoment, "baseEndMoment");
 
 
 		} else {
@@ -1025,7 +1075,7 @@ $(document).ready(function() {
 	 // on enter or blur test the new date
 	 var newDateAdded = function( posStr ){
 
-	 	if (limLog) console.log("newDateAdded posStr: " + posStr);
+	 	if (limLog) //console.log("newDateAdded posStr: " + posStr);
 
 	 	var inputBox = $("#input" + posStr + "Date");
 
@@ -1033,8 +1083,8 @@ $(document).ready(function() {
 			   // 
 		var checkDateObj = isDate(enteredDate);
 
-		console.debug("newDateAdded enteredDate: " + enteredDate);
-		console.log("newDateAdded bValid: " + checkDateObj.isValid);
+		//console.debug("newDateAdded enteredDate: " + enteredDate);
+		//console.log(checkDateObj.date, " checked date");
 
 
 	    // Walk through Base From to Base To first
@@ -1105,7 +1155,7 @@ $(document).ready(function() {
 
 	 var isDate = function( newDateStr ) {
 
-	 	//// if (log)  console.log("isDate newDateStr: " + newDateStr)
+	 	//// //if (log)   //console.log("isDate newDateStr: " + newDateStr)
 
 	 	var parms = newDateStr.split(/[\.\-\/]/);
 
@@ -1129,8 +1179,8 @@ $(document).ready(function() {
 
 		var isValid = (date.getMonth()+1) && dd === date.getDate() && yyyy === date.getFullYear();
 		
-		// if (log)  console.log("isDate yyyy: " + yyyy);
-		// if (log)  console.log("isDate date: " + date);
+		// //if (log)   //console.log("isDate yyyy: " + yyyy);
+		// //if (log)   //console.log("isDate date: " + date);
 
 		return {isValid: isValid, date: date};
 
@@ -1141,24 +1191,24 @@ $(document).ready(function() {
 
 	 var validateStartBeforeEnd = function( startDateMoment, endDateMoment ){
 
-	 	console.log(arguments, " validateStartBeforeEnd ");
+	 	//console.log(arguments, " validateStartBeforeEnd ");
 
 	 	//var diffStart = moment( [ startDateMoment.year(), startDateMoment.month(), startDateMoment.date() ] );
 	 	//var diffEnd =  moment( [ endDateMoment.year(), endDateMoment.month(), endDateMoment.date() ] );
 
-	 	if (limLog)  console.log("=========== START ============");
-	 	if (limLog)  console.log("year: " + startDateMoment.year() );
-	 	if (limLog)  console.log("month: " + Number ( Number( startDateMoment.month() ) + 1 ) );
-	 	if (limLog)  console.log("date: " + startDateMoment.date() );
+	 	if (limLog)  //console.log("=========== START ============");
+	 	if (limLog)  //console.log("year: " + startDateMoment.year() );
+	 	if (limLog)  //console.log("month: " + Number ( Number( startDateMoment.month() ) + 1 ) );
+	 	if (limLog)  //console.log("date: " + startDateMoment.date() );
 
-	 	if (limLog)  console.log("========== END ==========");
-	 	if (limLog)  console.log("year: " + endDateMoment.year() );
-	 	if (limLog)  console.log("month: " + Number ( Number( endDateMoment.month() ) + 1 ) );
-	 	if (limLog)  console.log("date: " + endDateMoment.date() );
+	 	if (limLog)  //console.log("========== END ==========");
+	 	if (limLog)  //console.log("year: " + endDateMoment.year() );
+	 	if (limLog)  //console.log("month: " + Number ( Number( endDateMoment.month() ) + 1 ) );
+	 	if (limLog)  //console.log("date: " + endDateMoment.date() );
 	 	
 	 	
 	 	var monthsDiff = endDateMoment.diff(startDateMoment, "months");
-	 	console.log(monthsDiff, 'months' );
+	 	//console.log(monthsDiff, 'months' );
 	 	
 
 	 	var bResult = false;
@@ -1171,7 +1221,7 @@ $(document).ready(function() {
 	 	} else {
 
 	 		var daysDiff = endDateMoment.diff(startDateMoment, "days");
-	 		console.log(daysDiff, 'days' );
+	 		//console.log(daysDiff, 'days' );
 
 	 		if ( daysDiff >= 1 ) {
 
@@ -1186,7 +1236,7 @@ $(document).ready(function() {
 
 	 	}
 	
-	 	// if (log)  console.log("validateStartBeforeEnd valid: " + bResult + " diffDays: " + diffDays); 
+	 	// //if (log)   //console.log("validateStartBeforeEnd valid: " + bResult + " diffDays: " + diffDays); 
 
 	 	if ( !bResult ) {
 
@@ -1208,7 +1258,7 @@ $(document).ready(function() {
 
 	 	var baseFromValid = false;
 
-	 	console.log(baseStartMoment, "<--baseStartMoment validateBaseFrom");
+	 	//console.log(baseStartMoment, "<--baseStartMoment validateBaseFrom");
 
 	 	if (null !== baseStartMoment) {
 
@@ -1240,7 +1290,7 @@ $(document).ready(function() {
 				displayBaseRangeError('Invalid: the "from:" date is before the "to:" date. Please click Reset to try again. ');
 			}
 
-		 	console.log("validateBaseTo 1 valid? " + baseToValid); 
+		 	//console.log("validateBaseTo 1 valid? " + baseToValid); 
 
 		 	// complex 3 date validation with compare checked	
 		 	if ( bCompareChecked ) {
@@ -1252,7 +1302,7 @@ $(document).ready(function() {
 
 		 	}
 
-		 	console.log("validateBaseFrom 2 valid? " + baseToValid); 
+		 	//console.log("validateBaseFrom 2 valid? " + baseToValid); 
 
 		 	if (baseToValid ) {
 				displayNoErrorMessage();
@@ -1307,7 +1357,7 @@ $(document).ready(function() {
 		 	bTestCompareStartvsCompareEnd =  validateStartBeforeEnd(compareStartMoment, compareEndMoment); 
 			bTestCompareStartVsBaseEnd = validateStartBeforeEnd(baseEndMoment, compareStartMoment);
 
-			console.log("validateCompareTo b1: " + bTestCompareStartvsCompareEnd + " b2: " + bTestCompareStartVsBaseEnd);
+			//console.log("validateCompareTo b1: " + bTestCompareStartvsCompareEnd + " b2: " + bTestCompareStartVsBaseEnd);
 
 			if (!bTestCompareStartvsCompareEnd) {
 
@@ -1368,7 +1418,7 @@ $(document).ready(function() {
 					var fixCompareMoment = moment().month( compareStartDate.getMonth() ).day( compareStartDate.getDate() ).subtract(1, 'days'); 
 					calendarDate = fixCompareMoment._d;
 
-					console.log("W I L D C A R D");
+					//console.log("W I L D C A R D");
 
 				} else {
 					calendarDate = dates[1];
@@ -1386,7 +1436,7 @@ $(document).ready(function() {
 
 	var onCalendarsChange = function(dates, el) {
 
-	  	if (limLog) console.log(arguments, "Date changed event currentFocusId: " + currentFocusId);
+	  	if (limLog) //console.log(arguments, "Date changed event currentFocusId: " + currentFocusId);
 
 	  	var bBaseFocus = ( currentFocusId.indexOf("Base") !== - 1);
 
@@ -1441,7 +1491,7 @@ $(document).ready(function() {
 		  calendars: 3,
 		  mode: 'range',
 		  onRangeChange: function(){
-		  	// if (log) console.log(arguments, "Calendars range change")
+		  	// //if (log)  //console.log(arguments, "Calendars range change")
 		  }, 
 		  onChange: onCalendarsChange,
 		  	
@@ -1451,13 +1501,13 @@ $(document).ready(function() {
 
 
 	$("#inputCompareCheckbox").on("change", function(e) {
-		//// if (log)  console.log(e.currentTarget.checked);
+		//// //if (log)   //console.log(e.currentTarget.checked);
 
 		if ( e.currentTarget.checked ) {
 			
 			bCompareChecked = true; 
 
-			console.log(compareStartMoment, "compare checked - what is compareStartMoment?");
+			//console.log(compareStartMoment, "compare checked - what is compareStartMoment?");
 
 			if (null === compareStartMoment && !bCustomBaseRange ) {
 
@@ -1502,7 +1552,7 @@ $(document).ready(function() {
 	});
 
 	$("#compareSelect").on("change", function(e){
-		//// if (log)  console.log("compare select - e.target.value: " + e.target.value);
+		//// //if (log)   //console.log("compare select - e.target.value: " + e.target.value);
 
 		var idNum = Number(e.target.value);
 
@@ -1540,6 +1590,7 @@ $(document).ready(function() {
 
 	 		$("#baseSelect").removeClass("disableApply"); 
 
+	 		$("#shield").show();
 
 	 	} else {
 
@@ -1560,6 +1611,8 @@ $(document).ready(function() {
 			setCurrentFocus("inputCompareStartDate");
 
 			clearCompareDates();
+
+			$("#shield").hide();
 			 	
 	 		
 	 	}
@@ -1570,13 +1623,13 @@ $(document).ready(function() {
 
 	var setCalendarsByCurBaseRange = function( startDate, endDate ) {
 
-		console.log(arguments, " setCalendarsByCurBaseRange ");
+		//console.log(arguments, " setCalendarsByCurBaseRange ");
 
 		startDate = (typeof startDate === "undefined") ? curRange[0]._d : startDate;
 		endDate = (typeof endDate === "undefined") ? curRange[1]._d : endDate;
 
-		console.log(startDate, " setCalendarsByCurBaseRange startDate");
-		console.log(endDate, " setCalendarsByCurBaseRange endDate");
+		//console.log(startDate, " setCalendarsByCurBaseRange startDate");
+		//console.log(endDate, " setCalendarsByCurBaseRange endDate");
 
 		setBaseDate(startDate, null, "Start" );
 		setBaseDate(null, endDate, "End" );
@@ -1597,16 +1650,16 @@ $(document).ready(function() {
 
 		var diffDays = Number( baseEndMoment.diff( baseStartMoment, "days") ) + 1;
 
-		console.log("getPreviousCustomBaseRange diffDays: " + diffDays);
+		//console.log("getPreviousCustomBaseRange diffDays: " + diffDays);
 
 		var previousCompareEndMoment = moment().date( baseStartMoment.date() ).month( baseStartMoment.month() ).year( baseStartMoment.year() ).subtract(1, 'days');
 		var previousCompareStartMoment = moment().date( baseStartMoment.date() ).month( baseStartMoment.month() ).year( baseStartMoment.year() ).subtract(diffDays, 'days');
 
 		var previousCustomRange = [ previousCompareStartMoment._d, previousCompareEndMoment._d ];
 
-		console.log(previousCustomRange, "getPreviousCustomBaseRange check compareStartMoment new");
-		console.log(baseStartMoment, "getPreviousCustomBaseRange check baseStartMoment");
-		console.log(baseEndMoment, "getPreviousCustomBaseRange check baseStartMoment");
+		//console.log(previousCustomRange, "getPreviousCustomBaseRange check compareStartMoment new");
+		//console.log(baseStartMoment, "getPreviousCustomBaseRange check baseStartMoment");
+		//console.log(baseEndMoment, "getPreviousCustomBaseRange check baseStartMoment");
 		
 		setCompareDate(previousCompareStartMoment._d, null, "Start" );
 		setCompareDate(null, previousCompareEndMoment._d, "End" );
@@ -1629,7 +1682,7 @@ $(document).ready(function() {
 
 	var setCalendarsByPreviousCompareRange = function() {
 
-		console.log("setCalendarsByPreviousCompareRange bCustomBaseRange: " + bCustomBaseRange + " vs bCustomCompareRange: " + bCustomCompareRange);
+		//console.log("setCalendarsByPreviousCompareRange bCustomBaseRange: " + bCustomBaseRange + " vs bCustomCompareRange: " + bCustomCompareRange);
 
 		var dates;
 
@@ -1707,8 +1760,8 @@ $(document).ready(function() {
 		ir.introspect.app.msgBus.trigger('date:apply', data);
 
 		if (limLog) {
-			console.log("Sending Dates =============>")
-			console.log(data, "Dates sent to server")
+			//console.log("Sending Dates =============>")
+			//console.log(data, "Dates sent to server")
 		}
 
 		if (undefined !== ga) ga('send', 'event', 'Tool Bar', 'click', 'apply dates');
@@ -1725,7 +1778,7 @@ $(document).ready(function() {
 		reset();
 	}); 
 
-	//// if (log)  console.log(compareStartMoment, "compareStartMoment");
+	//// //if (log)   //console.log(compareStartMoment, "compareStartMoment");
 
 
 	// GLOBAL API FOR TESTING 
