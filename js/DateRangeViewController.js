@@ -55,6 +55,8 @@ $(document).ready(function() {
 	
 	// BASE 
 
+	var invalidMessageStr = 'Invalid: the "from:" date is after the "to:" date. Please click Reset to try again.';
+
 	// 0 - last 7 days
 	var last7DaysRange = [moment().subtract(6, 'days'), moment()];
 	// 1 - last week
@@ -583,7 +585,7 @@ $(document).ready(function() {
 
 	 var clearBaseDates = function(){
 
-	 	if (limLog)  //console.log("clearBaseDates");
+	 	  //console.log("clearBaseDates");
 	 	
 	 	$("#inputBaseStartDate").val("");
 	 	$("#inputBaseEndDate").val("");
@@ -999,7 +1001,7 @@ $(document).ready(function() {
 
 		var validObj = validateCompareTo();
 
-		if (validObj.bTestCompareStartvsCompareEnd && validObj.bTestCompareStartVsBaseEnd ) {
+		if (validObj.bTestCompareStartvsCompareEnd && validObj.bTestCompareEndVsBaseStart ) {
 			// disable both inputs 
 			
 			compareEndMoment = getDateMoment("CompareEnd");
@@ -1026,7 +1028,7 @@ $(document).ready(function() {
 
 			} else {
 
-				displayBaseRangeError('Invalid: the date you selected is after the base range. Please click RESET to try again ');
+				displayBaseRangeError('Invalid compare "from" date. Please click RESET to try again ');
 				setApplyDisabled(); 
 			}
 	
@@ -1047,7 +1049,7 @@ $(document).ready(function() {
 			// but is the compare start before the base range end?
 
 			// but is the end within or after the base range?!
-			var bTestCompareStartVsBaseStart = validateStartBeforeEnd(compareStartMoment, baseStartMoment );
+			var bTestCompareStartVsBaseStart = validateStartBeforeEnd(compareStartMoment, baseStartMoment, true );
 
 			if ( bTestCompareStartVsBaseStart ) {
 
@@ -1062,7 +1064,7 @@ $(document).ready(function() {
 				drawDates();
 
 			} else {
-				displayBaseRangeError('Invalid: the date you selected is after the base range. Please click RESET to try again ');
+				displayBaseRangeError('Invalid compare "to" date. Please click RESET to try again ');
 				setApplyDisabled(); 
 			}
 
@@ -1075,7 +1077,7 @@ $(document).ready(function() {
 	 // on enter or blur test the new date
 	 var newDateAdded = function( posStr ){
 
-	 	if (limLog) //console.log("newDateAdded posStr: " + posStr);
+	 	 //console.log("newDateAdded posStr: " + posStr);
 
 	 	var inputBox = $("#input" + posStr + "Date");
 
@@ -1189,22 +1191,25 @@ $(document).ready(function() {
 
 	 //////////////////////////////////////////////////////////////////////// VALIDATION 
 
-	 var validateStartBeforeEnd = function( startDateMoment, endDateMoment ){
+	 var validateStartBeforeEnd = function( startDateMoment, endDateMoment, bValidateLog ){
 
 	 	//console.log(arguments, " validateStartBeforeEnd ");
 
 	 	//var diffStart = moment( [ startDateMoment.year(), startDateMoment.month(), startDateMoment.date() ] );
 	 	//var diffEnd =  moment( [ endDateMoment.year(), endDateMoment.month(), endDateMoment.date() ] );
+	 	if (bValidateLog) {
+		 	console.log("START ============");
+		 	console.log("year: " + startDateMoment.year() );
+		 	console.log("month: " + Number ( Number( startDateMoment.month() ) + 1 ) );
+		 	console.log("date: " + startDateMoment.date() );
 
-	 	if (limLog)  //console.log("=========== START ============");
-	 	if (limLog)  //console.log("year: " + startDateMoment.year() );
-	 	if (limLog)  //console.log("month: " + Number ( Number( startDateMoment.month() ) + 1 ) );
-	 	if (limLog)  //console.log("date: " + startDateMoment.date() );
+		 	console.log("END ==========");
+		 	console.log("year: " + endDateMoment.year() );
+		 	console.log("month: " + Number ( Number( endDateMoment.month() ) + 1 ) );
+		 	console.log("date: " + endDateMoment.date() );
+	 	}
 
-	 	if (limLog)  //console.log("========== END ==========");
-	 	if (limLog)  //console.log("year: " + endDateMoment.year() );
-	 	if (limLog)  //console.log("month: " + Number ( Number( endDateMoment.month() ) + 1 ) );
-	 	if (limLog)  //console.log("date: " + endDateMoment.date() );
+	 	var yearsDiff = endDateMoment.year() - startDateMoment.year();
 	 	
 	 	
 	 	var monthsDiff = endDateMoment.diff(startDateMoment, "months");
@@ -1213,28 +1218,38 @@ $(document).ready(function() {
 
 	 	var bResult = false;
 
-	 	if ( monthsDiff >= 1 ) {
+	 	if ( yearsDiff >= 1 ) {
+
+	 		if (bValidateLog) console.log(yearsDiff, 'years diff - all good' );
 
 	 		//valid 
 	 		bResult = true; 
 
 	 	} else {
 
-	 		var daysDiff = endDateMoment.diff(startDateMoment, "days");
-	 		//console.log(daysDiff, 'days' );
+		 	if ( monthsDiff >= 1 ) {
 
-	 		if ( daysDiff >= 1 ) {
+		 		//valid 
+		 		bResult = true; 
 
-	 			//valid 
-	 			bResult = true; 
+		 	} else {
 
-	 		} else {
+		 		var daysDiff =  Number( endDateMoment.date() ) - Number( startDateMoment.date() );
+		 		if (bValidateLog) console.log(daysDiff, 'days' );
 
-	 			// invalid 
-	 			bResult = false; 
-	 		}
+		 		if ( daysDiff >= 1 ) {
+		 			//valid 
+		 			bResult = true; 
 
-	 	}
+		 		} else {
+
+		 			// invalid 
+		 			bResult = false; 
+		 		}
+
+		 	}
+
+		 }
 	
 	 	// //if (log)   //console.log("validateStartBeforeEnd valid: " + bResult + " diffDays: " + diffDays); 
 
@@ -1242,7 +1257,7 @@ $(document).ready(function() {
 
 	 		setApplyDisabled();
 
-	 		displayBaseRangeError('Invalid: the "from:" date is before the "to:" date. Please click Reset to try again. ');
+	 		displayBaseRangeError(invalidMessageStr);
 
 	 		setCalendarsDisabled();
 
@@ -1287,7 +1302,7 @@ $(document).ready(function() {
 
 		 	if (!baseToValid) {
 
-				displayBaseRangeError('Invalid: the "from:" date is before the "to:" date. Please click Reset to try again. ');
+				displayBaseRangeError(invalidMessageStr);
 			}
 
 		 	//console.log("validateBaseTo 1 valid? " + baseToValid); 
@@ -1297,7 +1312,7 @@ $(document).ready(function() {
 		 		baseToValid = validateStartBeforeEnd(baseStartMoment, compareStartMoment); 
 
 		 		if (!baseToValid) {
-					displayBaseRangeError('Invalid: the "from:" date is before the "to:" date. Please click Reset to try again. ');
+					displayBaseRangeError(invalidMessageStr);
 				}
 
 		 	}
@@ -1337,7 +1352,7 @@ $(document).ready(function() {
 			}
 
 			if (!bTestCompareEndVsBaseEnd) {
-				displayBaseRangeError('Invalid: the "from:" date is before the "to:" date. Please click Reset to try again. ');
+				displayBaseRangeError(invalidMessageStr);
 			}
 
 		} else {
@@ -1350,27 +1365,26 @@ $(document).ready(function() {
 	 var validateCompareTo = function(){
 
 	 	var bTestCompareStartvsCompareEnd = false;
-	 	var bTestCompareStartVsBaseEnd = false;
+	 	var bTestCompareEndVsBaseStart = false;
 
-	 	if (null !== compareStartMoment && !bCustomCompareRange) {
+	 	if (null !== compareStartMoment ) {
 
-		 	bTestCompareStartvsCompareEnd =  validateStartBeforeEnd(compareStartMoment, compareEndMoment); 
-			bTestCompareStartVsBaseEnd = validateStartBeforeEnd(baseEndMoment, compareStartMoment);
+	 		console.log("validating compare to")
+
+		 	bTestCompareStartvsCompareEnd =  validateStartBeforeEnd(compareStartMoment, compareEndMoment, false); 
+			bTestCompareEndVsBaseStart = validateStartBeforeEnd(compareEndMoment, baseStartMoment, true);
 
 			//console.log("validateCompareTo b1: " + bTestCompareStartvsCompareEnd + " b2: " + bTestCompareStartVsBaseEnd);
 
 			if (!bTestCompareStartvsCompareEnd) {
-
-				displayBaseRangeError("Invalid Compare Range: the to date is before the from date ");
+				displayBaseRangeError(invalidMessageStr);
 			}
 
-			if (!bTestCompareStartVsBaseEnd) {
-
-				displayBaseRangeError('Invalid: the "from:" date is before the "to:" date. Please click Reset to try again. ');
-
+			if (!bTestCompareEndVsBaseStart) {
+				displayBaseRangeError(invalidMessageStr);
 			}
 
-			if (bTestCompareStartvsCompareEnd && bTestCompareStartVsBaseEnd ) {
+			if (bTestCompareStartvsCompareEnd && bTestCompareEndVsBaseStart ) {
 				displayNoErrorMessage();
 			}
 		} else {
@@ -1378,7 +1392,7 @@ $(document).ready(function() {
 			return { bTestCompareStartvsCompareEnd: true, bTestCompareStartVsBaseEnd: true }
 		}
 
-		return { bTestCompareStartvsCompareEnd: bTestCompareStartvsCompareEnd, bTestCompareStartVsBaseEnd: bTestCompareStartVsBaseEnd }
+		return { bTestCompareStartvsCompareEnd: bTestCompareStartvsCompareEnd, bTestCompareEndVsBaseStart: bTestCompareEndVsBaseStart }
 
 	 };
 
@@ -1436,7 +1450,7 @@ $(document).ready(function() {
 
 	var onCalendarsChange = function(dates, el) {
 
-	  	if (limLog) //console.log(arguments, "Date changed event currentFocusId: " + currentFocusId);
+	  //console.log(arguments, "Date changed event currentFocusId: " + currentFocusId);
 
 	  	var bBaseFocus = ( currentFocusId.indexOf("Base") !== - 1);
 
@@ -1759,10 +1773,6 @@ $(document).ready(function() {
 		//ir.introspect.app.msgBus.trigger('applyDates');
 		ir.introspect.app.msgBus.trigger('date:apply', data);
 
-		if (limLog) {
-			//console.log("Sending Dates =============>")
-			//console.log(data, "Dates sent to server")
-		}
 
 		if (undefined !== ga) ga('send', 'event', 'Tool Bar', 'click', 'apply dates');
 			
