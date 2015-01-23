@@ -1766,10 +1766,10 @@ $(document).ready(function() {
 		var compareEndDate = (null !== inputCompareEndMoment) ? inputCompareEndMoment._d : null;
 
 		// need to ensure all the data are the full day 23:59:59
-		baseStartDate.setHours(23,59,59);
+		baseStartDate.setHours(0,0,0);
 		baseEndDate.setHours(23,59,59);
 		
-		if (null !== compareStartDate) compareStartDate.setHours(23,59,59);
+		if (null !== compareStartDate) compareStartDate.setHours(0,0,0);
 		if (null !== compareEndDate) compareEndDate.setHours(23,59,59);
 		
 		var data = { baseStartDate: baseStartDate, 
