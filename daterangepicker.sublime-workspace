@@ -255,7 +255,7 @@
 			"file": "js/DateRangeViewController.js",
 			"settings":
 			{
-				"buffer_size": 50363,
+				"buffer_size": 49971,
 				"line_ending": "Unix"
 			}
 		},
@@ -697,15 +697,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 50363,
+						"buffer_size": 49971,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								19293,
-								19293
+								24340,
+								24661
 							]
 						],
 						"settings":
@@ -714,7 +714,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 8939.0,
+						"translation.y": 11532.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,

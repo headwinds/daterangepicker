@@ -178,6 +178,7 @@ $(document).ready(function() {
 
 		displayNoErrorMessage();
 
+		$("#shield").hide();
 	
 		
 	};
@@ -1764,6 +1765,13 @@ $(document).ready(function() {
 		var compareStartDate = (null !== inputCompareStartMoment) ? inputCompareStartMoment._d : null;
 		var compareEndDate = (null !== inputCompareEndMoment) ? inputCompareEndMoment._d : null;
 
+		// need to ensure all the data are the full day 23:59:59
+		baseStartDate.setHours(23,59,59);
+		baseEndDate.setHours(23,59,59);
+		
+		if (null !== compareStartDate) compareStartDate.setHours(23,59,59);
+		if (null !== compareEndDate) compareEndDate.setHours(23,59,59);
+		
 		var data = { baseStartDate: baseStartDate, 
 					 baseEndDate: baseEndDate, 
 					 compareStartDate: compareStartDate, 
