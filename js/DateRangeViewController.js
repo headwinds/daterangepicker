@@ -657,7 +657,7 @@ $(document).ready(function() {
 
 	 	 if ( null === baseStartMoment) {
 	 	
-	    	baseRangeStr = "<span class='baseRangeTxt'>? - ?</span>";
+	    	baseRangeStr = "<span class='baseRangeTxt'>Base Range: Please select 2 dates</span>";
 
 		    $("#baseRange").html( baseRangeStr );
 
@@ -676,7 +676,7 @@ $(document).ready(function() {
 
 	    if (bCompareChecked && null === compareStartMoment) {
 	 	
-	    	var customAStr =  "<span class='compareRangeTxt'>? - ?</span>";
+	    	var customAStr =  "<span class='compareRangeTxt'>Compare Range: Please select 2 dates</span>";
 	    	var customJoinStr = "<span style='font-size:12px; color: #666'> - To -  </span>" ;
 		    var customFullStr = customAStr + customJoinStr + baseRangeStr;
 
@@ -702,8 +702,8 @@ $(document).ready(function() {
 		    	compareEndDateStr = compareEndMoment.format("MMMM") + ' ' + compareEndMoment.date() + ', '+ compareEndMoment.year();
 		    }
 
-		    if ( compareStartDateStr === "NaN undefined, NaN" ) compareStartDateStr = " ? ";
-		    if ( compareEndDateStr === "NaN undefined, NaN" ) compareEndDateStr = " ? ";
+		    if ( compareStartDateStr === "NaN undefined, NaN" ) compareStartDateStr = " Please select compare start date ";
+		    if ( compareEndDateStr === "NaN undefined, NaN" ) compareEndDateStr = " Please select compare end date";
 
 		    var compareRangePartAStr =  "<span class='compareRangeTxt'>" + compareStartDateStr   + " - " +  compareEndDateStr + "</span>";
 		    var compareRangePartBStr = "<span style='font-size:12px; color: #666'> - To -  </span>" ;
@@ -1008,7 +1008,7 @@ $(document).ready(function() {
 			compareEndMoment = getDateMoment("CompareEnd");
 
 			// but is the end within or after the base range?!
-			var bTestCompareEndVsBaseStart = validateStartBeforeEnd(compareEndMoment, baseStartMoment );
+			var bTestCompareEndVsBaseStart = validateStartBeforeEnd(compareEndMoment, baseStartMoment, true, "validating compareEndMoment to baseStartMoment" );
 
 			if ( bTestCompareEndVsBaseStart ) {
 
@@ -1041,16 +1041,20 @@ $(document).ready(function() {
 
 	 var compareStartCaseHandler = function(startDate) {
 
+	 	console.log("DateRangeViewController - startDate: " + startDate);
+
 		setCompareDate(startDate, null, "Start");
 
 		var bCompareFromValid = validateCompareFrom(); 
+
+		console.log("DateRangeViewController - bCompareFromValid: " + bCompareFromValid);
 
 		if ( bCompareFromValid ) {
 
 			// but is the compare start before the base range end?
 
 			// but is the end within or after the base range?!
-			var bTestCompareStartVsBaseStart = validateStartBeforeEnd(compareStartMoment, baseStartMoment, true );
+			var bTestCompareStartVsBaseStart = validateStartBeforeEnd(compareStartMoment, baseStartMoment, true, "validating compareStartMoment to baseStartMoment" );
 
 			if ( bTestCompareStartVsBaseStart ) {
 
@@ -1060,9 +1064,10 @@ $(document).ready(function() {
 				setCurrentFocus("inputCompareEndDate");
 				enableCompareTo(); 
 
-				compareEndMoment = getDateMoment("CompareEnd"); // ok to set it because it the same and fakes the draw
-
-				drawDates();
+				//compareEndMoment = getDateMoment("CompareEnd"); // ok to set it because it the same and fakes the draw
+ 
+				//drawDates(); // actually don't draw them because the final date has not been set
+				calendars.DatePickerSetDate(compareStartMoment._d, true)
 
 			} else {
 				displayBaseRangeError('Invalid compare "to" date. Please click RESET to try again ');
@@ -1192,13 +1197,15 @@ $(document).ready(function() {
 
 	 //////////////////////////////////////////////////////////////////////// VALIDATION 
 
-	 var validateStartBeforeEnd = function( startDateMoment, endDateMoment, bValidateLog ){
+	 var validateStartBeforeEnd = function( startDateMoment, endDateMoment, bValidateLog, logMessage ){
 
 	 	//console.log(arguments, " validateStartBeforeEnd ");
 
 	 	//var diffStart = moment( [ startDateMoment.year(), startDateMoment.month(), startDateMoment.date() ] );
 	 	//var diffEnd =  moment( [ endDateMoment.year(), endDateMoment.month(), endDateMoment.date() ] );
 	 	if (bValidateLog) {
+	 		console.log("+ validateStartBeforeEnd +");
+	 		console.log("what: " + logMessage);
 		 	console.log("START ============");
 		 	console.log("year: " + startDateMoment.year() );
 		 	console.log("month: " + Number ( Number( startDateMoment.month() ) + 1 ) );
@@ -1213,8 +1220,8 @@ $(document).ready(function() {
 	 	var yearsDiff = endDateMoment.year() - startDateMoment.year();
 	 	
 	 	
-	 	var monthsDiff = endDateMoment.diff(startDateMoment, "months");
-	 	//console.log(monthsDiff, 'months' );
+	 	var monthsDiff = endDateMoment.diff(startDateMoment, "months");  
+	 	console.log(monthsDiff, 'months' );
 	 	
 
 	 	var bResult = false;
@@ -1225,6 +1232,7 @@ $(document).ready(function() {
 
 	 		//valid 
 	 		bResult = true; 
+	 		return bResult;
 
 	 	} else {
 
@@ -1232,6 +1240,7 @@ $(document).ready(function() {
 
 		 		//valid 
 		 		bResult = true; 
+		 		return bResult;
 
 		 	} else {
 
@@ -1299,7 +1308,7 @@ $(document).ready(function() {
 
 	 	if (null !== baseStartMoment) {
 
-		 	baseToValid = validateStartBeforeEnd(baseStartMoment, baseEndMoment); 
+		 	baseToValid = validateStartBeforeEnd(baseStartMoment, baseEndMoment, false, "validating baseStartMoment to baseEndMoment"); 
 
 		 	if (!baseToValid) {
 
@@ -1310,7 +1319,7 @@ $(document).ready(function() {
 
 		 	// complex 3 date validation with compare checked	
 		 	if ( bCompareChecked ) {
-		 		baseToValid = validateStartBeforeEnd(baseStartMoment, compareStartMoment); 
+		 		baseToValid = validateStartBeforeEnd(baseStartMoment, compareStartMoment, false, "validating baseStartMoment to compareStartMoment"); 
 
 		 		if (!baseToValid) {
 					displayBaseRangeError(invalidMessageStr);
@@ -1345,7 +1354,7 @@ $(document).ready(function() {
 	 	var bTestCompareEndVsBaseEnd = false;
 
 	 	if (!bCustomCompareRange) {
-		 	bTestCompareEndVsBaseEnd= validateStartBeforeEnd(baseEndMoment, compareEndMoment );
+		 	bTestCompareEndVsBaseEnd= validateStartBeforeEnd(baseEndMoment, compareEndMoment, false, "validating baseEndMoment to compareEndMoment" );
 		 
 		 	
 		 	if (bTestCompareEndVsBaseEnd ) {
@@ -1372,8 +1381,8 @@ $(document).ready(function() {
 
 	 		console.log("validating compare to")
 
-		 	bTestCompareStartvsCompareEnd =  validateStartBeforeEnd(compareStartMoment, compareEndMoment, false); 
-			bTestCompareEndVsBaseStart = validateStartBeforeEnd(compareEndMoment, baseStartMoment, true);
+		 	bTestCompareStartvsCompareEnd =  validateStartBeforeEnd(compareStartMoment, compareEndMoment, true, "validating compareStartMoment to compareEndMoment"); 
+			bTestCompareEndVsBaseStart = validateStartBeforeEnd(compareEndMoment, baseStartMoment, false, "validating compareEndMoment to baseStartMoment");
 
 			//console.log("validateCompareTo b1: " + bTestCompareStartvsCompareEnd + " b2: " + bTestCompareStartVsBaseEnd);
 
