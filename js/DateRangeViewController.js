@@ -178,7 +178,7 @@ $(document).ready(function() {
 
 		displayNoErrorMessage();
 
-		$("#shield").hide();
+		$("#shield").show(); // shields for preselected dates in IE
 	
 		
 	};
