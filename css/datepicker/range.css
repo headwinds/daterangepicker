@@ -44,7 +44,7 @@ h4 {
 
 /* line 13, ../../sass/_ir_common_date_range.scss */
 #dateCardContainer {
-  height: 365px;
+  height: 400px;
   width: 560px !important;
   top: 0px;
   left: 520px;
@@ -74,46 +74,53 @@ h4 {
   /* Bold today's date */
   /* cells are wider in the clean style */ }
   /* line 22, ../../sass/_ir_common_date_range.scss */
+  #dateCardContainer ul {
+    list-style-type: none; }
+  /* line 26, ../../sass/_ir_common_date_range.scss */
+  #dateCardContainer li {
+    margin: 0px;
+    padding: 0px; }
+  /* line 31, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer .disableApply {
     opacity: 0.6;
     pointer-events: none;
     cursor: default; }
-  /* line 28, ../../sass/_ir_common_date_range.scss */
+  /* line 37, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer .enableApply {
     opacity: 1;
     pointer-events: all;
     cursor: pointer; }
-  /* line 34, ../../sass/_ir_common_date_range.scss */
+  /* line 43, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer .disableInput {
     border: none !important; }
-  /* line 38, ../../sass/_ir_common_date_range.scss */
+  /* line 47, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer .enableInput {
     border: 2px solid !important; }
-  /* line 42, ../../sass/_ir_common_date_range.scss */
+  /* line 51, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer .disableControl {
     pointer-events: none;
     border: none !important; }
-  /* line 47, ../../sass/_ir_common_date_range.scss */
+  /* line 56, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer .enableControl {
     pointer-events: all;
     border: 2px solid !important; }
-  /* line 52, ../../sass/_ir_common_date_range.scss */
+  /* line 61, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer span.baseRangeTxt {
     color: #7fc022;
     font-size: 14px;
     font-weight: normal; }
-  /* line 58, ../../sass/_ir_common_date_range.scss */
+  /* line 67, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer span.compareRangeTxt {
     color: #257d9b;
     font-size: 14px;
     font-weight: normal; }
-  /* line 64, ../../sass/_ir_common_date_range.scss */
+  /* line 73, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer .errorInputTxt {
     color: #990000; }
-  /* line 69, ../../sass/_ir_common_date_range.scss */
+  /* line 78, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer span.warningRangeTxt {
     color: #e69500; }
-  /* line 73, ../../sass/_ir_common_date_range.scss */
+  /* line 82, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer .calendarContainer {
     display: block;
     position: relative;
@@ -125,18 +132,20 @@ h4 {
     padding: 20px;
     height: 300px;
     overflow: visible; }
-  /* line 81, ../../sass/_ir_common_date_range.scss */
+  /* line 90, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer input {
     margin-left: 5px;
     width: 80px !important; }
-  /* line 86, ../../sass/_ir_common_date_range.scss */
+  /* line 95, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer input[type="checkbox"] {
     width: 14px !important; }
-  /* line 90, ../../sass/_ir_common_date_range.scss */
+  /* line 99, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer h4.baseTitle {
     margin-left: 0px;
-    font-family: "Geogrotesque-Medium", Georgia, serif, Verdana; }
-  /* line 97, ../../sass/_ir_common_date_range.scss */
+    font-family: "Geogrotesque-Medium", Georgia, serif, Verdana;
+    margin: 0px;
+    padding: 0px; }
+  /* line 108, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer .compareRowContainer {
     display: block;
     position: relative;
@@ -148,7 +157,7 @@ h4 {
     width: 100%;
     height: 25px;
     overflow: visible; }
-  /* line 105, ../../sass/_ir_common_date_range.scss */
+  /* line 116, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer #datepicker-calendar {
     display: block;
     position: relative;
@@ -158,15 +167,15 @@ h4 {
     padding: 0px;
     overflow: hidden;
     height: 175px; }
-    /* line 109, ../../sass/_ir_common_date_range.scss */
+    /* line 120, ../../sass/_ir_common_date_range.scss */
     #dateCardContainer #datepicker-calendar .datepicker {
       width: 502px !important;
       height: 140px !important; }
-  /* line 116, ../../sass/_ir_common_date_range.scss */
+  /* line 127, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer select {
     width: 127px;
     height: 18px; }
-  /* line 121, ../../sass/_ir_common_date_range.scss */
+  /* line 132, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer div.datepicker {
     position: relative;
     font-family: Arial, Helvetica, sans-serif;
@@ -178,10 +187,10 @@ h4 {
     top: 0;
     left: 0;
     display: none; }
-  /* line 133, ../../sass/_ir_common_date_range.scss */
+  /* line 144, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer .datepickerContainer {
     position: absolute; }
-  /* line 145, ../../sass/_ir_common_date_range.scss */
+  /* line 156, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer .datepickerBorderT,
   #dateCardContainer .datepickerBorderB,
   #dateCardContainer .datepickerBorderL,
@@ -191,84 +200,84 @@ h4 {
   #dateCardContainer .datepickerBorderBL,
   #dateCardContainer .datepickerBorderBR {
     display: none; }
-  /* line 149, ../../sass/_ir_common_date_range.scss */
+  /* line 160, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer .datepickerHidden {
     display: none; }
-  /* line 152, ../../sass/_ir_common_date_range.scss */
+  /* line 163, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer div.datepicker table {
     border-collapse: collapse; }
-  /* line 155, ../../sass/_ir_common_date_range.scss */
+  /* line 166, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer div.datepicker a {
     color: #333;
     text-decoration: none;
     cursor: pointer;
     outline: none; }
-  /* line 161, ../../sass/_ir_common_date_range.scss */
+  /* line 172, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer div.datepicker table td {
     text-align: center;
     padding: 0;
     margin: 0; }
-  /* line 166, ../../sass/_ir_common_date_range.scss */
+  /* line 177, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer div.datepicker th {
     text-align: center;
     color: #666666;
     font-weight: normal;
     padding: 0; }
-  /* line 172, ../../sass/_ir_common_date_range.scss */
+  /* line 183, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer div.datepicker tbody a {
     display: block; }
-  /* line 175, ../../sass/_ir_common_date_range.scss */
+  /* line 186, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer .datepickerDays a {
     width: 20px;
     line-height: 16px;
     height: 16px;
     padding-right: 2px;
     cursor: pointer; }
-  /* line 183, ../../sass/_ir_common_date_range.scss */
+  /* line 194, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer .datepickerYears a,
   #dateCardContainer .datepickerMonths a {
     width: 39px;
     line-height: 36px;
     height: 36px;
     text-align: center; }
-  /* line 192, ../../sass/_ir_common_date_range.scss */
+  /* line 203, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer .datepickerMonths td:first-child a,
   #dateCardContainer .datepickerMonths td:last-child a,
   #dateCardContainer .datepickerYears td:first-child a,
   #dateCardContainer .datepickerYears td:last-child a {
     width: 38px; }
-  /* line 195, ../../sass/_ir_common_date_range.scss */
+  /* line 206, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer td.datepickerNotInMonth a {
     color: #666666; }
-  /* line 198, ../../sass/_ir_common_date_range.scss */
+  /* line 209, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer tbody.datepickerDays td.datepickerSelected {
     background: #7fc022;
     pointer-events: none !important;
     cursor: default !important; }
-  /* line 203, ../../sass/_ir_common_date_range.scss */
+  /* line 214, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer tbody.datepickerDays td.datepickerNotInMonth.datepickerSelected {
     background: #17384d; }
-  /* line 207, ../../sass/_ir_common_date_range.scss */
+  /* line 218, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer tbody.datepickerYears td.datepickerSelected,
   #dateCardContainer tbody.datepickerMonths td.datepickerSelected {
     background: #17384d; }
-  /* line 210, ../../sass/_ir_common_date_range.scss */
+  /* line 221, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer div.datepicker td.datepickerSelected a {
     color: white; }
-  /* line 214, ../../sass/_ir_common_date_range.scss */
+  /* line 225, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer div.datepicker a:hover,
   #dateCardContainer div.datepicker a:hover {
     color: #88c5eb; }
-  /* line 217, ../../sass/_ir_common_date_range.scss */
+  /* line 228, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer div.datepicker td.datepickerNotInMonth a:hover {
     color: #999999; }
-  /* line 220, ../../sass/_ir_common_date_range.scss */
+  /* line 231, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer .datepickerSpace div {
     width: 20px; }
-  /* line 223, ../../sass/_ir_common_date_range.scss */
+  /* line 234, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer .datepickerBlock {
     vertical-align: top; }
-  /* line 228, ../../sass/_ir_common_date_range.scss */
+  /* line 239, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer a.datepickerGoNext,
   #dateCardContainer a.datepickerGoPrev,
   #dateCardContainer a.datepickerMonth {
@@ -276,139 +285,139 @@ h4 {
     height: 20px;
     line-height: 20px;
     float: left; }
-  /* line 235, ../../sass/_ir_common_date_range.scss */
+  /* line 246, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer div.datepicker th a.datepickerGoNext,
   #dateCardContainer div.datepicker th a.datepickerGoPrev {
     width: 20px;
     color: #666666;
     display: none; }
-  /* line 240, ../../sass/_ir_common_date_range.scss */
+  /* line 251, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer div.datepicker th a.datepickerMonth {
     width: 114px;
     display: block; }
-  /* line 246, ../../sass/_ir_common_date_range.scss */
+  /* line 257, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer div.datepicker .datepickerFirstView th a.datepickerGoPrev,
   #dateCardContainer div.datepicker .datepickerLastView th a.datepickerGoNext {
     display: block; }
-  /* line 250, ../../sass/_ir_common_date_range.scss */
+  /* line 261, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer div.datepicker th a.datepickerMonth {
     margin-left: 20px; }
-  /* line 253, ../../sass/_ir_common_date_range.scss */
+  /* line 264, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer div.datepicker .datepickerFirstView th a.datepickerMonth {
     margin-left: 0; }
-  /* line 258, ../../sass/_ir_common_date_range.scss */
+  /* line 269, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer table.datepickerViewDays tbody.datepickerMonths,
   #dateCardContainer table.datepickerViewDays tbody.datepickerYears {
     display: none; }
-  /* line 264, ../../sass/_ir_common_date_range.scss */
+  /* line 275, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer table.datepickerViewMonths tbody.datepickerDays,
   #dateCardContainer table.datepickerViewMonths tbody.datepickerYears,
   #dateCardContainer table.datepickerViewMonths tr.datepickerDoW {
     display: none; }
-  /* line 270, ../../sass/_ir_common_date_range.scss */
+  /* line 281, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer table.datepickerViewYears tbody.datepickerDays,
   #dateCardContainer table.datepickerViewYears tbody.datepickerMonths,
   #dateCardContainer table.datepickerViewYears tr.datepickerDoW {
     display: none; }
-  /* line 274, ../../sass/_ir_common_date_range.scss */
+  /* line 285, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer td.datepickerDisabled a,
   #dateCardContainer td.datepickerDisabled.datepickerNotInMonth a {
     color: #555555;
     pointer-events: none !important;
     cursor: default !important; }
-  /* line 279, ../../sass/_ir_common_date_range.scss */
+  /* line 290, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer td.datepickerDisabled a:hover {
     color: #333333;
     pointer-events: none !important;
     cursor: default !important; }
-  /* line 285, ../../sass/_ir_common_date_range.scss */
+  /* line 296, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer div.datepicker tbody.datepickerDays td.datepickerSpecial a {
     background: #770000;
     color: white; }
-  /* line 289, ../../sass/_ir_common_date_range.scss */
+  /* line 300, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer div.datepicker tbody.datepickerDays td.datepickerSpecial.datepickerSelected a {
     background: #aa0000; }
-  /* line 294, ../../sass/_ir_common_date_range.scss */
+  /* line 305, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer tbody.datepickerDays td.datepickerNotInMonth.datepickerSelected {
     background-color: transparent; }
-  /* line 297, ../../sass/_ir_common_date_range.scss */
+  /* line 308, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer div.datepicker td.datepickerNotInMonth a span {
     display: none; }
-  /* line 300, ../../sass/_ir_common_date_range.scss */
+  /* line 311, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer div.datepicker td.datepickerNotInMonth a:hover span {
     display: none; }
-  /* line 303, ../../sass/_ir_common_date_range.scss */
+  /* line 314, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer div.datepicker tbody.datepickerDays td.datepickerNotInMonth:hover {
     background-color: transparent; }
-  /* line 309, ../../sass/_ir_common_date_range.scss */
+  /* line 320, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer body {
     font-family: Arial; }
-  /* line 314, ../../sass/_ir_common_date_range.scss */
+  /* line 325, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer input[type="input"] {
     width: 80px; }
-  /* line 318, ../../sass/_ir_common_date_range.scss */
+  /* line 329, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer input.baseRange:focus {
     outline: none;
     border: 2px solid #7fc022; }
-  /* line 323, ../../sass/_ir_common_date_range.scss */
+  /* line 334, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer input.baseRangeSelected {
     border: 2px solid #7fc022; }
-  /* line 328, ../../sass/_ir_common_date_range.scss */
+  /* line 339, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer input.compareRange:focus {
     outline: none;
     border: 2px solid #257d9b; }
-  /* line 333, ../../sass/_ir_common_date_range.scss */
+  /* line 344, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer input.compareRangeSelected {
     border: 2px solid #257d9b; }
-  /* line 337, ../../sass/_ir_common_date_range.scss */
+  /* line 348, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer p {
     font-size: 14px;
     color: #666; }
-  /* line 342, ../../sass/_ir_common_date_range.scss */
+  /* line 353, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer input[type="radio"] {
     display: inline-block; }
-  /* line 348, ../../sass/_ir_common_date_range.scss */
+  /* line 359, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer tbody.datepickerDays td.datepickerCompareSelected {
     background-color: #257d9b; }
-  /* line 353, ../../sass/_ir_common_date_range.scss */
+  /* line 364, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer tbody.datepickerDays td.datepickerCompareSelected a {
     color: white; }
-  /* line 357, ../../sass/_ir_common_date_range.scss */
+  /* line 368, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer #testsContainer {
     margin-top: 40px; }
-  /* line 361, ../../sass/_ir_common_date_range.scss */
+  /* line 372, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer .validMessage {
     color: #666; }
-  /* line 365, ../../sass/_ir_common_date_range.scss */
+  /* line 376, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer .errorMessage {
     color: #990000; }
-  /* line 369, ../../sass/_ir_common_date_range.scss */
+  /* line 380, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer hr {
     margin: 0px;
     padding: 0px;
     background-color: #CCC; }
-  /* line 375, ../../sass/_ir_common_date_range.scss */
+  /* line 386, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer strong {
     color: #999; }
-  /* line 379, ../../sass/_ir_common_date_range.scss */
+  /* line 390, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer label {
     font-size: 12px;
     color: #666;
     font-family: "DINMittelEF-Regular", Helvetica, sans-serif; }
-  /* line 385, ../../sass/_ir_common_date_range.scss */
+  /* line 396, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer .selectContainer {
     display: inline-block; }
-  /* line 390, ../../sass/_ir_common_date_range.scss */
+  /* line 401, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer .toFrom {
     width: 230px;
     display: inline-block; }
-  /* line 396, ../../sass/_ir_common_date_range.scss */
+  /* line 407, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer #compareRange {
     display: inline-block; }
-  /* line 400, ../../sass/_ir_common_date_range.scss */
+  /* line 411, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer .buffer {
     margin-bottom: 10px; }
-  /* line 404, ../../sass/_ir_common_date_range.scss */
+  /* line 415, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer .footerBar {
     display: block;
     width: 530px;
@@ -416,107 +425,107 @@ h4 {
     margin: 0px;
     padding: 0px;
     margin-top: 15px; }
-  /* line 414, ../../sass/_ir_common_date_range.scss */
+  /* line 425, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer .validationContainer {
     display: inline-block;
     width: 350px;
     margin: 0px;
     padding: 0px; }
-  /* line 421, ../../sass/_ir_common_date_range.scss */
+  /* line 432, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer .validationText {
     display: block;
     width: 350px;
     margin: 0px;
     padding: 0px;
     font-size: 12px; }
-  /* line 429, ../../sass/_ir_common_date_range.scss */
+  /* line 440, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer .rangeButtonContainers {
     display: inline-block;
     width: 158px;
     margin: 0px;
     padding: 0px;
     float: right; }
-    /* line 436, ../../sass/_ir_common_date_range.scss */
+    /* line 447, ../../sass/_ir_common_date_range.scss */
     #dateCardContainer .rangeButtonContainers .dateButton {
       height: 26px;
       width: 70px;
       margin-left: 5px; }
-    /* line 442, ../../sass/_ir_common_date_range.scss */
+    /* line 453, ../../sass/_ir_common_date_range.scss */
     #dateCardContainer .rangeButtonContainers .dateButton:focus {
       border: none;
       outline: none; }
-  /* line 452, ../../sass/_ir_common_date_range.scss */
+  /* line 463, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer .datepicker {
     background-color: #F7F7F7;
     border: 1px solid #CCCCCC;
     border-radius: 5px 5px 5px 5px;
     padding: 10px; }
-  /* line 460, ../../sass/_ir_common_date_range.scss */
+  /* line 471, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer .datepickerSpace div {
     width: 2px; }
-  /* line 465, ../../sass/_ir_common_date_range.scss */
+  /* line 476, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer div.datepicker th {
     background-color: #eee; }
-  /* line 468, ../../sass/_ir_common_date_range.scss */
+  /* line 479, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer div.datepicker th a.datepickerMonth {
     color: #666666;
     font-weight: normal; }
-  /* line 474, ../../sass/_ir_common_date_range.scss */
+  /* line 485, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer div.datepicker th {
     color: #999;
     font-weight: bold; }
-  /* line 479, ../../sass/_ir_common_date_range.scss */
+  /* line 490, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer div.datepicker table thead tr.datepickerDoW th {
     border-bottom: 1px solid #CCCCCC; }
-  /* line 485, ../../sass/_ir_common_date_range.scss */
+  /* line 496, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer div.datepicker a,
   #dateCardContainer div.datepicker a:hover {
     color: #333; }
-  /* line 490, ../../sass/_ir_common_date_range.scss */
+  /* line 501, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer div.datepicker table.datepickerViewDays,
   #dateCardContainer div.datepicker table.datepickerViewMonths,
   #dateCardContainer div.datepicker table.datepickerViewYears {
     background-color: white; }
-  /* line 493, ../../sass/_ir_common_date_range.scss */
+  /* line 504, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer div.datepicker table tbody.datepickerDays td {
     border: 1px solid #F7F7F7; }
-  /* line 498, ../../sass/_ir_common_date_range.scss */
+  /* line 509, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer tbody.datepickerDays td.datepickerSelected {
     background-color: #7fc022; }
-  /* line 503, ../../sass/_ir_common_date_range.scss */
+  /* line 514, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer div.datepicker td.datepickerFuture {
     pointer-events: none !important;
     cursor: default !important; }
-  /* line 508, ../../sass/_ir_common_date_range.scss */
+  /* line 519, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer div.datepicker td.datepickerFuture a {
     color: #DDDDDD;
     pointer-events: none !important;
     cursor: default !important; }
-  /* line 515, ../../sass/_ir_common_date_range.scss */
+  /* line 526, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer div.datepicker td.datepickerFuture a:hover {
     pointer-events: none;
     background-color: #DDDDDD !important;
     pointer-events: none !important;
     cursor: default !important; }
-  /* line 523, ../../sass/_ir_common_date_range.scss */
+  /* line 534, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer div.datepicker td.datepickerFuture td:hover {
     pointer-events: none;
     background-color: #DDDDDD !important;
     pointer-events: none !important;
     cursor: default !important; }
-  /* line 532, ../../sass/_ir_common_date_range.scss */
+  /* line 543, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer div.datepicker tbody.datepickerDays td:hover {
     background-color: #FFCC33; }
-  /* line 537, ../../sass/_ir_common_date_range.scss */
+  /* line 548, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer div.datepicker td.datepickerToday a {
     font-weight: bold; }
-  /* line 542, ../../sass/_ir_common_date_range.scss */
+  /* line 553, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer .datepickerYears a, #dateCardContainer .datepickerMonths a {
     width: 42px; }
-  /* line 546, ../../sass/_ir_common_date_range.scss */
+  /* line 557, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer .datepickerMonths td:first-child a,
   #dateCardContainer .datepickerYears td:first-child a {
     width: 39px; }
-  /* line 549, ../../sass/_ir_common_date_range.scss */
+  /* line 560, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer div.datepicker th a.datepickerMonth {
     width: 121px; }

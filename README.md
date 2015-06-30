@@ -3,21 +3,26 @@
 ![headwinds datepicker](http://www.headwinds.net/lab/daterangepicker/images/daterangepicker.png)
 
 I was tasked to create a date range picker that mirrored the behavoir found in the Google Analytics date range picker. 
+ 
+I started with the code base from [Justin Stern](http://foxrunsoftware.github.com/DatePicker/) since it was mostly jquery and I knew that I could fairly easily port it to Angular or Backbone once it has stabilized. 
 
-I googled that task and discovered this [stackoverflow thread](http://stackoverflow.com/questions/1971208/looking-for-a-good-date-range-picker-any-suggestions). 
+I decided to leverage momentjs to deal with dates and build custom ranges which [Dan Grossman](http://www.dangrossman.info/2012/08/20/a-date-range-picker-for-twitter-bootstrap/) did in this example.
 
-I started with the code base from [Justin Stern](http://foxrunsoftware.github.com/DatePicker/) since it was mostly jquery and I knew that I could fairly easily port it to Angular or Backbone. 
+This date range picker can support:
 
-I didn't want a exact copy but to steal some ideas and also leverage momentjs to deal with dates and build custom ranges which [Dan Grossman](http://www.dangrossman.info/2012/08/20/a-date-range-picker-for-twitter-bootstrap/) did in this example.
+* user selected 1 day
+* user selected & pre-selected 2 dates for a base range
+* user selected & pre-selected 4 dates for a base vs range. 
 
 ## DEMO
 
 [demo](http://headwinds.net/lab/daterangepicker/datepicker.html)
 
-Update: I guess I didn't google hard enough because I googled again to see if I had missed anything and sure enough someone else had went down the same rabbit hole solved the problem copying Google's design [more precisely](https://github.com/petrkotek/DatePicker).
+## CSS
 
-In my case, I didn't need an exact copy and had more area to play with so I was able to alter the design to make it more aesthetically pleasing
-and easy to use. 
+The CSS is generated from SCSS and Compass. I recommend using [Codekit](https://incident57.com/codekit/) for managing SCSS and Compass projects.
+
+
 
 
 

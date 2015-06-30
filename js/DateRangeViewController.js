@@ -140,6 +140,10 @@ $(document).ready(function() {
 
     var previousRange = previousRanges[0].range; 
 
+    // 1 DAY MODE
+
+    var bOneDayMode = false; // defaults to true
+ 
 
 	// BASE INPUT RANGE 
 
@@ -159,6 +163,9 @@ $(document).ready(function() {
 
 		$("#compareGroup").hide();
 		$("#prismContainer").hide();
+
+
+		$("#multipleDayContainer").hide();
 	
 
 		//$("#testsContainer").hide();
@@ -179,9 +186,75 @@ $(document).ready(function() {
 		displayNoErrorMessage();
 
 		$("#shield").show(); // shields for preselected dates in IE
+
+		setupOneDayCheck();
 	
 		
 	};
+
+	var multipleHeight = $("#dateCardContainer").height();
+	var oneDateHeight = 130;
+
+	var setupOneDayCheck = function(){
+
+		$("#inputOneDayCheckbox").on("change", function(e) {
+		
+			bOneDayMode = ( e.currentTarget.checked ) ? false : true;
+
+			if (bOneDayMode) {
+				$("#multipleDayContainer").hide();
+				$("#oneDayContainer").show();
+				$("#dateCardContainer").height(oneDateHeight);
+			} else {
+				$("#multipleDayContainer").show();
+				$("#oneDayContainer").hide();
+				$("#dateCardContainer").height(multipleHeight)
+			}
+				
+		});
+
+		$("#oneDateSelect").on("change", function(e){
+	 	
+	 		var idNum = Number(e.target.value);
+
+	 		var day;
+
+	 		switch(idNum) {
+
+	 			case 0 :
+	 				day = moment().format("MM/DD/YYYY");
+	 				break;
+	 			case 1 : 
+	 				day = moment().subtract(7, 'days').format("MM/DD/YYYY");
+	 				break;	 
+	 			case 2 :
+	 				day = moment().subtract(2, 'weeks').format("MM/DD/YYYY");
+	 				break;
+	 			case 3 	:
+	 				day = moment().subtract(1, 'months').format("MM/DD/YYYY");
+	 				break;
+	 			case 4 :
+	 				day = "";
+	 				break;	
+	 		}
+
+	 		console.log(idNum)
+
+
+	 		//if (day !== "") $("#oneDayDate").val(date);
+	 		//else $("#oneDayDate").
+
+	 		$("#oneDayDate").val(day);
+
+	 	});
+
+	 	var today = moment().format("MM/DD/YYYY");
+	 	$("#oneDayDate").val(today);
+	 	$("#dateCardContainer").height(oneDateHeight);
+
+
+			
+	}
 
 	var reset = function(){
 
@@ -974,6 +1047,7 @@ $(document).ready(function() {
 			if (null !== baseStartMoment) {
 				//console.log("about to draw base dates");
 				drawDates();
+				setApplyEnabled();
 
 			}
 
@@ -1070,7 +1144,7 @@ $(document).ready(function() {
 				calendars.DatePickerSetDate(compareStartMoment._d, true)
 
 			} else {
-				displayBaseRangeError('Invalid compare "to" date. Please click RESET to try again ');
+				displayBaseRangeError('Invalid compare "from" date. Please click RESET to try again ');
 				setApplyDisabled(); 
 			}
 
@@ -1220,7 +1294,7 @@ $(document).ready(function() {
 	 	var yearsDiff = endDateMoment.year() - startDateMoment.year();
 	 	
 	 	
-	 	var monthsDiff = endDateMoment.diff(startDateMoment, "months");  
+	 	var monthsDiff = endDateMoment.month() - startDateMoment.month();
 	 	console.log(monthsDiff, 'months' );
 	 	
 
@@ -1754,6 +1828,8 @@ $(document).ready(function() {
 	// APPLY & CANCEL 
 
 	$("#applyDates").on("click", function(){
+
+		console.log("DateRangeViewController - applying dates...");
 
 		ir.introspect.app.msgBus.trigger("date:close"); 
 

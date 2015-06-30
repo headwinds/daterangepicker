@@ -16,17 +16,40 @@
   </head>
   <body>
 
-    <h4>Date Range Picker Demo</h4>
-    <p>Source: <a href="https://github.com/headwinds/daterangepicker">Github</a></p>
-    <div id="dateCardContainer" class="cardContainer">
+    <h4 class="baseTitle" style="padding: 0px; margin: 0px">Date Picker</h4>
+  
+    <div id="dateCardContainer" class="cardContainer" style='border: 2px solid #eee; border-radius: 5px'>
       <!-- base range input -->
       <div class="calendarContainer"> 
 
-          <p class="instructions" style="font-size: 12px; color: #999; padding: 0px; margin: 0px">To begin, create a Base range by selecting 2 dates. Once you have a Base range, then you may
-          select a Compare Range by selecting 2 more dates which occur in the past before the Base range. Whether preselected or custom, always create your Base range first. 
+          <!--
+          <p>To begin, please review these 3 options to help start selecting either 1 day or multiple date range</p>
+          <ul>
+            <li><p><b>1 Day</b> - Select the 1 day checkbox</p></li>
+            <li><p><b>2 Date Base Range</b> - Unselect the 1 day checkbox and select a base range</p></li>
+            <li><p><b>4 Date Base vs Compare Ranges</b> - Unselect the 1 day checkbox and select a base and compare range</p></li>
+          </ul>
+          -->
 
-          </p> 
+          <div style="display: block; height: 30px; width: 100%">
+            <input style="display: inline-block; height: 30px; width: 30px; vertical-align: middle; margin: 0px; padding: 0px" class="inputCheckbox" id="inputOneDayCheckbox" type="checkbox" value="0" />
+            <p style="display: inline-block; margin: 0px; margin-left: 10px; padding: 0px; height: 30px; width: 400px;">Are you interested in data from more than 1 day?</p>
+          </div>
 
+          <div style="display: block; height: 30px" id="oneDayContainer">
+            <label>Date: </label><input type="text" class="inputDate baseRange" id="oneDayDate" placeholder="MM/DD/YYYY" />
+            <div class="selectContainer" id="oneDateSelect">
+             <select>
+                <option value="0">Today</option>
+                <option value="1">7 days ago</option>
+                <option value="2">2 Weeks ago</option>
+                <option value="3">1 Month ago</option>
+                <option value="4">Custom Date</option>
+             </select>
+             </div>
+          </div>
+
+          <div id="multipleDayContainer">
           <h4 id="baseRange" class="baseTitle" style="margin: 0px; margin-top: 10px; margin-bottom: 10px;"></h4>
 
           <div class="toFrom buffer">
@@ -76,6 +99,7 @@
                </select>
             </div>
         </div>
+        </div>
         <!-- apply and cancel -->
         <div class="footerBar">
              <div class="validationContainer" class="validationContainer">
@@ -89,6 +113,8 @@
           </div>  
         </div>
       </div>  
+
+      <p>Source: <a href="https://github.com/headwinds/daterangepicker">Github</a></p>
 
    </body>
 </html>

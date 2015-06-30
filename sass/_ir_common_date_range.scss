@@ -19,6 +19,15 @@ $errorColor: #990000;
     overflow: visible;
     pointer-events: all;
 
+    ul {
+      list-style-type: none;
+    }
+
+    li {
+      margin: 0px;
+      padding: 0px;
+    }
+
     .disableApply {
       opacity: 0.6;
       pointer-events: none;
@@ -90,6 +99,8 @@ $errorColor: #990000;
     h4.baseTitle {
       margin-left: 0px;
       font-family: "Geogrotesque-Medium", Georgia, serif, Verdana;
+      margin: 0px;
+      padding: 0px;
 
     }
 
