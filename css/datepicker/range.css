@@ -252,8 +252,11 @@ h4 {
   /* line 209, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer tbody.datepickerDays td.datepickerSelected {
     background: #7fc022;
+    /*
     pointer-events: none !important;
-    cursor: default !important; }
+    cursor: default !important; 
+    */
+    }
   /* line 214, ../../sass/_ir_common_date_range.scss */
   #dateCardContainer tbody.datepickerDays td.datepickerNotInMonth.datepickerSelected {
     background: #17384d; }

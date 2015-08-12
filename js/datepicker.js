@@ -482,12 +482,16 @@
         if ($(ev.target).is('span')) {
           ev.target = ev.target.parentNode;
         }
+
+
         var el = $(ev.target);
         if (el.is('a')) {
           ev.target.blur();
+          
           if (el.hasClass('datepickerDisabled')) {
-            return false;
+          //  return false;
           }
+
           var options = $(this).data('datepicker');
           var parentEl = el.parent();
           var tblEl = parentEl.parent().parent().parent();
@@ -497,7 +501,7 @@
           var changedRange = false;
           var fillIt = false;
           var currentCal = Math.floor(options.calendars/2);
-          
+
           if (parentEl.is('th')) {
             // clicking the calendar title
             
@@ -614,6 +618,10 @@
             options.onRangeChange.apply(this, prepareDate(options));
           }
         }
+
+
+
+
         return false;
       },
       
@@ -928,6 +936,9 @@
        * @see DatePickerSetDate()
        */
       setDate: function(date, shiftTo){
+
+        console.log("shifting " + shiftTo);
+
         return this.each(function(){
           if ($(this).data('datepickerId')) {
             var cal = $('#' + $(this).data('datepickerId'));

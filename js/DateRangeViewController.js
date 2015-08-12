@@ -22,6 +22,8 @@ $(document).ready(function() {
 	var currentFocusId = null;
 	var prevFocusId = null;
 
+	var bShiftCalendar = false;
+
 	var baseStartMoment = null;
 	var baseEndMoment = null; 
 	var compareStartMoment = null;
@@ -135,10 +137,10 @@ $(document).ready(function() {
     ]; 
 
    
-    var defaultRange = baseRanges[0].range;
+    var defaultRange = baseRanges[2].range;
     var curRange = defaultRange;
 
-    var previousRange = previousRanges[0].range; 
+    var previousRange = previousRanges[2].range; 
 
     // 1 DAY MODE
 
@@ -151,6 +153,9 @@ $(document).ready(function() {
 	var baseFrom = new Date(baseTo.getTime() - 1000 * 60 * 60 * 24 * 14);
 
 	var baseRangeStr = "";
+
+	var multipleHeight = $("#dateCardContainer").height();
+	var oneDateHeight = 130;
 
 	/////////////////////////////////////////// INIT
 
@@ -187,13 +192,42 @@ $(document).ready(function() {
 
 		$("#shield").show(); // shields for preselected dates in IE
 
-		setupOneDayCheck();
-	
+		//setupOneDayCheck();
+
+		var bDatesProvided = true;
+
+		
+		var dates = [ Number( new Date() ), Number( new Date() )];
+		if (bDatesProvided) setDates(dates);
+		
+		// 
+		selectBaseOption("2");
 		
 	};
 
-	var multipleHeight = $("#dateCardContainer").height();
-	var oneDateHeight = 130;
+	var selectBaseOption = function( valStr ){
+		$("#baseSelect select").val(valStr);
+	}
+
+	var setDates = function(dates) {
+
+		if ( dates.length > 2 ) {
+
+			var startBaseDate = dates[0];
+			var startEndDate = dates[1];
+			var startCompareDate = dates[2];
+			var startCompareDate = dates[3];
+
+		} else {
+
+			var startBaseDate = dates[0];
+			var startEndDate = dates[1];
+
+		}
+
+	}
+
+
 
 	var setupOneDayCheck = function(){
 
@@ -246,6 +280,8 @@ $(document).ready(function() {
 
 	 		$("#oneDayDate").val(day);
 
+
+
 	 	});
 
 	 	var today = moment().format("MM/DD/YYYY");
@@ -253,6 +289,7 @@ $(document).ready(function() {
 	 	$("#dateCardContainer").height(oneDateHeight);
 
 
+	 	$("#inputOneDayCheckbox").click();
 			
 	}
 
@@ -684,7 +721,7 @@ $(document).ready(function() {
 	 	calendars.DatePickerClear();
 
 	 	var clearCompareDates = [ baseStartMoment._d, baseEndMoment._d ];
-		calendars.DatePickerSetDate(clearCompareDates, true);
+		calendars.DatePickerSetDate(clearCompareDates, bShiftCalendar);
 
 	 	compareStartMoment = null;
 	 	compareEndMoment = null;
@@ -980,14 +1017,45 @@ $(document).ready(function() {
 
 	 //////////////////////////////////////////// HANDLERS
 
+
 	 var drawDates = function(){
 	 	
 	 	if (!bCompareChecked) {
+	 		
 	 		setBaseRangeMessage([ baseStartMoment._d, baseEndMoment._d  ]);
-			calendars.DatePickerSetDate([ baseStartMoment._d, baseEndMoment._d ], true);
+			calendars.DatePickerSetDate([ baseStartMoment._d, baseEndMoment._d ], bShiftCalendar);
+	 	
 	 	} else {
-	 		setBaseRangeMessage([ baseStartMoment._d, baseEndMoment._d, compareStartMoment._d, compareEndMoment._d  ]);
-			calendars.DatePickerSetDate([ baseStartMoment._d, baseEndMoment._d, compareStartMoment._d, compareEndMoment._d  ], true);
+	 		
+	 		
+	 		console.log(" -- DRAW DATES -- ");
+	 		console.log(" baseStartMoment._d: " + baseStartMoment._d ); 
+			console.log(" baseEndMoment._d: " + baseEndMoment._d ); 
+			if (null !== compareStartMoment) console.log(" compareStartMoment._d: " + compareStartMoment._d ); 
+			if (null !== compareEndMoment) console.log(" compareEndMoment._d: " + compareEndMoment._d ); 
+
+			if ( null !== compareEndMoment ) {
+
+				calendars.DatePickerSetDate([ baseStartMoment._d, baseEndMoment._d, compareStartMoment._d, compareEndMoment._d  ], bShiftCalendar);
+
+				setBaseRangeMessage([ baseStartMoment._d, baseEndMoment._d, compareStartMoment._d, compareEndMoment._d  ]);
+
+			} else if ( null !== compareStartMoment ) {
+
+				var cloneTime = baseStartMoment.clone(); 
+
+				var tempCompareEndDate = cloneTime.subtract(1, "days");
+
+				calendars.DatePickerSetDate([ baseStartMoment._d, baseEndMoment._d, compareStartMoment._d, tempCompareEndDate._d  ], bShiftCalendar);
+
+				//setBaseRangeMessage([ baseStartMoment._d, baseEndMoment._d, compareStartMoment._d  ]);
+				console.log("ok tempCompareEndDate: ", tempCompareEndDate);
+
+				setBaseRangeMessage([ baseStartMoment._d, baseEndMoment._d, compareStartMoment._d, tempCompareEndDate._d  ]);
+			} 
+
+
+			
 		}
 	 }
 
@@ -1016,7 +1084,7 @@ $(document).ready(function() {
 
 			setCurrentFocus("inputBaseEndDate");
 			// don't draw until both are valid
-			calendars.DatePickerSetDate(baseStartMoment._d, true)
+			calendars.DatePickerSetDate(baseStartMoment._d, bShiftCalendar)
 
 		} else {
 
@@ -1140,8 +1208,8 @@ $(document).ready(function() {
 
 				//compareEndMoment = getDateMoment("CompareEnd"); // ok to set it because it the same and fakes the draw
  
-				//drawDates(); // actually don't draw them because the final date has not been set
-				calendars.DatePickerSetDate(compareStartMoment._d, true)
+				drawDates(); // actually don't draw them because the final date has not been set
+				//calendars.DatePickerSetDate(compareStartMoment._d, bShiftCalendar)
 
 			} else {
 				displayBaseRangeError('Invalid compare "from" date. Please click RESET to try again ');
@@ -1220,7 +1288,7 @@ $(document).ready(function() {
 	   		else compareEndMoment = getDateMoment("CompareEnd");
 	   		
 	   		setComapreDate(compareStartMoment._d, compareEndMoment._d, "Start");
-	   		calendars.DatePickerSetDate([ baseEndMoment._d, baseStartMoment._d, compareEndMoment._d, compareStartMoment._d ], true);
+	   		calendars.DatePickerSetDate([ baseEndMoment._d, baseStartMoment._d, compareEndMoment._d, compareStartMoment._d ], bShiftCalendar);
 
 	   		displayNoErrorMessage();
 
@@ -1321,7 +1389,9 @@ $(document).ready(function() {
 		 		var daysDiff =  Number( endDateMoment.date() ) - Number( startDateMoment.date() );
 		 		if (bValidateLog) console.log(daysDiff, 'days' );
 
-		 		if ( daysDiff >= 1 ) {
+		 		// be able to pick same day! 
+
+		 		if ( daysDiff >= 0 ) {
 		 			//valid 
 		 			bResult = true; 
 
@@ -1708,7 +1778,7 @@ $(document).ready(function() {
 	 		// focus on the first base bate
 			setCurrentFocus("inputCompareStartDate");
 
-			clearCompareDates();
+			//clearCompareDates();
 
 			$("#shield").hide();
 			 	
@@ -1736,7 +1806,7 @@ $(document).ready(function() {
 		baseEndMoment = getDateMoment("BaseEnd"); 
 
 		setBaseRangeMessage([startDate, endDate]);
-		calendars.DatePickerSetDate([ startDate, endDate ], true);
+		calendars.DatePickerSetDate([ startDate, endDate ], bShiftCalendar);
 	 	
 		
 
@@ -1895,6 +1965,8 @@ $(document).ready(function() {
 	window.drp.isDate = isDate;
 	window.drp.validateStartBeforeEnd = validateStartBeforeEnd;
 	window.drp.getDateMoment = getDateMoment;
+
+
 
 	init();
 
