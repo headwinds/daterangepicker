@@ -565,12 +565,14 @@
 		"/Users/bflowers/Projects/headwinds/code/daterangepicker/css",
 		"/Users/bflowers/Projects/headwinds/code/daterangepicker/css/datepicker",
 		"/Users/bflowers/Projects/headwinds/code/daterangepicker/js",
-		"/Users/bflowers/Projects/headwinds/code/daterangepicker/sass"
+		"/Users/bflowers/Projects/headwinds/code/daterangepicker/sass",
+		"/Users/bflowers/Projects/headwinds/code/daterangepicker/stylesheets"
 	],
 	"file_history":
 	[
-		"/Users/bflowers/Projects/headwinds/code/daterangepicker/datepicker.html",
 		"/Users/bflowers/Projects/headwinds/code/daterangepicker/js/DateRangeViewController.js",
+		"/Users/bflowers/Projects/headwinds/code/daterangepicker/datepicker.html",
+		"/Users/bflowers/Projects/headwinds/code/daterangepicker/js/datepicker.js",
 		"/Users/bflowers/Projects/headwinds/code/daterangepicker/README.md",
 		"/Users/bflowers/Projects/headwinds/code/daterangepicker/sass/_ir_common_date_range.scss",
 		"/Users/bflowers/Projects/headwinds/cabinquest/builds/bellwoods0_5_build1/gameapp-dev/private/views/map/mapeditorTemplate.html",
@@ -695,8 +697,7 @@
 		"/Users/bflowers/Projects/headwinds/cabinquest/builds/bellwoods0_5_build1/autonomous/img/bellwoods/vehicles/trains/autonomousCaboose.svg",
 		"/Users/bflowers/Projects/headwinds/cabinquest/builds/bellwoods0_5_build1/autonomous/img/bellwoods/vehicles/trains/autonomousEngine.svg",
 		"/Users/bflowers/Projects/headwinds/cabinquest/builds/bellwoods0_5_build1/gameapp-dev/private/js/models/AirplaneModel.js",
-		"/Users/bflowers/Projects/headwinds/cabinquest/builds/bellwoods0_5_build1/gameapp-dev/private/js/models/TrainModel.js",
-		"/Users/bflowers/Projects/headwinds/cabinquest/builds/bellwoods0_5_build1/gameapp-dev/private/js/services/porthole/PortholeImageService.js"
+		"/Users/bflowers/Projects/headwinds/cabinquest/builds/bellwoods0_5_build1/gameapp-dev/private/js/models/TrainModel.js"
 	],
 	"find":
 	{
@@ -741,6 +742,15 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"setupOneDayCheck",
+			"onSVGLoadedHandler",
+			"drawDates",
+			"DatePickerSetDate",
+			"setDate",
+			"DatePickerSetDate",
+			"clearCompareDates",
+			"DatePickerClear",
+			"drawDates",
 			"baseSelect",
 			"h4",
 			"change",
@@ -859,16 +869,7 @@
 			"treehugger",
 			"dwell",
 			"twitch",
-			"analyzeForest",
-			"checkPersistentData",
-			"currentForestModel",
-			"analyzeForest",
-			"hideFullControls",
-			"hide",
-			"setupWindowManager",
-			"repositionCredits",
-			"onResizeHandler",
-			"setupWindowManager"
+			"analyzeForest"
 		],
 		"highlight": false,
 		"in_selection": false,

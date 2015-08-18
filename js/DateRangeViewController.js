@@ -192,7 +192,7 @@ $(document).ready(function() {
 
 		$("#shield").show(); // shields for preselected dates in IE
 
-		//setupOneDayCheck();
+		if ( document.domain === "headwinds.net	") setupOneDayCheck();
 
 		var bDatesProvided = true;
 
