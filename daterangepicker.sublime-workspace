@@ -742,6 +742,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"setCompareDate",
+			"compareStartMoment",
+			"selectCompareOption",
+			"inputCompareCheckbox",
+			"selectBaseOption",
+			"setupOneDayCheck",
+			"setDates",
 			"setupOneDayCheck",
 			"onSVGLoadedHandler",
 			"drawDates",
@@ -862,14 +869,7 @@
 			"updateBranches",
 			"\"PortholeViewController:branchIndex:update\"",
 			"analyzeForest",
-			"updateBranch",
-			"analyzeForest",
-			"whoops",
-			"gevinson",
-			"treehugger",
-			"dwell",
-			"twitch",
-			"analyzeForest"
+			"updateBranch"
 		],
 		"highlight": false,
 		"in_selection": false,

@@ -38,22 +38,6 @@ $(document).ready(function() {
 	var limLog = true
 
 	var dateIndex = 0;
-
-	/*
-      <option value="1">Last Week</option>
-	  <option value="2">Last 7 days</option>
-	  <option value="3">Last 30 days</option>
-	  <option value="4">Last Month</option>
-	  <option value="5">Last 3 Months</option>
-	  <option value="6">Last 6 Months</option>
-	  <option value="7">Last 365 Days</option>
-	  <option value="8">This year</option>
-	  <option value="9">Custom Range</option>
-	*/
-
-	
-	// var last90DaysRange = [moment().subtract(89, 'days'), moment()];
-	// var last180DaysRange = [moment().subtract(179, 'days'), moment()];
 	
 	// BASE 
 
@@ -76,7 +60,6 @@ $(document).ready(function() {
 	// 7 - this year
 	var thisYearRange =  [moment().startOf('year'), moment()];
 
-	
 	// COMPARE 
 
 	// 0 - last 7 days 
@@ -84,7 +67,7 @@ $(document).ready(function() {
 	// 1 - last week
 	var previousPeriodLastWeekRange = [moment().subtract(2, 'week').startOf('week'), moment().subtract(2, 'week').endOf('week')];
 	// 2 - last 30 days 
-	var previousPeriod30DaysRange = [moment().subtract(60, 'days'), moment().subtract(30, 'days')];
+	var previousPeriod30DaysRange = [moment().subtract(59, 'days'), moment().subtract(30, 'days')];
 	// 3 - last month 
 	var previousPeriodLastMonthRange = [moment().subtract(2, 'month').startOf('month'), moment().subtract(2, 'month').endOf('month')];
 	// 4 - last 3 months
@@ -192,36 +175,185 @@ $(document).ready(function() {
 
 		$("#shield").show(); // shields for preselected dates in IE
 
-		if ( document.domain === "headwinds.net	") setupOneDayCheck();
+		if ( document.domain === "headwinds.net" || document.domain === "localhost") setupOneDayCheck();
 
-		var bDatesProvided = true;
+		//testSetDates();
+		
+		// TESTING
+		/*
+
+		var startDate = new Date();
+		startDate.setDate(10); 
+		var endDate = new Date(); 
+
+		var startCompareDate = new Date();
+		startCompareDate.setDate(9); 
+		var endCompareDate = new Date(); 
+		endCompareDate.setDate(5); 
+
+		var baseRange = [startDate, endDate];
+		var compareRange = [startDate, endDate, startCompareDate, endCompareDate];
+
+		setMode(false, compareRange);
+		*/
 
 		
-		var dates = [ Number( new Date() ), Number( new Date() )];
-		if (bDatesProvided) setDates(dates);
-		
-		// 
-		selectBaseOption("2");
+
 		
 	};
+
+	var setMode = function(bBaseMode, dates) {
+		console.log("DateRangeViewController - setMode - bBaseMode: ", arguments);
+
+		reset();
+		
+		if ( bBaseMode ) {
+
+			bCompareChecked = false;
+
+			selectBaseOption("2");
+
+			setBaseDate( dates[0],null,"Start");
+			setBaseDate( null, dates[1],"End");
+
+			drawDates(); 
+
+		} else {
+			
+			bCompareChecked = true;
+
+			selectBaseOption("2");
+			selectCompareOption("0");
+
+			setBaseDate( dates[0],null,"Start");
+			setBaseDate( null, dates[1],"End");
+
+			setCompareDate( dates[2],null,"Start");
+			setCompareDate( null, dates[3],"End");
+
+			drawDates(); 
+		}
+	}
+
+	var testSetDates = function(){
+		
+		// 7 days
+		
+		/*
+		last7DaysRange
+		lastWeekRange
+		last30DaysRange
+		lastMonthRange
+		last3MonthRange
+		last6MonthRange
+		last365DaysRange
+		thisYearRange
+
+		previousPeriod7DaysRange
+		previousPeriodLastWeekRange
+		previousPeriod30DaysRange
+		previousPeriodLastMonthRange
+		previousPeriodlast3MonthRange
+		previousPeriodLast6MonthRange
+		previousPeriod365DaysRange
+		previousPeriodThisYearRange
+		*/
+
+		// 7 days test 
+		//setDatesWithMomentRanges([last7DaysRange]); 
+
+		// last weeek range
+		//setDatesWithMomentRanges([lastWeekRange]); 
+
+		// last 30 days
+		//setDatesWithMomentRanges([last30DaysRange]); 
+
+		// last month
+		setDatesWithMomentRanges([lastMonthRange]); 
+
+		// last 3 month
+		//setDatesWithMomentRanges([last3MonthRange]); 
+
+		// last 6 month
+		//setDatesWithMomentRanges([last6MonthRange]); 
+
+		// last 365 days
+		//setDatesWithMomentRanges([last365DaysRange]); 
+
+		// this year 
+		//setDatesWithMomentRanges([previousPeriodThisYearRange]); 
+
+
+
+		//setDates();
+	}
 
 	var selectBaseOption = function( valStr ){
 		$("#baseSelect select").val(valStr);
 	}
 
-	var setDates = function(dates) {
+	var selectCompareOption = function( valStr ){
+		$("#compareSelect select").val(valStr);
+		
+		//$('#inputCompareCheckbox').prop('checked', true);
+		$('#inputCompareCheckbox').click();
+		//inputCompareCheckbox
 
-		if ( dates.length > 2 ) {
+	}
 
-			var startBaseDate = dates[0];
-			var startEndDate = dates[1];
-			var startCompareDate = dates[2];
-			var startCompareDate = dates[3];
+	var getRangeDiffDays = function(startDateMoment, endDateMoment) {
+
+		var startDateMomentClone = startDateMoment.clone();
+		var endDateMomentClone = endDateMoment.clone();
+
+		var duration = moment.duration(endDateMomentClone.diff(startDateMomentClone));
+		var days = Math.ceil( duration.asDays() );
+		//var days = duration.asDays();
+
+		console.log("DateRangeViewController - getRangeDiffDays - Day diff: " + days);
+
+		var option = 0; 
+
+		switch(days) {
+			case 6 :
+			case 7 : 
+				option = 0;
+				break;
+			case 28 :
+			case 29 :
+			case 30 :
+				option = 1;
+				break;	
+			default : 
+				option = 0;
+				break;	
+		}
+
+		return { days: days, option: option}; 
+	}
+
+	var setDatesWithMomentRanges = function( moments ) {
+
+		if ( moments.length > 1 ) {
+
+			var startBaseMoment = moments[0][0];
+			var endBaseMoment = moments[0][1];
+
+			var startCompareMoment = moments[1][0];
+			var endCompareMoment = moments[1][1];
+
+			var baseRangeDiffDays = getRangeDiffDays(startBaseMoment, endBaseMoment); 
+			var baseRangeDiffDays = getRangeDiffDays(startCompareMoment, endCompareMoment); 
+
 
 		} else {
 
-			var startBaseDate = dates[0];
-			var startEndDate = dates[1];
+			var startBaseMoment = moments[0][0];
+			var endBaseMoment = moments[0][1];
+
+			var diffDays = getRangeDiffDays(startBaseMoment, endBaseMoment);
+
+			console.log("DateRangeViewController - setDatesWithMomentRanges - diffDays: " + diffDays);
 
 		}
 
@@ -230,6 +362,8 @@ $(document).ready(function() {
 
 
 	var setupOneDayCheck = function(){
+
+		console.log("DateRangeViewController - setupOneDayCheck");
 
 		$("#inputOneDayCheckbox").on("change", function(e) {
 		
@@ -280,8 +414,6 @@ $(document).ready(function() {
 
 	 		$("#oneDayDate").val(day);
 
-
-
 	 	});
 
 	 	var today = moment().format("MM/DD/YYYY");
@@ -290,6 +422,8 @@ $(document).ready(function() {
 
 
 	 	$("#inputOneDayCheckbox").click();
+
+	 	//$("#dateCardContainer").css("height", "410px");
 			
 	}
 
