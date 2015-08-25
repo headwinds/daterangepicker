@@ -4,6 +4,30 @@
 		"selected_items":
 		[
 			[
+				"cur",
+				"curRange"
+			],
+			[
+				"previou",
+				"previousRange"
+			],
+			[
+				"Date",
+				"DateRangeViewController"
+			],
+			[
+				"baseS",
+				"baseStartMoment"
+			],
+			[
+				"Dat",
+				"DateRangeViewController"
+			],
+			[
+				"compareS",
+				"compareStartMoment"
+			],
+			[
 				"list",
 				"list-style-type"
 			],
@@ -490,35 +514,19 @@
 			[
 				"Game",
 				"BellwoodsGameController"
-			],
-			[
-				"load",
-				"loadTreePromise"
-			],
-			[
-				"cur",
-				"currentForestModel"
-			],
-			[
-				"pin",
-				"bUsePinnedPhoto"
-			],
-			[
-				"bUe",
-				"bUsePersonalPhoto"
-			],
-			[
-				"cure",
-				"currentUserModel"
-			],
-			[
-				"shuffl",
-				"shuffled"
 			]
 		]
 	},
 	"buffers":
 	[
+		{
+			"file": "js/DateRangeViewController.js",
+			"settings":
+			{
+				"buffer_size": 60072,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -742,6 +750,32 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"diff",
+			"getDateMoment",
+			"inputCompareCheckbox",
+			"setMode",
+			"previousRange",
+			"setMode",
+			"setBaseDate",
+			"setMode",
+			"setCalendarsByPreviousCompareRange",
+			"setCalendarByPreviousCompareRange",
+			"setCalendarsByPreviousRange",
+			"setBaseDates",
+			"setCalendarsByPreviousCompareRange",
+			"compare clicked",
+			"moment",
+			"moment()",
+			"setBaseDate",
+			"compare clicked",
+			"baseRange",
+			"inputCompareCheckbox",
+			"inputCheckbox",
+			"getRangeDiffDays",
+			"setBaseDate",
+			"getRangeDiffDays",
+			"setDatesWithMomentRanges",
+			"shift",
 			"setCompareDate",
 			"compareStartMoment",
 			"selectCompareOption",
@@ -843,33 +877,7 @@
 			"load",
 			"TreesController attempt to load feed",
 			"updateTreeVisit",
-			"updateVisit",
-			"TreesController attempting to update visit this model with id",
-			"updateVisit",
-			"TreesController attempting to update visit this model with id",
-			"TreesFactoryService",
-			"TreesController attempting to update visit",
-			"analyzeForest",
-			"typeof",
-			"location",
-			"create",
-			"NavCtrl:page:change",
-			"showPanel",
-			"NavCtrl:profile:show",
-			"gotoPage",
-			"visible",
-			"gotoProfile",
-			"NaN",
-			"PortholeViewController - showPanel - hide",
-			"NaN",
-			"hidePanel",
-			"PortholeViewController - showPanel - hide",
-			"next",
-			"create",
-			"updateBranches",
-			"\"PortholeViewController:branchIndex:update\"",
-			"analyzeForest",
-			"updateBranch"
+			"updateVisit"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -940,8 +948,38 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "js/DateRangeViewController.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 60072,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								50788,
+								50788
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 27835.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
