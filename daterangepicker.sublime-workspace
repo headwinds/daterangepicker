@@ -523,7 +523,7 @@
 			"file": "js/DateRangeViewController.js",
 			"settings":
 			{
-				"buffer_size": 60072,
+				"buffer_size": 60521,
 				"line_ending": "Unix"
 			}
 		}
@@ -750,6 +750,17 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"getDateMoment",
+			"setBaseDate",
+			"setMode",
+			"getDateMoment",
+			"inputCompareCheckbox",
+			"setMode",
+			"setCompareDate",
+			"setCompareRange",
+			"setBaseDate",
+			"previousRange",
+			"getRangeDiffDays",
 			"diff",
 			"getDateMoment",
 			"inputCompareCheckbox",
@@ -866,18 +877,7 @@
 			"achievementStatus",
 			"feed: first deep dive",
 			"updateTreeVisit",
-			"onTreeClickHandler",
-			"emitClick",
-			"BellwoodsGameActorFactory",
-			"emitClick",
-			"BellwoodGameActorsFactory:tree:click",
-			"\"BellwoodGameActorsFactory:tree:click\"",
-			"onTreeClickHandler",
-			"loadTree",
-			"load",
-			"TreesController attempt to load feed",
-			"updateTreeVisit",
-			"updateVisit"
+			"onTreeClickHandler"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -957,15 +957,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 60072,
+						"buffer_size": 60521,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								50788,
-								50788
+								162,
+								162
 							]
 						],
 						"settings":
@@ -974,7 +974,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 27835.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,

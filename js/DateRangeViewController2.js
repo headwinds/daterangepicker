@@ -38,6 +38,22 @@ $(document).ready(function() {
 	var limLog = true
 
 	var dateIndex = 0;
+
+	/*
+      <option value="1">Last Week</option>
+	  <option value="2">Last 7 days</option>
+	  <option value="3">Last 30 days</option>
+	  <option value="4">Last Month</option>
+	  <option value="5">Last 3 Months</option>
+	  <option value="6">Last 6 Months</option>
+	  <option value="7">Last 365 Days</option>
+	  <option value="8">This year</option>
+	  <option value="9">Custom Range</option>
+	*/
+
+	
+	// var last90DaysRange = [moment().subtract(89, 'days'), moment()];
+	// var last180DaysRange = [moment().subtract(179, 'days'), moment()];
 	
 	// BASE 
 
@@ -60,6 +76,7 @@ $(document).ready(function() {
 	// 7 - this year
 	var thisYearRange =  [moment().startOf('year'), moment()];
 
+	
 	// COMPARE 
 
 	// 0 - last 7 days 
@@ -67,7 +84,7 @@ $(document).ready(function() {
 	// 1 - last week
 	var previousPeriodLastWeekRange = [moment().subtract(2, 'week').startOf('week'), moment().subtract(2, 'week').endOf('week')];
 	// 2 - last 30 days 
-	var previousPeriod30DaysRange = [moment().subtract(59, 'days'), moment().subtract(30, 'days')];
+	var previousPeriod30DaysRange = [moment().subtract(60, 'days'), moment().subtract(30, 'days')];
 	// 3 - last month 
 	var previousPeriodLastMonthRange = [moment().subtract(2, 'month').startOf('month'), moment().subtract(2, 'month').endOf('month')];
 	// 4 - last 3 months
@@ -175,238 +192,39 @@ $(document).ready(function() {
 
 		$("#shield").show(); // shields for preselected dates in IE
 
+		if ( document.domain === "headwinds.net	") setupOneDayCheck();
 
-		// TESTING
-		var bTesting = true;
+		var bDatesProvided = true;
 
-		if ( ( document.domain === "headwinds.net" || document.domain === "localhost" ) && bTesting ) {
+		
+		var dates = [ Number( new Date() ), Number( new Date() )];
+		if (bDatesProvided) setDates(dates);
+		
+		// 
+		selectBaseOption("2");
+
+		if ( document.domain === "headwinds.net" || document.domain === "localhost" ) {
 			setupOneDayCheck();
-
-		
-			var startDate = new Date();
-			startDate.setDate(25);
-			startDate.setMonth(6); 
-			
-			var endDate = new Date();
-			//endDate.setDate(21);  
-
-			var startCompareDate = new Date();
-			startCompareDate.setDate(9); 
-			startCompareDate.setMonth(6); 
-
-			var endCompareDate = new Date(); 
-			endCompareDate.setDate(24);
-			endCompareDate.setMonth(3); 
-
-			var baseRange = [startDate, endDate];
-			var compareRange = [startDate, endDate, startCompareDate, endCompareDate];
-
-
-			setMode(true, baseRange);
-			
-
 		}
-	
-		
 	};
-
-	var setMode = function(bBaseMode, dates) {
-		console.log("DateRangeViewController - setMode - bBaseMode: ", arguments);
-
-		reset();
-		
-		if ( bBaseMode ) {
-
-			bCompareChecked = false;
-
-			setBaseDate( dates[0],null,"Start"); // set both start and end 
-			setBaseDate( null, dates[1],"End");
-
-			var difObj = getRangeDiffDays( baseStartMoment, baseEndMoment ); 
-			selectBaseOption( difObj.option );
-
-	    	curRange = [baseStartMoment, baseEndMoment]; // now safe to set the range after setting both start and end
-
-	    	var tempCompareStartDate = baseEndMoment.clone(); 
-	    	var tempCompareEndDate = baseStartMoment.clone();
-
-	    	tempCompareEndDate.subtract(1, "days");
-
-	    	var compareStartDateFromEndDate = tempCompareEndDate.clone();
-
-
-	    	//compareDifObj = getRangeDiffDays( tempCompareStartDate, tempCompareEndDate ); 
-
-	    	compareStartDateFromEndDate.subtract(difObj.days, "days");
-
-	    	previousRange = [compareStartDateFromEndDate, tempCompareEndDate]
-
-	    	console.log("DateRangeViewController - setMode - previousRange: ", previousRange);
-
-			drawDates(); 
-
-
-		} else {
-			
-			bCompareChecked = true;
-
-			selectCompareOption("0");
-
-			setBaseDate( dates[0],null,"Start");
-			setBaseDate( null, dates[1],"End");
-
-			setCompareDate( dates[2],null,"Start");
-			setCompareDate( null, dates[3],"End");
-
-			var difObj = getRangeDiffDays( baseStartMoment, baseEndMoment ); 
-			selectBaseOption( difObj.option );
-
-			curRange = [baseStartMoment, baseEndMoment];
-			//previousRange = [compareStartMoment, compareEndMoment]; 
-
-			//previousRange = 
-
-			drawDates(); 
-		}
-	}
-
-	var testSetDates = function(){
-		
-		// 7 days
-		
-		/*
-		last7DaysRange
-		lastWeekRange
-		last30DaysRange
-		lastMonthRange
-		last3MonthRange
-		last6MonthRange
-		last365DaysRange
-		thisYearRange
-
-		previousPeriod7DaysRange
-		previousPeriodLastWeekRange
-		previousPeriod30DaysRange
-		previousPeriodLastMonthRange
-		previousPeriodlast3MonthRange
-		previousPeriodLast6MonthRange
-		previousPeriod365DaysRange
-		previousPeriodThisYearRange
-		*/
-
-		// 7 days test 
-		//setDatesWithMomentRanges([last7DaysRange]); 
-
-		// last weeek range
-		//setDatesWithMomentRanges([lastWeekRange]); 
-
-		// last 30 days
-		//setDatesWithMomentRanges([last30DaysRange]); 
-
-		// last month
-		setDatesWithMomentRanges([lastMonthRange]);
-
-		// last 3 month
-		//setDatesWithMomentRanges([last3MonthRange]); 
-
-		// last 6 month
-		//setDatesWithMomentRanges([last6MonthRange]); 
-
-		// last 365 days
-		//setDatesWithMomentRanges([last365DaysRange]); 
-
-		// this year 
-		//setDatesWithMomentRanges([previousPeriodThisYearRange]); 
-
-
-
-		//setDates();
-	}
 
 	var selectBaseOption = function( valStr ){
 		$("#baseSelect select").val(valStr);
 	}
 
-	var selectCompareOption = function( valStr ){
-		$("#compareSelect select").val(valStr);
-		
-		//$('#inputCompareCheckbox').prop('checked', true);
-		$('#inputCompareCheckbox').click();
-		//inputCompareCheckbox
+	var setDates = function(dates) {
 
-	}
+		if ( dates.length > 2 ) {
 
-	var getRangeDiffDays = function(startDateMoment, endDateMoment) {
-
-		var startDateMomentClone = startDateMoment.clone();
-		var endDateMomentClone = endDateMoment.clone();
-
-		var duration = moment.duration(endDateMomentClone.diff(startDateMomentClone));
-		var days = Math.ceil( duration.asDays() );
-		//var days = duration.asDays();
-
-		var option = 0;
-
-		var todayDate = new Date(); 
-
-		var today =  todayDate.getMonth() + "-" + todayDate.getDate() + "-" + todayDate.getFullYear(); 
-
-		var startDateNum = Number( endDateMoment._d );
-		var startDate = new Date(startDateNum);
-
-		var startDateStr =  startDate.getMonth() + "-" + startDate.getDate() + "-" + startDate.getFullYear(); 
-
-		console.log("DateRangeViewController - getRangeDiffDays - Day diff: " + days);
-		console.log("DateRangeViewController - getRangeDiffDays - startDateStr: " + startDateStr);
-		console.log("DateRangeViewController - getRangeDiffDays - today: " + today);
-		console.log("---------------------------------------------");
-
-		if ( startDateStr === today && days === 6 ) {
-			option = 0; 
-		} else if ( days > 0 && days < 8 ) {
-			option = 1; 
-		} else if ( days === 29 && startDateStr === today) {
-			option = 2;
-		} else if ( days >= 8 && days <= 31  ) {
-			option = 3;
-		} else if ( days > 31 && days <= 93 ) {
-			option = 4;
-		} else if ( days > 93 && days <= 180 ) {
-			option = 5;
-		}  else if ( days > 180 && days <= 364 ) {
-			option = 7;
-		} else if ( days === 365 ) {
-			option = 6;
-		} else {
-			option = 2;
-		}
-
-		
-		return { days: days, option: option}; 
-	}
-
-	var setDatesWithMomentRanges = function( moments ) {
-
-		if ( moments.length > 1 ) {
-
-			var startBaseMoment = moments[0][0];
-			var endBaseMoment = moments[0][1];
-
-			var startCompareMoment = moments[1][0];
-			var endCompareMoment = moments[1][1];
-
-			var baseRangeDiffDays = getRangeDiffDays(startBaseMoment, endBaseMoment); 
-			var baseRangeDiffDays = getRangeDiffDays(startCompareMoment, endCompareMoment); 
-
+			var startBaseDate = dates[0];
+			var startEndDate = dates[1];
+			var startCompareDate = dates[2];
+			var startCompareDate = dates[3];
 
 		} else {
 
-			var startBaseMoment = moments[0][0];
-			var endBaseMoment = moments[0][1];
-
-			var diffDays = getRangeDiffDays(startBaseMoment, endBaseMoment);
-
-			console.log("DateRangeViewController - setDatesWithMomentRanges - diffDays: " + diffDays);
+			var startBaseDate = dates[0];
+			var startEndDate = dates[1];
 
 		}
 
@@ -415,8 +233,6 @@ $(document).ready(function() {
 
 
 	var setupOneDayCheck = function(){
-
-		console.log("DateRangeViewController - setupOneDayCheck");
 
 		$("#inputOneDayCheckbox").on("change", function(e) {
 		
@@ -467,6 +283,8 @@ $(document).ready(function() {
 
 	 		$("#oneDayDate").val(day);
 
+
+
 	 	});
 
 	 	var today = moment().format("MM/DD/YYYY");
@@ -475,8 +293,6 @@ $(document).ready(function() {
 
 
 	 	$("#inputOneDayCheckbox").click();
-
-	 	//$("#dateCardContainer").css("height", "410px");
 			
 	}
 
@@ -579,8 +395,6 @@ $(document).ready(function() {
 	 			$("#baseSelect select").val(8);
 
 	 		}
-
-	 		console.log("DateRangeViewController - baseSelect - custom");
 
 	 		bCustomBaseRange = true; 
 	 		
@@ -851,7 +665,7 @@ $(document).ready(function() {
 
 
 	 }
-
+	 
 	 var setBaseDate = function( startDate, endDate, posStr ){
 
 	 	//console.log(arguments, " setBaseDate ");
@@ -882,7 +696,6 @@ $(document).ready(function() {
 	    }
 	    
 	 }
-
 
 	 var clearBaseDates = function(){
 
@@ -932,8 +745,8 @@ $(document).ready(function() {
 		var compareNumDateStr = ( Number(compareDate.getMonth()) + 1 ) + "/" + compareDate.getDate() + "/" + compareDate.getFullYear();
 	    $("#inputCompare" + posStr + "Date").val(compareNumDateStr);
 
-	    if ( null === compareStartMoment ) compareStartMoment = moment(); //getDateMoment("CompareStart");
-	    if ( null === compareEndMoment ) compareEndMoment =  moment(); ///getDateMoment("CompareEnd");
+	    if ( null === compareStartMoment ) compareStartMoment = getDateMoment("CompareStart");
+	    if ( null === compareEndMoment ) compareEndMoment = getDateMoment("CompareEnd");
 
 		// need up update the compare moments 	    
 	    if (posStr === "Start") {
@@ -1209,8 +1022,6 @@ $(document).ready(function() {
 
 
 	 var drawDates = function(){
-
-	 	console.log(" -- DRAW DATES -- bCompareChecked: " + bCompareChecked);
 	 	
 	 	if (!bCompareChecked) {
 	 		
@@ -1220,10 +1031,9 @@ $(document).ready(function() {
 	 	} else {
 	 		
 	 		
-	 	
+	 		console.log(" -- DRAW DATES -- ");
 	 		console.log(" baseStartMoment._d: " + baseStartMoment._d ); 
 			console.log(" baseEndMoment._d: " + baseEndMoment._d ); 
-			
 			if (null !== compareStartMoment) console.log(" compareStartMoment._d: " + compareStartMoment._d ); 
 			if (null !== compareEndMoment) console.log(" compareEndMoment._d: " + compareEndMoment._d ); 
 
@@ -1862,21 +1672,9 @@ $(document).ready(function() {
 
 
 	$("#inputCompareCheckbox").on("change", function(e) {
-		
-		console.log("++++++++++++++++++++++++++++++++++++++++++");
-		console.log("DateRangeViewController - compare clicked");
-		console.log("DateRangeViewController - baseStartMoment: ", baseStartMoment);
-		console.log("DateRangeViewController - baseEndMoment: ", baseEndMoment);
-		console.log("DateRangeViewController - compareStartMoment: ", compareStartMoment);
-		console.log("DateRangeViewController - compareEndMoment: ", compareEndMoment);
+		//// //if (log)   //console.log(e.currentTarget.checked);
 
-		var curTargetChecked = e.currentTarget.checked;
-
-		console.log("DateRangeViewController - curTargetChecked: " + curTargetChecked);
-		console.log("DateRangeViewController - bCustomBaseRange: " + curTargetChecked);
-
-
-		if ( curTargetChecked ) {
+		if ( e.currentTarget.checked ) {
 			
 			bCompareChecked = true; 
 
@@ -1888,9 +1686,8 @@ $(document).ready(function() {
 				// I can't call getPreviousCustomBaseRange() until compareStartMoment is defined!
 
 				//var dates = ( bCustomBaseRange ) ? getPreviousCustomBaseRange() : [ previousRange[0]._d, previousRange[1]._d ];
-
-				//var dates = ( baseStartMoment !== null ) ? [ baseStartMoment._d, baseEndMoment._d ] : [ previousRange[0]._d, previousRange[1]._d ];
 				var dates = [ previousRange[0]._d, previousRange[1]._d ];
+
 				var compareNumStartDateStr = dates[0].getDate() + "/" + ( dates[0].getMonth() + 1 ) + "/" + dates[0].getFullYear();
 			    var compareNumEndDateStr = dates[1].getDate() + "/" + ( dates[1].getMonth() + 1 ) + "/" + dates[1].getFullYear();
 
@@ -1900,7 +1697,6 @@ $(document).ready(function() {
 				// 2. get them
 				compareStartMoment = getDateMoment( "CompareStart" );
 				compareEndMoment = getDateMoment( "CompareEnd" );
-	
 
 				
 			} 
@@ -2172,8 +1968,6 @@ $(document).ready(function() {
 	window.drp.isDate = isDate;
 	window.drp.validateStartBeforeEnd = validateStartBeforeEnd;
 	window.drp.getDateMoment = getDateMoment;
-
-	window.drp.setMode = setMode;
 
 
 
