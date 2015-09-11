@@ -519,14 +519,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "js/DateRangeViewController.js",
-			"settings":
-			{
-				"buffer_size": 60521,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -579,6 +571,11 @@
 	"file_history":
 	[
 		"/Users/bflowers/Projects/headwinds/code/daterangepicker/js/DateRangeViewController.js",
+		"/Users/bflowers/Projects/headwinds/code/phantomjs/voices.js",
+		"/Users/bflowers/Projects/headwinds/code/phantomjs/voicesgrab.js",
+		"/Users/bflowers/Projects/headwinds/code/phantomjs/angel.js",
+		"/Users/bflowers/Projects/headwinds/code/daterangepicker/js/setDate.js",
+		"/Users/bflowers/Projects/headwinds/code/daterangepicker/js/DateRangeViewController2.js",
 		"/Users/bflowers/Projects/headwinds/code/daterangepicker/datepicker.html",
 		"/Users/bflowers/Projects/headwinds/code/daterangepicker/js/datepicker.js",
 		"/Users/bflowers/Projects/headwinds/code/daterangepicker/README.md",
@@ -700,12 +697,7 @@
 		"/Users/bflowers/Projects/headwinds/cabinquest/builds/bellwoods0_5_build1/gameapp-dev/private/js/controllers/hyperloop/HyperloopViewController.js",
 		"/Users/bflowers/Projects/headwinds/cabinquest/builds/bellwoods0_5_build1/gameapp-dev/private/js/factories/vehicles/VehicleFactory.js",
 		"/Users/bflowers/Projects/headwinds/cabinquest/builds/bellwoods0_5_build1/autonomous/views/autonomous/autonomousTemplate.html",
-		"/Users/bflowers/Projects/headwinds/cabinquest/builds/bellwoods0_5_build1/styles/scss/cabinquest.scss",
-		"/Users/bflowers/Projects/headwinds/cabinquest/builds/bellwoods0_5_build1/autonomous/img/bellwoods/vehicles/trains/autonomousCabin.svg",
-		"/Users/bflowers/Projects/headwinds/cabinquest/builds/bellwoods0_5_build1/autonomous/img/bellwoods/vehicles/trains/autonomousCaboose.svg",
-		"/Users/bflowers/Projects/headwinds/cabinquest/builds/bellwoods0_5_build1/autonomous/img/bellwoods/vehicles/trains/autonomousEngine.svg",
-		"/Users/bflowers/Projects/headwinds/cabinquest/builds/bellwoods0_5_build1/gameapp-dev/private/js/models/AirplaneModel.js",
-		"/Users/bflowers/Projects/headwinds/cabinquest/builds/bellwoods0_5_build1/gameapp-dev/private/js/models/TrainModel.js"
+		"/Users/bflowers/Projects/headwinds/cabinquest/builds/bellwoods0_5_build1/styles/scss/cabinquest.scss"
 	],
 	"find":
 	{
@@ -750,6 +742,21 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"setMode",
+			"selectCompareOption",
+			"setBaseDate",
+			"setMode",
+			"selectCompareOption",
+			"selectBaseOption",
+			"NODE",
+			"setBaseDate",
+			"baseSelect",
+			"setBaseDate",
+			"baseStartCaseHandler",
+			"setBaseDate",
+			"baseSelect",
+			"setBaseDate",
+			"baseSelect",
 			"getDateMoment",
 			"setBaseDate",
 			"setMode",
@@ -862,22 +869,7 @@
 			"showIcons",
 			"iconsVisible",
 			"showIcons",
-			"hideIcons",
-			"hideFruit",
-			"opacity",
-			"produceTree",
-			"text",
-			"quests",
-			"quest0",
-			"profile",
-			"$scope.profile",
-			"$scope.progress",
-			"issues",
-			"updateAchievements",
-			"achievementStatus",
-			"feed: first deep dive",
-			"updateTreeVisit",
-			"onTreeClickHandler"
+			"hideIcons"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -948,38 +940,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "js/DateRangeViewController.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 60521,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								162,
-								162
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],

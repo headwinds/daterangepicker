@@ -201,8 +201,11 @@ $(document).ready(function() {
 			var baseRange = [startDate, endDate];
 			var compareRange = [startDate, endDate, startCompareDate, endCompareDate];
 
+			var bBaseMode = false;
+			
+			var rangeSelectIds = ["4","1"];
 
-			setMode(true, baseRange);
+			setMode(bBaseMode, compareRange, rangeSelectIds);
 			
 
 		}
@@ -210,7 +213,13 @@ $(document).ready(function() {
 		
 	};
 
-	var setMode = function(bBaseMode, dates) {
+	/*
+	
+	rangeSelectIds an array of either "0" to "7" for base or "0" or "1" for compare
+	ie ["5", "1"];
+	*/
+
+	var setMode = function(bBaseMode, dates, rangeSelectIds ) {
 		console.log("DateRangeViewController - setMode - bBaseMode: ", arguments);
 
 		reset();
@@ -222,24 +231,47 @@ $(document).ready(function() {
 			setBaseDate( dates[0],null,"Start"); // set both start and end 
 			setBaseDate( null, dates[1],"End");
 
-			var difObj = getRangeDiffDays( baseStartMoment, baseEndMoment ); 
-			selectBaseOption( difObj.option );
+			//var difObj = getRangeDiffDays( baseStartMoment, baseEndMoment ); 
+			//selectBaseOption( difObj.option );
+
+			selectBaseOption( rangeSelectIds[0] );
 
 	    	curRange = [baseStartMoment, baseEndMoment]; // now safe to set the range after setting both start and end
 
-	    	var tempCompareStartDate = baseEndMoment.clone(); 
-	    	var tempCompareEndDate = baseStartMoment.clone();
+	    	switch ( rangeSelectIds[0] ) {
+	    		case "0" :
+	    			previousRange = previousRanges[0].range;
+	    			break;
+	    		case "1" :
+	    			previousRange = previousRanges[1].range;
+	    			break;
+	    		case "2" :
+	    			previousRange = previousRanges[2].range;
+	    			break;
+	    		case "3" :
+	    			previousRange = previousRanges[3].range;
+	    			break;
+	    		case "4" :
+	    			previousRange = previousRanges[4].range;
+	    			break;
+	    		case "5" :
+	    			previousRange = previousRanges[5].range;
+	    			break;	
+	    		case "6" :
+	    			previousRange = previousRanges[6].range;
+	    			break;	
+	    		case "7" :
+	    			previousRange = previousRanges[7].range;
+	    			break;	
+	    		case "8" :
+	    			previousRange = previousRanges[8].range;
+	    			break;						
+	    		default :
+	    			previousRange = previousPeriod30DaysRange;
+	    			break;		
 
-	    	tempCompareEndDate.subtract(1, "days");
-
-	    	var compareStartDateFromEndDate = tempCompareEndDate.clone();
-
-
-	    	//compareDifObj = getRangeDiffDays( tempCompareStartDate, tempCompareEndDate ); 
-
-	    	compareStartDateFromEndDate.subtract(difObj.days, "days");
-
-	    	previousRange = [compareStartDateFromEndDate, tempCompareEndDate]
+	    	}
+	    	
 
 	    	console.log("DateRangeViewController - setMode - previousRange: ", previousRange);
 
@@ -250,7 +282,11 @@ $(document).ready(function() {
 			
 			bCompareChecked = true;
 
-			selectCompareOption("0");
+			var compareSelectId = rangeSelectIds[1];
+
+			if ( compareSelectId === "2" ) compareSelectId = "0"; // default
+
+			selectCompareOption( compareSelectId );
 
 			setBaseDate( dates[0],null,"Start");
 			setBaseDate( null, dates[1],"End");
@@ -258,8 +294,10 @@ $(document).ready(function() {
 			setCompareDate( dates[2],null,"Start");
 			setCompareDate( null, dates[3],"End");
 
-			var difObj = getRangeDiffDays( baseStartMoment, baseEndMoment ); 
-			selectBaseOption( difObj.option );
+			//var difObj = getRangeDiffDays( baseStartMoment, baseEndMoment ); 
+			//selectBaseOption( difObj.option );
+			selectBaseOption( rangeSelectIds[0] );
+			
 
 			curRange = [baseStartMoment, baseEndMoment];
 			//previousRange = [compareStartMoment, compareEndMoment]; 
@@ -328,11 +366,16 @@ $(document).ready(function() {
 	}
 
 	var selectCompareOption = function( valStr ){
-		$("#compareSelect select").val(valStr);
+		
 		
 		//$('#inputCompareCheckbox').prop('checked', true);
 		$('#inputCompareCheckbox').click();
 		//inputCompareCheckbox
+
+		setTimeout( function(){
+			$("#compareSelect select").val(valStr);
+		}, 50);
+		
 
 	}
 
@@ -482,7 +525,7 @@ $(document).ready(function() {
 
 	var reset = function(){
 
-		//console.log("---- reset ----")
+		console.log("---- reset ----")
 
 		$("#baseRange").text("");
 		$("#validationMessage").text("");
@@ -505,13 +548,18 @@ $(document).ready(function() {
 		bCustomCompareRange = false;
 		bCompareChecked = false;
 
-		curRange = last7DaysRange;
-	    previousRange = previousPeriod7DaysRange; 
+		// reset to last 30 instead 7 days
+
+		//curRange = last7DaysRange;
+	    //previousRange = previousPeriod7DaysRange; 
+
+	    curRange = last30DaysRange;
+	    previousRange = previousPeriod30DaysRange; 
 
 		setCalendarsByCurBaseRange();
 
-		baseStartMoment = getDateMoment( "BaseStart" ); //getBaseStartDate();
-		baseEndMoment = getDateMoment( "BaseEnd" );
+		baseStartMoment = curRange[0]; //getDateMoment( "BaseStart" ); //getBaseStartDate();
+		baseEndMoment = curRange[1]; //getDateMoment( "BaseEnd" );
 
 		setBaseRangeMessage([baseStartMoment._d, baseEndMoment._d]);
 
@@ -530,6 +578,7 @@ $(document).ready(function() {
 		
 		setAllDisabled();
 
+		$("#baseSelect select").val("2");
 		$("#compareSelect select").val("0");
 		
 		$('#inputCompareCheckbox').prop('checked', false);
@@ -2136,9 +2185,11 @@ $(document).ready(function() {
 		
 		var data = { baseStartDate: baseStartDate, 
 					 baseEndDate: baseEndDate, 
+					 baseSelectId: $("#baseSelect select").val(),
 					 compareStartDate: compareStartDate, 
 					 compareEndDate: compareEndDate,
-					 compareMode: bCompareChecked };
+					 compareMode: bCompareChecked,
+					 compareSelectId: $("#compareSelect select").val()};
 
 		//ir.introspect.app.msgBus.trigger('applyDates');
 		ir.introspect.app.msgBus.trigger('date:apply', data);
