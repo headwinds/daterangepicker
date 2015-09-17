@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"start",
+				"startTime"
+			],
+			[
+				"cre",
+				"createDates"
+			],
+			[
+				"basRa",
+				"baseRanges"
+			],
+			[
 				"cur",
 				"curRange"
 			],
@@ -206,10 +218,6 @@
 			[
 				"Train",
 				"TrainModel"
-			],
-			[
-				"cre",
-				"createTrainCabins"
 			],
 			[
 				"crea",
@@ -506,19 +514,19 @@
 			[
 				"ba",
 				"background-repeat"
-			],
-			[
-				"backgrou",
-				"background-color"
-			],
-			[
-				"Game",
-				"BellwoodsGameController"
 			]
 		]
 	},
 	"buffers":
 	[
+		{
+			"file": "js/DateRangeViewController.js",
+			"settings":
+			{
+				"buffer_size": 62187,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -742,6 +750,46 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"setBaseDate",
+			"reset",
+			"setBaseDate",
+			"drawDates",
+			"setMode",
+			"drawDates",
+			"close",
+			"drawDates",
+			"base select",
+			"setCalendarsByCur",
+			"getBaseDates",
+			"baseRanges",
+			"setCalendarsByCurBaseRange",
+			"last30DaysRange",
+			"baseRanges",
+			"setCalendarsByC",
+			"setCalendarsBy",
+			"setCalendars",
+			"base select",
+			"setCalendarsByCurBaseRange",
+			"baseSelect",
+			"setMode",
+			"drawDates",
+			"createDates",
+			"reset",
+			"setBaseDate",
+			"setCalendarsByCurBaseRange",
+			"baseSelect",
+			"baseRanges",
+			"last30DaysRange",
+			"setCalendarsByCurBaseRange",
+			"reset",
+			"last30DaysRange",
+			"reset",
+			"setCalendarsByCurBaseRange",
+			"reset",
+			"previousPeriod30DaysRange",
+			"reset",
+			"last30DaysRange",
+			"reset",
 			"setMode",
 			"selectCompareOption",
 			"setBaseDate",
@@ -829,47 +877,7 @@
 			"\"ControllerViewController:addTree:click\"",
 			"produceTree",
 			"maps",
-			"map",
-			"setupFog",
-			"el",
-			"addTree",
-			"parentSVGContainer",
-			"scope.viewport",
-			"$scope.viewport",
-			"addTree",
-			"viewport",
-			"updateTreePosition",
-			"visitTree",
-			"updateTreeVisit",
-			"visitTree",
-			"updateTreeVisit",
-			"visitTree",
-			"updateTreeVisit",
-			"viewTree",
-			"tree:click",
-			"updateTreeVisit",
-			"onTreeClickHandler",
-			"BellwoodsTreeActorFactory",
-			"emitClick",
-			"TreesFactoryService",
-			"tree:drag",
-			"tree:drag:end",
-			"iconsVisible",
-			"TimelineMax",
-			"treeGroup",
-			"showFruit",
-			"_d",
-			"bHeadwinds",
-			"bSignedIn",
-			"console",
-			"StringUtilFactory",
-			"showIcons",
-			"onTreeClickHandler",
-			"hideIcons",
-			"showIcons",
-			"iconsVisible",
-			"showIcons",
-			"hideIcons"
+			"map"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -934,14 +942,44 @@
 		"reverse": false,
 		"show_context": true,
 		"use_buffer2": true,
-		"whole_word": true,
+		"whole_word": false,
 		"wrap": true
 	},
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "js/DateRangeViewController.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 62187,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								26536,
+								26536
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 14134.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],

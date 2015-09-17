@@ -43,83 +43,100 @@ $(document).ready(function() {
 
 	var invalidMessageStr = 'Invalid: the "from:" date is after the "to:" date. Please click Reset to try again.';
 
-	// 0 - last 7 days
-	var last7DaysRange = [moment().subtract(6, 'days'), moment()];
-	// 1 - last week
-	var lastWeekRange = [moment().subtract(1, 'week').startOf('week'), moment().subtract(1, 'week').endOf('week')];
-	// 2 - last 30 days 
-	var last30DaysRange = [moment().subtract(29, 'days'), moment()];
-	// 3 - last month 
-	var lastMonthRange = [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')];
-	// 4 - last 3 months
-	var last3MonthRange = [moment().subtract(3, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month') ];
-	// 5 - last 6 months
-	var last6MonthRange = [moment().subtract(6, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')];
-	// 6 - 365 days
-	var last365DaysRange = [moment().subtract(365, 'days'), moment()];
-	// 7 - this year
-	var thisYearRange =  [moment().startOf('year'), moment()];
 
-	// COMPARE 
+	var getLast30Days = function(){
 
-	// 0 - last 7 days 
-	var previousPeriod7DaysRange = [moment().subtract(13, 'days'), moment().subtract(7, 'days')];
-	// 1 - last week
-	var previousPeriodLastWeekRange = [moment().subtract(2, 'week').startOf('week'), moment().subtract(2, 'week').endOf('week')];
-	// 2 - last 30 days 
-	var previousPeriod30DaysRange = [moment().subtract(59, 'days'), moment().subtract(30, 'days')];
-	// 3 - last month 
-	var previousPeriodLastMonthRange = [moment().subtract(2, 'month').startOf('month'), moment().subtract(2, 'month').endOf('month')];
-	// 4 - last 3 months
-	var previousPeriodlast3MonthRange = [moment().subtract(6, 'month').startOf('month'), moment().subtract(4, 'month').endOf('month')];
-	// 5 - last 6 months
-	var previousPeriodLast6MonthRange = [moment().subtract(12, 'month').startOf('month'), moment().subtract(7, 'month').endOf('month')];
-	// 6 - 365 days
-	var previousPeriod365DaysRange = [moment().subtract(730, 'days'), moment().subtract(366, 'days')];
-	// 7 - this year
-	var diffDaysThisYear = moment().diff( moment().startOf('year'), "days" ); 
-	var previousThisYearStart = moment().subtract(1, 'year').endOf('year').subtract(diffDaysThisYear, 'days');
-	var previousThisYearEnd = moment().subtract(1, 'year').endOf('year');
+		var startTime = moment();
+		var endTime = moment();
 
-	var previousPeriodThisYearRange = [previousThisYearStart, previousThisYearEnd];
+		var newStartTime = startTime.clone(); 
+		newStartTime.subtract(29, 'days');
 
-	//console.log(previousPeriodThisYearRange, "previousPeriodThisYearRange: ");
 
-	
-	var previousYearRange = [moment().subtract(1, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')];
-	
+		return [newStartTime, endTime];
 
-	/*
-	var previousPeriod7DaysRange = [moment().subtract(7, 'days'), moment().subtract(13, 'days')];
-	var previousPeriod30DaysRange = [moment().subtract(30, 'days'), moment().subtract(59, 'days')];
-	var previousPeriod90DaysRange = [moment().subtract(90, 'days'), moment().subtract(179, 'days')];
-	var previousPeriod180DaysRange = [moment().subtract(180, 'days'), moment().subtract(359, 'days')];
-	var previousPeriod365DaysRange = [moment().subtract(365, 'days'), moment().subtract(729, 'days')];
-	*/
 
-	var baseRanges = [
-		{ label: 'Last 7 Days', range: last7DaysRange, id: 0},
-		{ label: 'Last Week', range: lastWeekRange, id: 1},
-	    { label: 'Last 30 Days', range: last30DaysRange, id: 2},
-	    { label: 'Last Month', range: lastMonthRange, id: 3},
-	    { label: 'Last 3 Months', range: last3MonthRange, id: 4},
-	    { label: 'Last 6 Months', range: last6MonthRange, id: 5},
-	    { label: 'Last 365 Days', range: last365DaysRange, id: 6},
-	    { label: 'This year', range: thisYearRange, id: 7}
-    ]; 
+	};
 
-    var previousRanges = [
-   		 { label: 'Previous Last 7 Days', range: previousPeriod7DaysRange, id: 0},
-	     { label: 'Previous Last Week', range: previousPeriodLastWeekRange, id: 1},
-	     { label: 'Previous Last 30 Days', range: previousPeriod30DaysRange, id: 2},
-	     { label: 'Previous Last Month', range: previousPeriodLastMonthRange, id: 3},
-	     { label: 'Previous Last 3 Months', range: previousPeriodlast3MonthRange, id: 4},
-	     { label: 'Previous Last 6 Months', range: previousPeriodLast6MonthRange, id: 5},
-	     { label: 'Previous Last 365 Days', range: previousPeriod365DaysRange, id: 6},
-	     { label: 'Previous Last Year', range: previousPeriodThisYearRange, id: 7}
-    ]; 
+	var getBaseDates = function(){
 
-   
+		// 0 - last 7 days
+		var last7DaysRange = [moment().subtract(6, 'days'), moment()];
+		// 1 - last week
+		var lastWeekRange = [moment().subtract(1, 'week').startOf('week'), moment().subtract(1, 'week').endOf('week')];
+		// 2 - last 30 days 
+		var last30DaysRange = getLast30Days();
+		// 3 - last month 
+		var lastMonthRange = [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')];
+		// 4 - last 3 months
+		var last3MonthRange = [moment().subtract(3, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month') ];
+		// 5 - last 6 months
+		var last6MonthRange = [moment().subtract(6, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')];
+		// 6 - 365 days
+		var last365DaysRange = [moment().subtract(365, 'days'), moment()];
+		// 7 - this year
+		var thisYearRange =  [moment().startOf('year'), moment()];
+
+		var baseRanges = [
+			{ label: 'Last 7 Days', range: last7DaysRange, id: 0},
+			{ label: 'Last Week', range: lastWeekRange, id: 1},
+		    { label: 'Last 30 Days', range: last30DaysRange, id: 2},
+		    { label: 'Last Month', range: lastMonthRange, id: 3},
+		    { label: 'Last 3 Months', range: last3MonthRange, id: 4},
+		    { label: 'Last 6 Months', range: last6MonthRange, id: 5},
+		    { label: 'Last 365 Days', range: last365DaysRange, id: 6},
+		    { label: 'This year', range: thisYearRange, id: 7}
+	    ]; 
+
+	    return baseRanges;
+
+	}
+
+	var getPreviousDates = function(){
+
+		// PREVIOUS 
+
+		// 0 - last 7 days 
+		var previousPeriod7DaysRange = [moment().subtract(13, 'days'), moment().subtract(7, 'days')];
+		// 1 - last week
+		var previousPeriodLastWeekRange = [moment().subtract(2, 'week').startOf('week'), moment().subtract(2, 'week').endOf('week')];
+		// 2 - last 30 days 
+		var previousPeriod30DaysRange = [moment().subtract(59, 'days'), moment().subtract(30, 'days')];
+		// 3 - last month 
+		var previousPeriodLastMonthRange = [moment().subtract(2, 'month').startOf('month'), moment().subtract(2, 'month').endOf('month')];
+		// 4 - last 3 months
+		var previousPeriodlast3MonthRange = [moment().subtract(6, 'month').startOf('month'), moment().subtract(4, 'month').endOf('month')];
+		// 5 - last 6 months
+		var previousPeriodLast6MonthRange = [moment().subtract(12, 'month').startOf('month'), moment().subtract(7, 'month').endOf('month')];
+		// 6 - 365 days
+		var previousPeriod365DaysRange = [moment().subtract(730, 'days'), moment().subtract(366, 'days')];
+		// 7 - this year
+		var diffDaysThisYear = moment().diff( moment().startOf('year'), "days" ); 
+		var previousThisYearStart = moment().subtract(1, 'year').endOf('year').subtract(diffDaysThisYear, 'days');
+		var previousThisYearEnd = moment().subtract(1, 'year').endOf('year');
+
+		var previousPeriodThisYearRange = [previousThisYearStart, previousThisYearEnd];
+
+		var previousYearRange = [moment().subtract(1, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')];
+		
+	    var previousRanges = [
+	   		 { label: 'Previous Last 7 Days', range: previousPeriod7DaysRange, id: 0},
+		     { label: 'Previous Last Week', range: previousPeriodLastWeekRange, id: 1},
+		     { label: 'Previous Last 30 Days', range: previousPeriod30DaysRange, id: 2},
+		     { label: 'Previous Last Month', range: previousPeriodLastMonthRange, id: 3},
+		     { label: 'Previous Last 3 Months', range: previousPeriodlast3MonthRange, id: 4},
+		     { label: 'Previous Last 6 Months', range: previousPeriodLast6MonthRange, id: 5},
+		     { label: 'Previous Last 365 Days', range: previousPeriod365DaysRange, id: 6},
+		     { label: 'Previous Last Year', range: previousPeriodThisYearRange, id: 7}
+	    ]; 
+
+	    return previousRanges;
+
+	}
+
+	var baseRanges = getBaseDates();
+	var previousRanges = getPreviousDates();
+
     var defaultRange = baseRanges[2].range;
     var curRange = defaultRange;
 
@@ -182,10 +199,11 @@ $(document).ready(function() {
 		if ( ( document.domain === "headwinds.net" || document.domain === "localhost" ) && bTesting ) {
 			setupOneDayCheck();
 
+			/*
 		
 			var startDate = new Date();
-			startDate.setDate(25);
-			startDate.setMonth(6); 
+			startDate.setDate(1);
+			startDate.setMonth(8); 
 			
 			var endDate = new Date();
 			//endDate.setDate(21);  
@@ -203,9 +221,12 @@ $(document).ready(function() {
 
 			var bBaseMode = false;
 			
-			var rangeSelectIds = ["4","1"];
+			var rangeSelectIds = ["8","1"];
 
-			setMode(bBaseMode, compareRange, rangeSelectIds);
+			var dates = (bBaseMode) ? baseRange : compareRange;
+
+			setMode(bBaseMode, dates, rangeSelectIds);
+			*/
 			
 
 		}
@@ -231,9 +252,7 @@ $(document).ready(function() {
 			setBaseDate( dates[0],null,"Start"); // set both start and end 
 			setBaseDate( null, dates[1],"End");
 
-			//var difObj = getRangeDiffDays( baseStartMoment, baseEndMoment ); 
-			//selectBaseOption( difObj.option );
-
+		
 			selectBaseOption( rangeSelectIds[0] );
 
 	    	curRange = [baseStartMoment, baseEndMoment]; // now safe to set the range after setting both start and end
@@ -264,7 +283,8 @@ $(document).ready(function() {
 	    			previousRange = previousRanges[7].range;
 	    			break;	
 	    		case "8" :
-	    			previousRange = previousRanges[8].range;
+	    			// custom - set to set the dates 
+					//drawDates();
 	    			break;						
 	    		default :
 	    			previousRange = previousPeriod30DaysRange;
@@ -275,7 +295,7 @@ $(document).ready(function() {
 
 	    	console.log("DateRangeViewController - setMode - previousRange: ", previousRange);
 
-			drawDates(); 
+
 
 
 		} else {
@@ -301,11 +321,15 @@ $(document).ready(function() {
 
 			curRange = [baseStartMoment, baseEndMoment];
 			//previousRange = [compareStartMoment, compareEndMoment]; 
-
-			//previousRange = 
-
-			drawDates(); 
+			//if ( compareSelectId === "1" ) drawDates();
 		}
+
+		//previousRange = 
+		//setTimeout( function(){
+		//	drawDates(); 
+		//}, 2250);
+
+		drawDates(); 
 	}
 
 	var testSetDates = function(){
@@ -525,7 +549,18 @@ $(document).ready(function() {
 
 	var reset = function(){
 
-		console.log("---- reset ----")
+		console.log("---- reset ----");
+
+		// 
+		baseStartMoment = null;
+		baseEndMoment = null; 
+		compareStartMoment = null;
+		compareEndMoment = null;
+	
+		baseRanges = getBaseDates();
+		previousRanges = getPreviousDates();
+
+		console.log(baseRanges);
 
 		$("#baseRange").text("");
 		$("#validationMessage").text("");
@@ -534,11 +569,7 @@ $(document).ready(function() {
 
 		$('#datepicker-calendar').DatePickerClear();
 
-		// 
-		baseStartMoment = null;
-		baseEndMoment = null; 
-		compareStartMoment = null;
-		compareEndMoment = null;
+	
 
 		$("#baseSelect select").val("0");
 		if  ( $("#baseSelect").hasClass("disableApply") ) $("#baseSelect").removeClass("disableApply"); 
@@ -552,9 +583,14 @@ $(document).ready(function() {
 
 		//curRange = last7DaysRange;
 	    //previousRange = previousPeriod7DaysRange; 
+	    curRange = null;
+	    curRange = baseRanges[2].range;
+	    
+	    previousRange = previousRanges[2].range; 
 
-	    curRange = last30DaysRange;
-	    previousRange = previousPeriod30DaysRange; 
+	   	console.log("curRange: ", curRange);
+	   	console.log("baseRanges[2].range: ", baseRanges[2].range);
+	   	console.log("baseRanges[2].label: ", baseRanges[2].label);
 
 		setCalendarsByCurBaseRange();
 
@@ -612,7 +648,7 @@ $(document).ready(function() {
 	 	
 	 	var idNum = Number(e.target.value);
 
-	 	//console.log("base select idNum: " + idNum);
+	 	console.log("base select idNum: " + idNum);
 
 	 	if ( idNum === 6 || idNum === 7 ) {
 	 		var warningStr =  "<span class='warningRangeTxt'> Warning: </span> this year range may take a long time to load";
@@ -659,6 +695,10 @@ $(document).ready(function() {
 	 		removeErrorTxt();
 
 	 		curRange = baseRanges[idNum].range;
+
+	 		if ( idNum === 2 ) curRange = getLast30Days();
+
+
 		 	previousRange = previousRanges[idNum].range;
 
 		 	//console.log(curRange, "new curRange");
@@ -904,7 +944,7 @@ $(document).ready(function() {
 	 var setBaseDate = function( startDate, endDate, posStr ){
 
 	 	//console.log(arguments, " setBaseDate ");
-	 	//// //if (log)   //console.log(baseStartMoment, " setBaseDate baseStartMoment");
+	 	if (posStr === "End") console.log("setBaseDate endDate: " + endDate);
 
 	 	var baseDate = (posStr === "Start") ? startDate : endDate; 
 
@@ -918,17 +958,25 @@ $(document).ready(function() {
 
 	    if (posStr === "Start") {
 	    	if (null !== baseStartMoment) {
-	    		baseStartMoment.date( baseDate.getDate() );
-	    		baseStartMoment.month( baseDate.getMonth() );
 	    		baseStartMoment.year( baseDate.getFullYear() );
+	    		baseStartMoment.month( baseDate.getMonth() );
+	    		baseStartMoment.date( baseDate.getDate() );
+	    		
 	    	}
 	    } else {
-	    	if (null !== baseEndMoment) {
-	    		baseEndMoment.date( baseDate.getDate() );
-	    		baseEndMoment.month( baseDate.getMonth() );
+	    	if (null !== baseEndMoment) 
+
+	    		// this order matters
+	    		// in different year some months will different number of days
 	    		baseEndMoment.year( baseDate.getFullYear() );
+	    		baseEndMoment.month( baseDate.getMonth() );
+	    		baseEndMoment.date( baseDate.getDate() );
+	    		
 	    	}
 	    }
+
+	    if (posStr === "End") console.log("setBaseDate baseDate: ", baseDate);
+	    if (posStr === "End") console.log("setBaseDate baseEndMoment: ", baseEndMoment);
 	    
 	 }
 
@@ -986,13 +1034,15 @@ $(document).ready(function() {
 
 		// need up update the compare moments 	    
 	    if (posStr === "Start") {
-	    	compareStartMoment.date( compareDate.getDate() );
-	    	compareStartMoment.month( compareDate.getMonth() ); // both moment and date respect 0-11 as months 
 	    	compareStartMoment.year( compareDate.getFullYear() );
+	    	compareStartMoment.month( compareDate.getMonth() ); // both moment and date respect 0-11 as months 
+	    	compareStartMoment.date( compareDate.getDate() );
+	    	
 	    } else {
-	    	compareEndMoment.date( compareDate.getDate() );
-	    	compareEndMoment.month( compareDate.getMonth() );
 	    	compareEndMoment.year( compareDate.getFullYear() );
+	    	compareEndMoment.month( compareDate.getMonth() );
+	    	compareEndMoment.date( compareDate.getDate() );
+	    	
 	    }
 	 }
 
@@ -1260,6 +1310,8 @@ $(document).ready(function() {
 	 var drawDates = function(){
 
 	 	console.log(" -- DRAW DATES -- bCompareChecked: " + bCompareChecked);
+	 	console.log("drawDates - baseStartMoment._d: " + baseStartMoment._d ); 
+		console.log("drawDates - baseEndMoment._d: " + baseEndMoment._d ); 
 	 	
 	 	if (!bCompareChecked) {
 	 		
@@ -1269,10 +1321,6 @@ $(document).ready(function() {
 	 	} else {
 	 		
 	 		
-	 	
-	 		console.log(" baseStartMoment._d: " + baseStartMoment._d ); 
-			console.log(" baseEndMoment._d: " + baseEndMoment._d ); 
-			
 			if (null !== compareStartMoment) console.log(" compareStartMoment._d: " + compareStartMoment._d ); 
 			if (null !== compareEndMoment) console.log(" compareEndMoment._d: " + compareEndMoment._d ); 
 
@@ -2047,7 +2095,10 @@ $(document).ready(function() {
 
 	var setCalendarsByCurBaseRange = function( startDate, endDate ) {
 
-		//console.log(arguments, " setCalendarsByCurBaseRange ");
+		console.log(" setCalendarsByCurBaseRange arguments: ", arguments);
+		console.log(" setCalendarsByCurBaseRange curRange: ", curRange);
+		console.log(" setCalendarsByCurBaseRange baseRanges: ", baseRanges);
+
 
 		startDate = (typeof startDate === "undefined") ? curRange[0]._d : startDate;
 		endDate = (typeof endDate === "undefined") ? curRange[1]._d : endDate;
@@ -2193,6 +2244,8 @@ $(document).ready(function() {
 
 		//ir.introspect.app.msgBus.trigger('applyDates');
 		ir.introspect.app.msgBus.trigger('date:apply', data);
+
+		//reset();
 
 
 		if (undefined !== ga) ga('send', 'event', 'Tool Bar', 'click', 'apply dates');
