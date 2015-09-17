@@ -196,11 +196,13 @@ $(document).ready(function() {
 		// TESTING
 		var bTesting = true;
 
-		if ( ( document.domain === "headwinds.net" || document.domain === "localhost" ) && bTesting ) {
+		if ( ( document.domain === "headwinds.net" || document.domain === "localhost" || document.domain === "www.headwinds.net") && bTesting ) {
+
+			console.log("headwinds testing")
+			
 			setupOneDayCheck();
 
 			/*
-		
 			var startDate = new Date();
 			startDate.setDate(1);
 			startDate.setMonth(8); 
@@ -219,9 +221,9 @@ $(document).ready(function() {
 			var baseRange = [startDate, endDate];
 			var compareRange = [startDate, endDate, startCompareDate, endCompareDate];
 
-			var bBaseMode = false;
+			var bBaseMode = true;
 			
-			var rangeSelectIds = ["8","1"];
+			var rangeSelectIds = ["4","1"];
 
 			var dates = (bBaseMode) ? baseRange : compareRange;
 
@@ -230,6 +232,8 @@ $(document).ready(function() {
 			
 
 		}
+
+		reset();
 	
 		
 	};
@@ -964,7 +968,7 @@ $(document).ready(function() {
 	    		
 	    	}
 	    } else {
-	    	if (null !== baseEndMoment) 
+	    	if (null !== baseEndMoment) {
 
 	    		// this order matters
 	    		// in different year some months will different number of days
