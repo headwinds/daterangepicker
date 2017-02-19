@@ -11,8 +11,26 @@
   <link rel="stylesheet" type="text/css" href="css/datepicker/base.css" />
   <link rel="stylesheet" type="text/css" href="css/datepicker/clean.css" />
   <link rel="stylesheet" type="text/css" href="css/datepicker/range.css" />
+  <style>
+  .dateButton{
+    border-radius: 5px;
+    border: none;
+    background-color: lightgrey;
+  }
 
+  .apply {
+    background-color: lightblue;
+  }
 
+  #dateCardContainer .rangeButtonContainers{
+    margin-top: 20px;
+  }
+
+  #dateCardContainer {
+    height: 370px;
+  }
+
+  </style>
   </head>
   <body>
 
@@ -31,12 +49,12 @@
           </ul>
           -->
 
-          <div style="display: block; height: 30px; width: 100%">
+          <div style="display: none; height: 30px; width: 100%">
             <input style="display: inline-block; height: 30px; width: 30px; vertical-align: middle; margin: 0px; padding: 0px" class="inputCheckbox" id="inputOneDayCheckbox" type="checkbox" value="0" />
             <p style="display: inline-block; font-size: 12px; margin: 0px; margin-left: 10px; padding: 0px; height: 30px; width: 400px;">Are you interested in data from more than 1 day?</p>
           </div>
 
-          <div style="display: block; height: 30px" id="oneDayContainer">
+          <div style="display: none; height: 30px" id="oneDayContainer">
             <label>Date: </label><input type="text" class="inputDate baseRange" id="oneDayDate" placeholder="MM/DD/YYYY" />
             <div class="selectContainer" id="oneDateSelect">
              <select>
@@ -107,8 +125,8 @@
              </div>
 
              <div class="rangeButtonContainers">
-                <button id="applyDates" class="button dateButton">APPLY</button>
                 <button id="cancelDates" class="button dateButton">RESET</button>
+                <button id="applyDates" class="button dateButton apply">APPLY</button>
              </div>
           </div>  
         </div>

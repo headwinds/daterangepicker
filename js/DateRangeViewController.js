@@ -170,7 +170,7 @@ $(document).ready(function() {
 		$("#prismContainer").hide();
 
 
-		$("#multipleDayContainer").hide();
+		//$("#multipleDayContainer").hide();
 	
 
 		//$("#testsContainer").hide();
