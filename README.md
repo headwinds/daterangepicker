@@ -48,6 +48,7 @@ The CSS is generated from SCSS and Compass. I recommend using [Codekit](https://
 
 If I had to do date range comparison today, I'd leverage the moment date math from this project and build a React based date range picker. While I definitely agree that its challenging to use in its current state, there may be some gold in here worth mining.
 
-The plan is to port some of the code in the original folder to React & Redux build. The create-react-app-redux folder will have this work but it's not worth reviewing yet.
+The plan is to port some of the code in the original folder to React & Redux build. The [create-react-app-redux](https://github.com/notrab/create-react-app-redux) folder will have this work but it's not worth reviewing yet.
+
 
 
