@@ -6,7 +6,9 @@
 
 This projects has very light documentation and is not a modern component (yet). The code base will probably only interest someone wishing to learn javascript not wanting an easy to implement library.
 
-Beyond the readme which outlines the purpose, I see I didn't properly explain how to use it. Right now, you basically need to download and play with it to see how it works. There's not a ton of code; basically 2 scripts: the one that draws the calendars and one that controls selecting the dates and handles some validation between date ranges.
+Beyond the readme which outlines the purpose, I see I didn't properly explain how to use it. Right now, you basically need to download and play with it to see how it works.
+
+There's not a ton of code; basically 2 scripts: the one that draws the calendars and one that controls selecting the dates and handles some validation between date ranges.
 
 There are no tests but try the demo and please report any issues. 
 
@@ -14,7 +16,7 @@ There are no tests but try the demo and please report any issues.
 
 [demo](http://headwinds.net/lab/daterangepicker/datepicker.html)
 
-The original-plain-js folder was created in 2015 contains mainly plain javascript involving jquery & moment.
+The original-plain-js folder was created in 2015 contains mainly plain javascript involving jquery & moment. Simply navigate to this original-plain-js folder and open the datepicker.html file in a browser like Chrome.
 
 This was written well before components and es6 classes so there is no one element. The controller talks many elements on the provided html page. It has all the raw pieces to be ported into a modern component though.
 
