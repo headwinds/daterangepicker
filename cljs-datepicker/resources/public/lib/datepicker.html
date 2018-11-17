@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  
+  <script type="text/javascript" src="js/moment.min.js"></script>
+  <script type="text/javascript" src="js/underscore-min.jsp.js"></script>
+  <script type="text/javascript" src="js/datepicker.js"></script>
+  <script type="text/javascript" src="js/DateRangeViewController.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="css/datepicker/base.css" />
+  <link rel="stylesheet" type="text/css" href="css/datepicker/clean.css" />
+  <link rel="stylesheet" type="text/css" href="css/datepicker/range.css" />
+  <style>
+  .dateButton{
+    border-radius: 5px;
+    border: none;
+    background-color: lightgrey;
+  }
+
+  .apply {
+    background-color: lightblue;
+  }
+
+  #dateCardContainer .rangeButtonContainers{
+    margin-top: 20px;
+  }
+
+  #dateCardContainer {
+    height: 370px;
+  }
+
+  </style>
+  </head>
+  <body>
+
+    <h4 class="baseTitle" style="padding: 0px; margin: 0px">Date Picker</h4>
+  
+    <div id="dateCardContainer" class="cardContainer" style='border: 2px solid #eee; border-radius: 5px'>
+      <!-- base range input -->
+      <div class="calendarContainer"> 
+
+          <!--
+          <p>To begin, please review these 3 options to help start selecting either 1 day or multiple date range</p>
+          <ul>
+            <li><p><b>1 Day</b> - Select the 1 day checkbox</p></li>
+            <li><p><b>2 Date Base Range</b> - Unselect the 1 day checkbox and select a base range</p></li>
+            <li><p><b>4 Date Base vs Compare Ranges</b> - Unselect the 1 day checkbox and select a base and compare range</p></li>
+          </ul>
+          -->
+
+          <div style="display: none; height: 30px; width: 100%">
+            <input style="display: inline-block; height: 30px; width: 30px; vertical-align: middle; margin: 0px; padding: 0px" class="inputCheckbox" id="inputOneDayCheckbox" type="checkbox" value="0" />
+            <p style="display: inline-block; font-size: 12px; margin: 0px; margin-left: 10px; padding: 0px; height: 30px; width: 400px;">Are you interested in data from more than 1 day?</p>
+          </div>
+
+          <div style="display: none; height: 30px" id="oneDayContainer">
+            <label>Date: </label><input type="text" class="inputDate baseRange" id="oneDayDate" placeholder="MM/DD/YYYY" />
+            <div class="selectContainer" id="oneDateSelect">
+             <select>
+                <option value="0">Today</option>
+                <option value="1">7 days ago</option>
+                <option value="2">2 Weeks ago</option>
+                <option value="3">1 Month ago</option>
+                <option value="4">Custom Date</option>
+             </select>
+             </div>
+          </div>
+
+          <div id="multipleDayContainer">
+          <h4 id="baseRange" class="baseTitle" style="margin: 0px; margin-top: 10px; margin-bottom: 10px;"></h4>
+
+          <div class="toFrom buffer">
+              <label>from: </label><input type="text" class="inputDate baseRange" id="inputBaseStartDate" placeholder="MM/DD/YYYY" />
+              <label>to: </label><input type="text" class="inputDate baseRange" id="inputBaseEndDate" placeholder="MM/DD/YYYY" />
+          </div>
+
+          <div class="selectContainer" id="baseSelect">
+           <select>
+              <option value="0">Last 7 days</option>
+              <option value="1">Last Week</option>
+              <option value="2">Last 30 days</option>
+              <option value="3">Last Month</option>
+              <option value="4">Last 3 Months</option>
+              <option value="5">Last 6 Months</option>
+              <option value="6">Last 365 Days</option>
+              <option value="7">This year</option>
+              <option value="8">Custom Range</option>
+           </select>
+           </div>
+        
+        <div id="date-range-field" style="border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
+                <span></span>      
+         </div>
+
+          <div id="shield" style="display: block; position: absolute; z-index: 10; width: 520px; height: 160px; background: #990000; opacity: 0"></div>
+
+        <!-- 3 calendars -->
+        <div id="datepicker-calendar"></div>
+
+        <div class="compareRowContainer">
+
+            <!-- compare range input -->
+            <input class="inputCheckbox" id="inputCompareCheckbox" type="checkbox" value="0" />
+            
+            <p id="compareRange">Compare</p>
+            
+            <div id="compareGroup" class="toFrom">
+               <label>from: </label><input type="text" class="inputDate compareRange" id="inputCompareStartDate" placeholder="MM/DD/YYYY" />
+               <label>to: </label><input type="text" class="inputDate compareRange" id="inputCompareEndDate" placeholder="MM/DD/YYYY" />
+            </div>
+            
+            <div class="selectContainer" id="compareSelect">
+               <select>
+                  <option value="0">Previous Period</option>
+                  <option value="1">Custom Range</option>
+               </select>
+            </div>
+        </div>
+        </div>
+        <!-- apply and cancel -->
+        <div class="footerBar">
+             <div class="validationContainer" class="validationContainer">
+                <p id="validationMessage" class="validationText"></p>
+             </div>
+
+             <div class="rangeButtonContainers">
+                <button id="cancelDates" class="button dateButton">RESET</button>
+                <button id="applyDates" class="button dateButton apply">APPLY</button>
+             </div>
+          </div>  
+        </div>
+      </div>  
+
+      <div style="display: none">
+        <p>Source: <a href="https://github.com/headwinds/daterangepicker">Github</a></p>
+      </div>
+   </body>
+</html>
+
