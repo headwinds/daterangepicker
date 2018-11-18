@@ -193,7 +193,7 @@ h4 {
 }
 /* line 120, ../../sass/_ir_common_date_range.scss */
 #dateCardContainer #datepicker-calendar .datepicker {
-  width: 502px !important;
+  width: auto !important;
   height: 140px !important;
 }
 /* line 127, ../../sass/_ir_common_date_range.scss */
@@ -655,4 +655,55 @@ h4 {
 
 #shield {
   display: none !important;
+}
+
+.datepickerContainer {
+  width: auto !important;
+}
+
+.datepicker {
+  width: auto !important;
+}
+
+#datepicker-calendar {
+  width: 500px;
+}
+
+body {
+  font-family: "Helvetica";
+  color: #666;
+}
+
+input:focus {
+  outline: none;
+}
+.dateButton {
+  border-radius: 5px;
+  border: none;
+  background-color: lightgrey;
+}
+
+.apply {
+  background-color: pink;
+}
+
+#dateCardContainer .rangeButtonContainers {
+  margin-top: 20px;
+}
+
+#dateCardContainer {
+}
+
+#datepicker {
+  background: "transparent";
+}
+
+.datepicker {
+  background: "transparent";
+}
+
+thead,
+th {
+  background: white;
+  color: red;
 }

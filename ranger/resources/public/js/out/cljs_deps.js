@@ -110,10 +110,11 @@ goog.addDependency("../cljsjs/material-ui/development/material-ui.inc.js", ['_CI
 goog.addDependency("../cljsjs/development/moment.inc.js", ['cljsjs.moment'], [], {'foreign-lib': true});
 goog.addDependency("../example/db.js", ['example.db'], ['cljs.core']);
 goog.addDependency("../example/events.js", ['example.events'], ['reagent.core', 'cljs.core', 'goog.object', 'reagent.impl.template', 'example.db', 're_frame.core', 'example.utils.http_fx']);
-goog.addDependency("../example/utils/js.js", ['example.utils.js'], ['cljsjs.moment', 'cljs.core', 'clojure.string']);
 goog.addDependency("../cljsjs/material-ui/development/material-ui-icons.inc.js", ['_CIRCA_material_ui.icons', 'material_ui_icons'], ['react', 'react_dom'], {'foreign-lib': true});
 goog.addDependency("../example/demos/demo_text_field.js", ['example.demos.demo_text_field'], ['material_ui', 'reagent.core', 'cljs.core', 'material_ui_icons', 'reagent.impl.template']);
-goog.addDependency("../example/demos/demo_pickers.js", ['example.demos.demo_pickers'], ['material_ui', 'reagent.core', 'cljs.core', 'example.utils.js', 'material_ui_icons', 'example.demos.demo_text_field']);
+goog.addDependency("../example/demos/picker.js", ['example.demos.picker'], ['material_ui', 'reagent.core', 'cljs.core', 'example.demos.demo_text_field', 're_frame.core']);
+goog.addDependency("../example/utils/js.js", ['example.utils.js'], ['cljsjs.moment', 'cljs.core', 'clojure.string']);
+goog.addDependency("../example/demos/demo_pickers.js", ['example.demos.demo_pickers'], ['material_ui', 'reagent.core', 'example.demos.picker', 'cljs.core', 'example.utils.js', 'material_ui_icons', 'example.demos.demo_text_field']);
 goog.addDependency("../secretary/core.js", ['secretary.core'], ['cljs.core', 'clojure.string', 'clojure.walk']);
 goog.addDependency("../example/routes.js", ['example.routes'], ['reagent.core', 'cljs.core', 'goog.history.EventType', 'example.events', 'goog.History', 'example.demos.demo_pickers', 'secretary.core', 'example.subs', 'goog.events', 're_frame.core', 'example.utils.http_fx']);
 goog.addDependency("../example/utils/theme.js", ['example.utils.theme'], ['material_ui.styles', 'cljs.core', 'goog.object', 'material_ui.colors']);

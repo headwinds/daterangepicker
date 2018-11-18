@@ -650,8 +650,6 @@ $(document).ready(function() {
     baseRanges = getBaseDates();
     previousRanges = getPreviousDates();
 
-    console.log(baseRanges);
-
     $("#baseRange").text("");
     $("#validationMessage").text("");
 
@@ -667,19 +665,10 @@ $(document).ready(function() {
     bCustomBaseRange = false;
     bCustomCompareRange = false;
     bCompareChecked = false;
-
-    // reset to last 30 instead 7 days
-
-    //curRange = last7DaysRange;
-    //previousRange = previousPeriod7DaysRange;
     curRange = null;
     curRange = baseRanges[2].range;
 
     previousRange = previousRanges[2].range;
-
-    console.log("curRange: ", curRange);
-    console.log("baseRanges[2].range: ", baseRanges[2].range);
-    console.log("baseRanges[2].label: ", baseRanges[2].label);
 
     setCalendarsByCurBaseRange();
 
@@ -718,14 +707,6 @@ $(document).ready(function() {
 
     disableCompareSelect();
     enableCheckBox();
-
-    /*
-		enableBaseTo();
-		enableCompareTo();
-		enableBaseFrom();
-		enableCompareFrom();
-		*/
-
     setApplyEnabled();
 
     $("#compareGroup").hide();
@@ -744,7 +725,7 @@ $(document).ready(function() {
       $("#validationMessage").removeClass("errorInputTxt");
   };
 
-  $("#baseSelect").on("change", function(e) {
+  function handleBaseSelectChange(e) {
     var idNum = Number(e.target.value);
 
     console.log("base select idNum: " + idNum);
@@ -783,8 +764,6 @@ $(document).ready(function() {
         "Please enter 2 dates for your Base range before continuing"
       );
 
-      //$("#shield").hide();
-
       return;
     } else {
       bCustomBaseRange = false;
@@ -798,18 +777,11 @@ $(document).ready(function() {
 
       previousRange = previousRanges[idNum].range;
 
-      //console.log(curRange, "new curRange");
-      //console.log(previousRange, "new previousRange");
-
       setBaseInputsDisabled();
       setCalendarsDisabled();
 
       enableCheckBox();
       enableCompareSelect();
-
-      //calendars.DatePickerClear();
-
-      //$("#shield").show();
     }
 
     if (!bCompareChecked) {
@@ -820,7 +792,9 @@ $(document).ready(function() {
     }
 
     //if (log)  //console.log("baseSelect change bCompareChecked: " + bCompareChecked );
-  });
+  }
+
+  $("#baseSelect").on("change", handleBaseSelectChange);
 
   /////////////////////////////////////////// GETTERS & SETTERS
 
@@ -2390,6 +2364,8 @@ $(document).ready(function() {
   window.drp.isDate = isDate;
   window.drp.validateStartBeforeEnd = validateStartBeforeEnd;
   window.drp.getDateMoment = getDateMoment;
+
+  window.drp.handleBaseSelectChange = handleBaseSelectChange;
 
   window.drp.setMode = setMode;
 
