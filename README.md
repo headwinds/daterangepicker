@@ -1,4 +1,4 @@
-# DatePicker
+# RANGER: Date Ranger Picker
 
 ![headwinds datepicker](daterangepicker.png)
 
@@ -9,16 +9,6 @@ I have a request to use a date range picker again and since the current native i
 No demo yet...
 
 I'm also experimenting with a date & time picker in this project which does have a [demo](https://reagent-reframe-material.now.sh/#/demos/pickers). It's in a docker and may take some time to boot up.
-
-## Warning
-
-This projects has very light documentation and is not a modern component (yet). The code base will probably only interest someone wishing to learn javascript not wanting an easy to implement library.
-
-Beyond the readme which outlines the purpose, I see I didn't properly explain how to use it. Right now, you basically need to download and play with it to see how it works.
-
-There's not a ton of code; basically 2 scripts: the one that draws the calendars and one that controls selecting the dates and handles some validation between date ranges.
-
-There are no tests but try the demo and please report any issues.
 
 ## Original Demo
 
@@ -50,24 +40,11 @@ This date range picker can support:
 
 The CSS is generated from SCSS and Compass. I recommend using [Codekit](https://incident57.com/codekit/) for managing SCSS and Compass projects.
 
-## React Build
-
-If I had to do date range comparison today, I'd leverage the moment date math from this project and build a React based date range picker. While I definitely agree that its challenging to use in its current state, there may be some gold in here worth mining.
-
-The plan is to port some of the code in the original folder to React and explore reselect and redux-observable.
-
-```
-yarn
-yarn init
-
-// dev with HMR
-yarn dev
-
-// production
-yarn build
-```
-
 ### Log
+
+Nov 18/2018
+
+- begun port to ClojureScript
 
 Aug 29/2017  
  _ tossed out what I know and decided to learn something new  
