@@ -6,7 +6,7 @@
 
 I have a request to use a date range picker again and since the current native input control that relies on [datetime-local doesn't support date format](https://stackoverflow.com/questions/7372038/is-there-any-way-to-change-input-type-date-format) (or at least at the time of writing this) and I want to use Material UI with ClojureScript, I'll attempt to update this project and experiment with Javascript interop to produce a much more flexible date control that can accept different date formats.
 
-No demo yet...
+[demo](https://ranger.now.sh)
 
 I'm also experimenting with a date & time picker in this project which does have a [demo](https://reagent-reframe-material.now.sh/#/demos/pickers). It's in a docker and may take some time to boot up.
 
