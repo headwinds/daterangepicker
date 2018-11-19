@@ -1087,8 +1087,12 @@
           return this.each(function() {
             if ($(this).data("datepickerId")) {
               var cal = $("#" + $(this).data("datepickerId"));
+
               var options = cal.data("datepicker");
-              options.date = normalizeDate(options.mode, date);
+
+              const mode = options.mode ? options.mode : "range";
+
+              options.date = normalizeDate(mode, date);
 
               if (shiftTo) {
                 options.current = new Date(

@@ -1,3 +1,6 @@
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
 div.datepicker {
   position: relative;
   font-family: Arial, Helvetica, sans-serif;
@@ -41,7 +44,7 @@ div.datepicker a {
 }
 div.datepicker table td {
   text-align: center;
-  padding: 0;
+  padding: 2px;
   margin: 0;
 }
 div.datepicker th {
@@ -76,7 +79,7 @@ td.datepickerNotInMonth a {
   color: #666666;
 }
 tbody.datepickerDays td.datepickerSelected {
-  background: #136a9f;
+  background: #09a5c7;
 }
 tbody.datepickerDays td.datepickerNotInMonth.datepickerSelected {
   background: #17384d;
@@ -180,7 +183,8 @@ div.datepicker tbody.datepickerDays td.datepickerNotInMonth:hover {
 
 div.datepicker {
   border: none !important;
-  background: white !important;
+  width: auto !important;
+  margin-top: 20px;
 }
 
 .daterangepickercontainer {

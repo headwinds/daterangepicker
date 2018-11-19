@@ -55,23 +55,8 @@
                       :margin 50
                       :alignItems "left"
                       }}
-         [:h2 {:style {:margin "20px 0px"}} "Date Range Picker"]
-
-           
-
-              [picker-view classes]
-
-              [:div {:style {:margin-top 50}}
-               [:> mui/Button
-                {:variant "contained"
-                 :color "secondary"
-                 :style {:text-transform "none"}
-                 :class (.-button classes)
-                 :on-click handle-js-click }
-                 [:div {:style {:margin-right 10}}
-                   [:>  mui-icons/LocalCafe]]
-                "Talk to Javascript"
-                ]]
+    
+        [picker-view classes]
 
         ]
    ))}))
