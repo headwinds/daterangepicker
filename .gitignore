@@ -10,3 +10,5 @@ bower_components
 node_modules
 
 *.sublime-project
+
+ranger/resources/public/js/out/

@@ -51,7 +51,7 @@ div.datepicker th {
   text-align: center;
   color: #666666;
   font-weight: normal;
-  padding: 0;
+  padding: 4px;
 }
 div.datepicker tbody a {
   display: block;
@@ -79,14 +79,14 @@ td.datepickerNotInMonth a {
   color: #666666;
 }
 tbody.datepickerDays td.datepickerSelected {
-  background: #09a5c7;
+  background: #00a2c7;
 }
 tbody.datepickerDays td.datepickerNotInMonth.datepickerSelected {
-  background: #17384d;
+  background: #00a2c7;
 }
 tbody.datepickerYears td.datepickerSelected,
 tbody.datepickerMonths td.datepickerSelected {
-  background: #17384d;
+  background: #00a2c7;
 }
 div.datepicker td.datepickerSelected a {
   color: white;

@@ -491,22 +491,22 @@ $(document).ready(function() {
 
       switch (idNum) {
         case 0:
-          day = moment().format("MM/DD/YYYY");
+          day = moment().format("MM DD YYYY");
           break;
         case 1:
           day = moment()
             .subtract(7, "days")
-            .format("MM/DD/YYYY");
+            .format("MM DD YYYY");
           break;
         case 2:
           day = moment()
             .subtract(2, "weeks")
-            .format("MM/DD/YYYY");
+            .format("MM DD YYYY");
           break;
         case 3:
           day = moment()
             .subtract(1, "months")
-            .format("MM/DD/YYYY");
+            .format("MM DD YYYY");
           break;
         case 4:
           day = "";
@@ -516,7 +516,7 @@ $(document).ready(function() {
       $("#oneDayDate").val(day);
     });
 
-    var today = moment().format("MM/DD/YYYY");
+    var today = moment().format("MM DD YYYY");
     $("#oneDayDate").val(today);
     $("#dateCardContainer").height(oneDateHeight);
 
@@ -959,8 +959,7 @@ $(document).ready(function() {
     var baseRangeStr;
 
     if (null === baseStartMoment) {
-      baseRangeStr =
-        "<span class='baseRangeTxt'>Base Range: Please select 2 dates</span>";
+      baseRangeStr = "<span class='baseRangeTxt'>Please select 2 dates</span>";
 
       $("#baseRange").html(baseRangeStr);
 
@@ -971,17 +970,23 @@ $(document).ready(function() {
     dates[0] = typeof dates[0] !== "number" ? dates[0] : new Date(dates[0]);
 
     var baseStartDateStr =
+      /*
       dates[0].getMonthName(true) +
       " " +
       dates[0].getDate() +
       ", " +
       dates[0].getFullYear();
+      */
+      moment(dates[0]).format("DD MMM, YYYY");
     var baseEndDateStr =
+      /*
       dates[1].getMonthName(true) +
       " " +
       dates[1].getDate() +
       ", " +
       dates[1].getFullYear();
+      */
+      moment(dates[1]).format("DD MMM, YYYY");
 
     baseRangeStr =
       "<span class='baseRangeTxt'>" +
@@ -1008,30 +1013,46 @@ $(document).ready(function() {
 
       if (dates.length > 2) {
         compareStartDateStr =
+          /*
           dates[2].getMonthName(true) +
           " " +
           dates[2].getDate() +
           ", " +
           dates[2].getFullYear();
+          */
+          moment(dates[2]).format("mm dd yyyy");
+
         compareEndDateStr =
+          /*
           dates[3].getMonthName(true) +
           " " +
           dates[3].getDate() +
           ", " +
           dates[3].getFullYear();
+          */
+          moment(dates[3]).format("mm dd yyyy");
       } else {
         compareStartDateStr =
+          /*
           compareStartMoment.format("MMMM") +
           " " +
           compareStartMoment.date() +
           ", " +
           compareStartMoment.year();
+          */
+
+          compareStartMoment.format("mm dd yyyy");
+
         compareEndDateStr =
+          /*
           compareEndMoment.format("MMMM") +
           " " +
           compareEndMoment.date() +
           ", " +
           compareEndMoment.year();
+          */
+
+          compareEndMoment.format("mm dd yyyy");
       }
 
       if (compareStartDateStr === "NaN undefined, NaN")

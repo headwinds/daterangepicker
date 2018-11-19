@@ -100,9 +100,9 @@
                 :type "text"
                 :variant "outlined"
                 :InputLabelProps {:shrink true :style {:font-size 14}}
-                :InputProps {:style {:font-size 16 :color "#333" :width 100}}
+                :InputProps {:style {:font-size 16 :color "#333" :width 110}}
                 :style {:width 100}
-                :placeholder "DD-MM-YYYY"
+                :placeholder "MM DD YYYY"
                 :class (.-textField classes)
                 :on-change (fn [e]
                             (swap! model #(-> %1 (assoc :from %2)) (.. e -target -value)))}]
@@ -131,9 +131,9 @@
                     :type "text"
                     :variant "outlined"
                     :InputLabelProps {:shrink true :style {:font-size 14}}
-                    :InputProps {:style {:font-size 16 :color "#333" :width 100}}
+                    :InputProps {:style {:font-size 16 :color "#333" :width 110}}
                     :style {:width 100}
-                    :placeholder "DD-MM-YYYY"
+                    :placeholder "MM DD YYYY"
                     :class (.-textField classes)
                     :on-change (fn [e]
                                 (swap! model #(-> %1 (assoc :from %2)) (.. e -target -value)))}]

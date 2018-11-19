@@ -1,16 +1,25 @@
 # RANGER: Date Ranger Picker
 
-![headwinds datepicker](daterangepicker.png)
+## Clojurescript & Javascript Version
 
-## Upgrade to ClojureScript
+![headwinds datepicker](ranger.png)
 
 I have a request to use a date range picker again and since the current native input control that relies on [datetime-local doesn't support date format](https://stackoverflow.com/questions/7372038/is-there-any-way-to-change-input-type-date-format) (or at least at the time of writing this) and I want to use Material UI with ClojureScript, I'll attempt to update this project and experiment with Javascript interop to produce a much more flexible date control that can accept different date formats.
 
+```
+cd ranger
+lein figwheel
+```
+
+Open your browser to: http://0.0.0.0:5000
+
 [demo](https://ranger.now.sh)
 
-I'm also experimenting with a date & time picker in this project which does have a [demo](https://reagent-reframe-material.now.sh/#/demos/pickers). It's in a docker and may take some time to boot up.
+I'm also experimenting with a date & time picker in this [material-ui & starwars project](https://reagent-reframe-material.now.sh/#/demos/pickers). It's in a docker and may take some time to boot up.
 
-## Original Demo
+## Original Javascript Version
+
+![headwinds datepicker](daterangepicker.png)
 
 [demo](https://daterangepicker-jvonlbfvls.now.sh/original-plain-js/datepicker)
 
