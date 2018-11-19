@@ -77,7 +77,13 @@
               {:value 8}
               "Custom Dates"]]
 
-            ;[:h4 {:id "baseRange" :class "baseTitle" :style {:margin 0, :margin-top 10, :margin-bottom 10}}]
+              [:h4 {:id "baseRange"
+                    :class "baseTitle"
+                    :style {:margin 0
+                            :margin-top 20;
+                            :margin-left 45;
+                            :font-weight "normal"
+                            :margin-bottom 10}}]
             ]
 
             [:div {:style {:display (if (= (:range-selected @model) 8) "flex" "none") :flex-direciton "row" :justify-content "flex-start"}}

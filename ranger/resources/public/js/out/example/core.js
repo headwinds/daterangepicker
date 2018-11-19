@@ -26,4 +26,4 @@ return reagent.core.render.call(null,new cljs.core.PersistentVector(null, 1, 5, 
 });
 example.core.start.call(null);
 
-//# sourceMappingURL=core.js.map?rel=1542587013333
+//# sourceMappingURL=core.js.map?rel=1542588611184
